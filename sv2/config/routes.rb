@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
   
+  get 'admin/usr'
+
+  get 'admin/agregUsr'
+
+  get 'admin/editUsr'
+
+  get 'admin/elimUsr'
+
+  get 'admin/nCotAgregArt'
+
   get 'admin/cotizacion'
 
   get 'admin/nuevCot'

@@ -14,6 +14,10 @@ class AdminControllerTest < ActionController::TestCase
     get :nuevCot
     assert_response :success
   end
+test "should get nCotAgregArt" do
+    get :nCotAgregArt
+    assert_response :success
+  end
 
   test "should get anularCot" do
     get :anularCot
@@ -87,6 +91,26 @@ class AdminControllerTest < ActionController::TestCase
 
   test "should get pagoNV" do
     get :pagoNV
+    assert_response :success
+  end
+  
+  test "should get usr" do
+    get :usr
+    assert_response :success
+  end
+
+  test "should get agregUsr" do
+    get :agregUsr
+    assert_response :success
+  end
+
+  test "should get editUsr" do
+    get :editUsr
+    assert_response :success
+  end
+
+  test "should get elimUsr" do
+    get :elimUsr
     assert_response :success
   end
 

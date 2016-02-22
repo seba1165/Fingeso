@@ -1,4 +1,16 @@
 class AdminController < ApplicationController
+  def usr
+  end
+
+  def agregUsr
+  end
+
+  def editUsr
+  end
+
+  def elimUsr
+  end
+
   def inicio
   	
   end
@@ -7,6 +19,9 @@ class AdminController < ApplicationController
   end
 
   def nuevCot
+  end
+
+  def nCotAgregArt
   end
 
   def anularCot
