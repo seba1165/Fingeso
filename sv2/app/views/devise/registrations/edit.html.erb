@@ -1,39 +1,82 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://localhost:3000">ServiVentas</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+          Logueado como <strong><%= current_empleado.email %></strong>.
+          <%= link_to 'Editar Perfil', edit_empleado_registration_path, :class => 'navbar-link' %> |
+          <%= link_to "Cerrar Sesion", destroy_empleado_session_path, method: :delete, :class => 'navbar-link'  %>
+
+    </div><!-- /.navbar-collapse -->
+
+  </div><!-- /.container-fluid -->
+</nav>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<body>
+<div class="container-">
+  <div class="row">
+    <div class="col-lg-12" style="text-align:center; margin:0 auto;">
+      <h2 style="color:#0B2161"><FONT FACE="times new roman">
+        Editar Perfil
+      </FONT></h2>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div class="field">
+            <%= f.label :telefono, "Telefono" %><br />
+            <%= f.phone_field :emp_tel, autofocus: true %>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Actualmente esperando informacion para: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+          <div class="field">
+            <%= f.label :password, "Contraseña" %> <i>(Dejar en blanco si no desea cambiarla)</i><br />
+            <%= f.password_field :password, autocomplete: "off" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password_confirmation, "Confirmación de la nueva contraseña" %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :current_password, "Contraseña Actual" %> <i>(Necesitamos su contraseña actual para confirmar los cambios)</i><br />
+            <%= f.password_field :current_password, autocomplete: "off" %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Actualizar" %>
+          </div>
+      <% end %>
+
+      <%= link_to "Regresar", :back %>
+      <hr class="star-light">
+    </div>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>
+</body>
+<div>
+  <footer class="container" style="min-height:150px; background-color:#0B2161;color:#fff;text-align:center;padding-top:50px;">
+    ServiVentas @2016
+    <p></p>
+    Sebastián Calderón - Verónica Domínguez - Daniel Morales
+  </footer>
+</div>

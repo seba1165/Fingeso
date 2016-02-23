@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  
-  resources :cargo_empleados
-  devise_for :empleados, controllers: {registrations: 'registrations'}
+
+
+  devise_for :empleados, :skip => [:registrations]
+  as :empleado do
+    get 'empleado/edit' => 'devise/registrations#edit', :as => 'edit_empleado_registration'
+    put 'empleados' => 'devise/registrations#update', :as => 'empleado_registration'
+  end
 
   get 'admin/usr'
 
@@ -79,7 +83,6 @@ Rails.application.routes.draw do
 
   root 'welcome#home'
 
-  get 'home' => 'welcome#home', as: :home
 
   #get 'welcome/home'
   # The priority is based upon order of creation: first created -> highest priority.
@@ -136,4 +139,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  get "*any", via: :all, to: "errors#not_found"
 end

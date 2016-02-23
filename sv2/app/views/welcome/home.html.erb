@@ -12,22 +12,28 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
+
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Olvidaste tu contraseña?</a></li>
-      </ul>
-      <form class="navbar-form navbar-right" role="search">
-        <div class="form-group">
-            <input type="text" class="form-control" name="username" placeholder="Username">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" name="password" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-default">Iniciar Sesión</button>
-      </form>
+      <% if empleado_signed_in? %>
+          Logueado como <strong><%= current_empleado.email %></strong>.
+          <%= link_to 'Editar Perfil', edit_empleado_registration_path, :class => 'navbar-link' %> |
+          <%= link_to "Cerrar Sesion", destroy_empleado_session_path, method: :delete, :class => 'navbar-link'  %>
+      <% else %>
+          <%= form_for(:empleado, :url => session_path(:empleado)) do |f| %>
+              <%= f.text_field :email %>
+              <%= f.password_field :password %>
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+              <%= f.submit 'Sign in' %>
+              <%= link_to "Forgot your password?", new_password_path(:empleado) %>
+          <% end %>
+      <% end %>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 
 <body>
     <div class="container-">
