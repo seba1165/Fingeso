@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  resources :cargo_empleados
+  devise_for :empleados, controllers: {registrations: 'registrations'}
+
   get 'admin/usr'
 
   get 'admin/agregUsr'

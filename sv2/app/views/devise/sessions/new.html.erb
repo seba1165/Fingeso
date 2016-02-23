@@ -18,10 +18,10 @@
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
-            <input type="text" class="form-control" name="username" placeholder="Username">
+          <input type="text" class="form-control" name="username" placeholder="Username">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="password" placeholder="Password">
+          <input type="text" class="form-control" name="password" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-default">Iniciar Sesión</button>
       </form>
@@ -29,23 +29,40 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<body>
-    <div class="container-">
-        <div class="row">
-            <div class="col-lg-12" style="text-align:center; margin:0 auto;">
-                <h2 style="color:#0B2161"><FONT FACE="times new roman">
-                BIENVENIDO A
-                </FONT></h2>
-                <img class="img-responsive center-block" src="http://serviventas.cl/wp-content/uploads/2015/02/Logo_ServiVentas.jpg" alt="">
-                <hr class="star-light">
-            </div>
-        </div>
+<h2>Log in</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.label :emp_email, "Email" %><br />
+    <%= f.email_field :emp_email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
     </div>
-</body>
-<div>
-    <footer class="container" style="min-height:150px; background-color:#0B2161;color:#fff;text-align:center;padding-top:50px;">
-        ServiVentas @2016
-        <p></p>
-        Sebastián Calderón - Verónica Domínguez - Daniel Morales
-    </footer>
+  <% end -%>
+
+  <div class="actions">
+    <%= f.submit "Log in" %>
+  </div>
+<% end %>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<%= render "devise/shared/links" %>
+
+
+  <footer class="container" style="min-height:150px; background-color:#0B2161;color:#fff;text-align:center;padding-top:50px;">
+    ServiVentas @2016
+    <p></p>
+    Sebastián Calderón - Verónica Domínguez - Daniel Morales
+  </footer>
 </div>
