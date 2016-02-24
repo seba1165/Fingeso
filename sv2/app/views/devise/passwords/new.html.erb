@@ -36,22 +36,34 @@
 <p class="alert"><%= alert %></p>
 
 <body>
-    <div class="container-">
-        <div class="row">
-            <div class="col-lg-12" style="text-align:center; margin:0 auto;">
-                <h2 style="color:#0B2161"><FONT FACE="times new roman">
-                BIENVENIDO A
-                </FONT></h2>
-                <img class="img-responsive center-block" src="http://serviventas.cl/wp-content/uploads/2015/02/Logo_ServiVentas.jpg" alt="">
-                <hr class="star-light">
-            </div>
-        </div>
+<div class="container-">
+  <div class="row">
+    <div class="col-lg-12" style="text-align:center; margin:0 auto;">
+      <h2 style="color:#0B2161"><FONT FACE="times new roman">
+        Olvidó su contraseña?
+      </FONT></h2>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div class="field">
+            <%= f.label :email, "Correo" %><br />
+            <%= f.email_field :email, autofocus: true %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Enviar instrucciones a mi Correo" %>
+          </div>
+      <% end %>
+
+      <hr class="star-light">
     </div>
+  </div>
+</div>
 </body>
 <div>
-    <footer class="container" style="min-height:150px; background-color:#0B2161;color:#fff;text-align:center;padding-top:50px;">
-        ServiVentas @2016
-        <p></p>
-        Sebastián Calderón - Verónica Domínguez - Daniel Morales
-    </footer>
+  <footer class="container" style="min-height:150px; background-color:#0B2161;color:#fff;text-align:center;padding-top:50px;">
+    ServiVentas @2016
+    <p></p>
+    Sebastián Calderón - Verónica Domínguez - Daniel Morales
+  </footer>
 </div>
