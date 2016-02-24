@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'admin/parametro'
+
+  get 'admin/registro'
+
   devise_for :empleados, :skip => [:registrations]
   as :empleado do
     get 'empleado/edit' => 'devise/registrations#edit', :as => 'edit_empleado_registration'
@@ -24,7 +28,7 @@ Rails.application.routes.draw do
 
   get 'admin/elimUsr'
 
-  get 'admin/nCotAgregArt'
+  get 'admin/nCotAgregArt' => 'admin#nCotAgregArt'
 
   get 'admin/cotizacion'
 

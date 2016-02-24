@@ -68,20 +68,35 @@
     </div>
 </div>
 </div>
+
+<div class="container"> <!--Falta agregar funcionalidades de los botones-->
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-1">
+            <p class="thick-line text-center"><strong>Subtotal</strong></p>
+        </div>
+        <div class="col-md-1 pull-right">
+            <p class="thick-line text-right">12433</p>
+        </div>
+    </div>
+    <hr>
+</div>
+
 <div class="container"> <!--Falta agregar funcionalidades de los botones-->
 	<div class="row">
-		<div class="col-md-1 pull-right">
-			<button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='#';"><span class="glyphicon glyphicon-save"></span> Guardar</button>
+        <div class="col-md-9"></div>
+		<div class="col-md-1">
+			<button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#FE2E2E;" onclick="location.href='http://localhost:3000/admin/nCotAgregArt';"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
 		</div>
 		<div class="col-md-1 pull-right">
-			<button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='http://localhost:3000/admin/nCotAgregArt';"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+            <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#04B45F;" onclick="location.href='#';"><span class="glyphicon glyphicon-save"></span> Guardar</button>
 		</div>		
 	</div>
 </div>
 <div class="container">
 	<div class="row">
 		<div class="col-md-1">
-			<button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='http://localhost:3000/admin/nCotAgregArt';"><span class="glyphicon glyphicon-arrow-left"></span> Volver</button>
+            <%= link_to 'Volver', admin_nCotAgregArt_path %>
 		</div>
 	</div>
 	<hr>

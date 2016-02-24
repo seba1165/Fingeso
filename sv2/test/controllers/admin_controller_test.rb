@@ -94,7 +94,7 @@ test "should get nCotAgregArt" do
     assert_response :success
   end
 
-  test "should get cotAgHerr" do
+test "should get cotAgHerr" do
     get :cotAgHerr
     assert_response :success
   end
@@ -116,6 +116,16 @@ test "should get nCotAgregArt" do
 
   test "should get cotAgIns" do
     get :cotAgIns
+    assert_response :success
+  end
+
+  test "should get parametro" do
+    get :parametro
+    assert_response :success
+  end
+
+  test "should get registro" do
+    get :registro
     assert_response :success
   end
 

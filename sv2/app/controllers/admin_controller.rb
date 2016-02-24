@@ -1,21 +1,5 @@
 class AdminController < ApplicationController
-  def cotAgHerr
-  end
-
-  def cotAgRepto
-  end
-
-  def cotAgAcc
-  end
-
-  def cotAgRepar
-  end
-
-  def cotAgIns
-  end
-
-  def inicio
-    
+  def inicio  
   end
 
   def cotizacion
@@ -24,7 +8,7 @@ class AdminController < ApplicationController
   def nuevCot
   end
 
-def nCotAgregArt
+  def nCotAgregArt
   end
 
   def anularCot
@@ -82,5 +66,26 @@ def nCotAgregArt
   end
 
   def elimUsr
+  end
+  
+  def cotAgHerr
+  end
+
+  def cotAgRepto
+  end
+
+  def cotAgAcc
+  end
+
+  def cotAgRepar
+  end
+
+  def cotAgIns
+  end
+
+  def parametro
+  end
+
+  def registro
   end
 end

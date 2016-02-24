@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223051716) do
+ActiveRecord::Schema.define(version: 20160222003729) do
 
   create_table "cargo_empleados", primary_key: "cargo_cod", force: :cascade do |t|
     t.string   "cargo_nom",  limit: 20
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160223051716) do
     t.string   "emp_nom",                limit: 20
     t.string   "emp_ape",                limit: 20
     t.string   "emp_tel",                limit: 10
-    t.string   "email",                             default: "", null: false
+    t.string   "emp_email",                         default: "", null: false
     t.string   "encrypted_password",                default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20160223051716) do
   end
 
   add_index "empleados", ["cargo_cod"], name: "tiene_fk", using: :btree
-  add_index "empleados", ["email"], name: "index_empleados_on_emp_email", unique: true, using: :btree
+  add_index "empleados", ["emp_email"], name: "index_empleados_on_emp_email", unique: true, using: :btree
   add_index "empleados", ["emp_rut"], name: "empleados_pk", unique: true, using: :btree
   add_index "empleados", ["reset_password_token"], name: "index_empleados_on_reset_password_token", unique: true, using: :btree
 
