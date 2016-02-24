@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
   
+  get 'admin/cotAgHerr'
+
+  get 'admin/cotAgRepto'
+
+  get 'admin/cotAgAcc'
+
+  get 'admin/cotAgRepar'
+
+  get 'admin/cotAgIns'
+
   get 'admin/usr'
 
   get 'admin/agregUsr'

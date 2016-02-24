@@ -93,24 +93,29 @@ test "should get nCotAgregArt" do
     get :pagoNV
     assert_response :success
   end
-  
-  test "should get usr" do
-    get :usr
+
+  test "should get cotAgHerr" do
+    get :cotAgHerr
     assert_response :success
   end
 
-  test "should get agregUsr" do
-    get :agregUsr
+  test "should get cotAgRepto" do
+    get :cotAgRepto
     assert_response :success
   end
 
-  test "should get editUsr" do
-    get :editUsr
+  test "should get cotAgAcc" do
+    get :cotAgAcc
     assert_response :success
   end
 
-  test "should get elimUsr" do
-    get :elimUsr
+  test "should get cotAgRepar" do
+    get :cotAgRepar
+    assert_response :success
+  end
+
+  test "should get cotAgIns" do
+    get :cotAgIns
     assert_response :success
   end
 

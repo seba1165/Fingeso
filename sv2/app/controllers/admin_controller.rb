@@ -1,18 +1,21 @@
 class AdminController < ApplicationController
-  def usr
+  def cotAgHerr
   end
 
-  def agregUsr
+  def cotAgRepto
   end
 
-  def editUsr
+  def cotAgAcc
   end
 
-  def elimUsr
+  def cotAgRepar
+  end
+
+  def cotAgIns
   end
 
   def inicio
-  	
+    
   end
 
   def cotizacion
@@ -21,7 +24,7 @@ class AdminController < ApplicationController
   def nuevCot
   end
 
-  def nCotAgregArt
+def nCotAgregArt
   end
 
   def anularCot
@@ -67,5 +70,17 @@ class AdminController < ApplicationController
   end
 
   def pagoNV
+  end
+  
+  def usr
+  end
+
+  def agregUsr
+  end
+
+  def editUsr
+  end
+
+  def elimUsr
   end
 end
