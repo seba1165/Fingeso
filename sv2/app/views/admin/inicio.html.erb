@@ -3,6 +3,10 @@
 <%= yield %>
 </head>
 
+<% flash.each do |key, value| %>
+    <p> <%= value %> </p>
+<% end %>
+
 <body>
 <div class="container-">
         <div class="row">

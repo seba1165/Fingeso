@@ -1,19 +1,8 @@
 class AdminController < ApplicationController
+  include Devise::Controllers::Helpers
   #Controlador para agregar usuarios
-  def usr
-    @usuarios = Empleado.all
-    @cargos = CargoEmpleado.all
-  end
-
-  def agregUsr
-    @empleado = Empleado.new
-  end
 
   def editUsr
-  end
-
-  def elimUsr
-    @empleado = Empleado.find(params[:id])
   end
 
   def inicio  

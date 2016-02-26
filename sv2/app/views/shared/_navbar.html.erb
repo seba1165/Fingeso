@@ -14,8 +14,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Vendedor</a></li>
-        <li><a href="#">Salir</a></li>
+        <li><a <strong> Logueado como <%= current_empleado.email %></strong> </a></li>
+        <li><a <%= link_to "Cerrar Sesion", destroy_empleado_session_path, method: :delete, :class => 'navbar-link'  %></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-left">
         <li class="dropdown">

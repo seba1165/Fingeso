@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   get 'empleados/index'
 
   get 'empleados/new'
@@ -21,6 +20,7 @@ Rails.application.routes.draw do
 
   #devise_for :empleados
   resources :empleados, :except => [:show]
+
 
   #devise_for :empleados, :controllers => { :registrations => "registrations" } , :skip => [:registrations]
   #as :empleado do
