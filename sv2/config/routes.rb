@@ -1,16 +1,41 @@
 Rails.application.routes.draw do
 
-  get 'admin/parametro'
 
-  get 'admin/registro'
+  get 'empleados/index'
+
+  get 'empleados/new'
+
+  get 'empleados/create'
+
+  get 'empleados/edit'
+
+  get 'empleados/update'
+
+  get 'empleados/destroy'
 
   devise_for :empleados, :skip => [:registrations]
   as :empleado do
-    get 'empleado/edit' => 'devise/registrations#edit', :as => 'edit_empleado_registration'
+    get 'empleados/edit' => 'devise/registrations#edit', :as => 'edit_empleado_registration'
     put 'empleados' => 'devise/registrations#update', :as => 'empleado_registration'
   end
 
-  get 'admin/cotAgHerr'
+  #devise_for :empleados
+  resources :empleados, :except => [:show]
+
+  #devise_for :empleados, :controllers => { :registrations => "registrations" } , :skip => [:registrations]
+  #as :empleado do
+  #  get 'empleado/edit' => 'devise/registrations#edit', :as => 'edit_empleado_registration'
+  #  put 'empleados' => 'devise/registrations#update', :as => 'empleado_registration'
+  #end
+  get 'admin/cotPrev'
+
+  get 'admin/cotFinal'
+
+  get 'admin/parametro' => 'errors#construccion'
+
+  get 'admin/registro' => 'errors#construccion'
+
+  get 'admin/cotAgHerr' 
 
   get 'admin/cotAgRepto'
 
@@ -19,8 +44,6 @@ Rails.application.routes.draw do
   get 'admin/cotAgRepar'
 
   get 'admin/cotAgIns'
-
-  get 'admin/usr'
 
   get 'admin/agregUsr'
 
@@ -42,59 +65,65 @@ Rails.application.routes.draw do
 
   get 'admin/ordComp'
 
-  get 'admin/nuevaOC'
+  get 'admin/nuevaOC' => 'errors#construccion'
 
-  get 'admin/anularOC'
+  get 'admin/anularOC' => 'errors#construccion'
 
-  get 'admin/aprobOC'
+  get 'admin/aprobOC' => 'errors#construccion'
 
-  get 'admin/abrirOC'
+  get 'admin/abrirOC' => 'errors#construccion'
 
-  get 'admin/OT'
+  get 'admin/OT' => 'errors#construccion'
 
-  get 'admin/anularOT'
+  get 'admin/anularOT' => 'errors#construccion'
 
-  get 'admin/editarOT'
+  get 'admin/editarOT' => 'errors#construccion'
 
-  get 'admin/finOT'
+  get 'admin/finOT' => 'errors#construccion'
 
-  get 'admin/notVent'
+  get 'admin/notVent' => 'errors#construccion'
 
-  get 'admin/genNV'
+  get 'admin/genNV' => 'errors#construccion'
 
-  get 'admin/pagoNV'
+  get 'admin/pagoNV' => 'errors#construccion'
 
   get 'admin/inicio'
 
-  get 'vendedor/nuevaOC'
+  get 'vendedor/nuevaOC' => 'errors#construccion'
 
-  get 'vendedor/anularOC'
+  get 'vendedor/anularOC' => 'errors#construccion'
 
-  get 'vendedor/aprobarOC'
+  get 'vendedor/aprobarOC' => 'errors#construccion'
 
-  get 'vendedor/abrirOC'
+  get 'vendedor/abrirOC' => 'errors#construccion'
 
-  get 'vendedor/ordComp'
+  get 'vendedor/ordComp' => 'errors#construccion'
 
-  get 'vendedor/nuevaCot'
+  get 'vendedor/nuevaCot' => 'errors#construccion'
 
-  get 'vendedor/anular'
+  get 'vendedor/anular' => 'errors#construccion'
 
-  get 'vendedor/aprobar'
+  get 'vendedor/aprobar' => 'errors#construccion'
 
-  get 'vendedor/abrir'
+  get 'vendedor/abrir' => 'errors#construccion'
 
-  get 'vendedor/cotizacion'
+  get 'vendedor/cotizacion' => 'errors#construccion'
 
-  get 'vendedor/notVen'
+  get 'vendedor/notVen' => 'errors#construccion'
 
-  get 'vendedor/inicio'
+  get 'vendedor/inicio' => 'errors#construccion'
 
-  get 'vendedor/clientes'
+  get 'vendedor/clientes' => 'errors#construccion'
 
-  get 'vendedor/vehiculos'
+  get 'vendedor/vehiculos' => 'errors#construccion'
 
-  root 'welcome#home'
+  root to: 'welcome#home', constraints: lambda { |request| !request.env['warden'].user }
+
+  root to: 'admin#inicio', as: 'admin_root',
+       constraints: lambda { |request| request.env['warden'].user.administrador? }
+
+  root to: 'vendedor#inicio', as: 'vendedor_root',
+       constraints: lambda { |request| request.env['warden'].user.vendedor? }
 
 
   #get 'welcome/home'

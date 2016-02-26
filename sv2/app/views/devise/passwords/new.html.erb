@@ -19,14 +19,22 @@
           <%= link_to 'Editar Perfil', edit_empleado_registration_path, :class => 'navbar-link' %> |
           <%= link_to "Cerrar Sesion", destroy_empleado_session_path, method: :delete, :class => 'navbar-link'  %>
       <% else %>
-          <%= form_for(:empleado, :url => session_path(:empleado)) do |f| %>
-              <%= f.text_field :email %>
-              <%= f.password_field :password %>
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember_me %>
-              <%= f.submit 'Sign in' %>
-              <%= link_to "Forgot your password?", new_password_path(:empleado) %>
-          <% end %>
+          <div class="collapse navbar-collapse" id="navbar-collapse-1">
+            <%= form_for(:empleado, :url => session_path(:empleado), html: { class: "navbar-form navbar-right form-inline" }) do |f| %>
+              <div class="form-group">
+                <%= f.text_field :emp_email %>
+              </div>
+              <div class="form-group">
+                <%= f.password_field :password %>
+              </div>
+              <div class="checkbox">
+                <%= f.check_box :remember_me %>
+                <%= f.label :Recordarme %>
+              </div>
+              <%= f.submit 'Iniciar Sesion', class:"btn btn-default" %>
+              <%= link_to "Olvidó su contraseña?", new_password_path(:empleado) %>
+            <% end %>            
+          </div><!-- /.navbar-collapse -->
       <% end %>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -46,8 +54,8 @@
           <%= devise_error_messages! %>
 
           <div class="field">
-            <%= f.label :email, "Correo" %><br />
-            <%= f.email_field :email, autofocus: true %>
+            <%= f.label :emp_email, "Correo" %><br />
+            <%= f.email_field :emp_email, autofocus: true %>
           </div>
 
           <div class="actions">
@@ -66,4 +74,4 @@
     <p></p>
     Sebastián Calderón - Verónica Domínguez - Daniel Morales
   </footer>
-</div>
+</div>s

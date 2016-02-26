@@ -1,4 +1,20 @@
 class AdminController < ApplicationController
+  #Controlador para agregar usuarios
+  def usr
+    @usuarios = Empleado.all
+    @cargos = CargoEmpleado.all
+  end
+
+  def agregUsr
+    @empleado = Empleado.new
+  end
+
+  def editUsr
+  end
+
+  def elimUsr
+  end
+
   def inicio  
   end
 
@@ -56,18 +72,6 @@ class AdminController < ApplicationController
   def pagoNV
   end
   
-  def usr
-  end
-
-  def agregUsr
-  end
-
-  def editUsr
-  end
-
-  def elimUsr
-  end
-  
   def cotAgHerr
   end
 
@@ -87,5 +91,11 @@ class AdminController < ApplicationController
   end
 
   def registro
+  end  
+
+  def cotPrev
+  end
+
+  def cotFinal
   end
 end

@@ -50,5 +50,8 @@ group :development do
 
   gem 'rut_validation'
 
+  gem 'protected_attributes'
+
+
 end
 

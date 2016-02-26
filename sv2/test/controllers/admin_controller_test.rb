@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class AdminControllerTest < ActionController::TestCase
+  
   test "should get inicio" do
     get :inicio
     assert_response :success
@@ -14,7 +15,8 @@ class AdminControllerTest < ActionController::TestCase
     get :nuevCot
     assert_response :success
   end
-test "should get nCotAgregArt" do
+  
+  test "should get nCotAgregArt" do
     get :nCotAgregArt
     assert_response :success
   end
@@ -94,7 +96,7 @@ test "should get nCotAgregArt" do
     assert_response :success
   end
 
-test "should get cotAgHerr" do
+  test "should get cotAgHerr" do
     get :cotAgHerr
     assert_response :success
   end
@@ -126,6 +128,16 @@ test "should get cotAgHerr" do
 
   test "should get registro" do
     get :registro
+    assert_response :success
+  end
+
+  test "should get cotPrev" do
+    get :cotPrev
+    assert_response :success
+  end
+
+  test "should get cotFinal" do
+    get :cotFinal
     assert_response :success
   end
 
