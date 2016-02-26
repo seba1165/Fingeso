@@ -13,6 +13,7 @@ class AdminController < ApplicationController
   end
 
   def elimUsr
+    @empleado = Empleado.find(params[:id])
   end
 
   def inicio  

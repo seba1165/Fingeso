@@ -17,7 +17,7 @@
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
       <%= form_for(:empleado, :url => session_path(:empleado), html: { class: "navbar-form navbar-right form-inline" }) do |f| %>
         <div class="form-group">
-          <%= f.text_field :emp_email %>
+          <%= f.text_field :email %>
         </div>
         <div class="form-group">
           <%= f.password_field :password %>

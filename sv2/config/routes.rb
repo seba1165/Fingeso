@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   #  get 'empleado/edit' => 'devise/registrations#edit', :as => 'edit_empleado_registration'
   #  put 'empleados' => 'devise/registrations#update', :as => 'empleado_registration'
   #end
+
+  post "empleado/del/:id" => 'admin#elimUsr' , as: :elimUsr
+
   get 'admin/cotPrev'
 
   get 'admin/cotFinal'

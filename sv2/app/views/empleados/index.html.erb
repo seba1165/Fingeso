@@ -39,10 +39,10 @@
         <% @empleados.each do |d| %>
             <tr>
               <td class="td-actions">
-                <%= link_to "Editar", edit_empleado_path(d) %>
+                <%= button_to "Editar", edit_empleado_path(d), :method => :get %>
               </td>
               <td class="td-actions">
-                <%= button_to "Borrar", d, :method => "delete" %>
+                <%= button_to "Borrar", elimUsr_path(d.emp_rut), :method => :post %>
               </td>
               <td><%= @cargos.find(d.cargo_cod).cargo_nom %></td>
               <td><%= d.emp_nom %></td>
