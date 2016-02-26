@@ -198,7 +198,7 @@ ActiveRecord::Schema.define(version: 20160226211408) do
 
   add_index "dom_val_art", ["dom_cod"], name: "dom_val_art_pk", unique: true, using: :btree
 
-  create_table "empleados", primary_key: "emp_rut", force: :cascade do |t|
+  create_table "empleado", primary_key: "emp_rut", force: :cascade do |t|
     t.integer  "cargo_cod",                                      null: false
     t.string   "emp_nom",                limit: 20
     t.string   "emp_ape",                limit: 20
@@ -215,9 +215,9 @@ ActiveRecord::Schema.define(version: 20160226211408) do
     t.inet     "last_sign_in_ip"
   end
 
-  add_index "empleados", ["cargo_cod"], name: "relationship_43_fk", using: :btree
-  add_index "empleados", ["emp_rut"], name: "empleados_pk", unique: true, using: :btree
-  add_index "empleados", ["reset_password_token"], name: "index_empleados_on_reset_password_token", unique: true, using: :btree
+  add_index "empleado", ["cargo_cod"], name: "relationship_43_fk", using: :btree
+  add_index "empleado", ["emp_rut"], name: "empleados_pk", unique: true, using: :btree
+  add_index "empleado", ["reset_password_token"], name: "index_empleados_on_reset_password_token", unique: true, using: :btree
 
   create_table "estado_cotizacion", primary_key: "cot_est_cod", force: :cascade do |t|
     t.string "cot_est_descr", limit: 30
@@ -679,9 +679,9 @@ ActiveRecord::Schema.define(version: 20160226211408) do
   add_foreign_key "det_ot", "orden_de_trabajo", column: "ot_cod", primary_key: "ot_cod", name: "fk_det_ot_relations_orden_de", on_update: :cascade, on_delete: :cascade
   add_foreign_key "det_ot", "vehiculo_serviciorep", column: "serv_cod", primary_key: "serv_cod", name: "fk_det_ot_relations_vehiculo", on_update: :cascade, on_delete: :nullify
   add_foreign_key "doc_previo", "cliente", column: "cliente_cod", primary_key: "cliente_cod", name: "fk_doc_prev_relations_cliente", on_update: :cascade, on_delete: :restrict
-  add_foreign_key "doc_previo", "empleados", column: "emp_rut", primary_key: "emp_rut", name: "fk_doc_prev_relations_empleado", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "doc_previo", "empleado", column: "emp_rut", primary_key: "emp_rut", name: "fk_doc_prev_relations_empleado", on_update: :cascade, on_delete: :restrict
   add_foreign_key "doc_previo", "nota_de_venta", column: "not_ven_cod", primary_key: "not_ven_cod", name: "fk_doc_prev_relations_nota_de_", on_update: :cascade, on_delete: :nullify
-  add_foreign_key "empleados", "cargo_empleado", column: "cargo_cod", primary_key: "cargo_cod", name: "fk_empleado_relations_cargo_em", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "empleado", "cargo_empleado", column: "cargo_cod", primary_key: "cargo_cod", name: "fk_empleado_relations_cargo_em", on_update: :cascade, on_delete: :restrict
   add_foreign_key "factura", "documento_de_pago", column: "doc_pago_cod", primary_key: "doc_pago_cod", name: "fk_factura_inheritan_document", on_update: :cascade, on_delete: :cascade
   add_foreign_key "factura", "estado_factura", column: "fact_est_cod", primary_key: "fact_est_cod", name: "fk_factura_relations_estado_f", on_update: :restrict, on_delete: :restrict
   add_foreign_key "herramienta", "articulo", column: "art_cod", primary_key: "art_cod", name: "fk_herramie_inheritan_articulo", on_update: :cascade, on_delete: :cascade
@@ -708,7 +708,7 @@ ActiveRecord::Schema.define(version: 20160226211408) do
   add_foreign_key "orden_de_despacho", "estado_od", column: "od_est_cod", primary_key: "od_est_cod", name: "fk_orden_de_relations_estado_o", on_update: :cascade, on_delete: :restrict
   add_foreign_key "orden_de_despacho", "nota_de_venta", column: "not_ven_cod", primary_key: "not_ven_cod", name: "fk_orden_de_relations_nota_de_", on_update: :cascade, on_delete: :cascade
   add_foreign_key "orden_de_trabajo", "doc_previo", column: "doc_cod", primary_key: "doc_cod", name: "fk_orden_de_relations_doc_prev", on_update: :cascade, on_delete: :restrict
-  add_foreign_key "orden_de_trabajo", "empleados", column: "emp_rut", primary_key: "emp_rut", name: "fk_orden_de_relations_empleado", on_update: :cascade, on_delete: :restrict
+  add_foreign_key "orden_de_trabajo", "empleado", column: "emp_rut", primary_key: "emp_rut", name: "fk_orden_de_relations_empleado", on_update: :cascade, on_delete: :restrict
   add_foreign_key "orden_de_trabajo", "estado_ot", column: "ot_est_cod", primary_key: "ot_est_cod", name: "fk_orden_de_relations_estado_o", on_update: :cascade, on_delete: :restrict
   add_foreign_key "orden_de_trabajo", "nota_de_venta", column: "not_ven_cod", primary_key: "not_ven_cod", name: "fk_orden_de_relations_nota_de_", on_update: :cascade, on_delete: :nullify
   add_foreign_key "orden_de_trabajo", "vehiculo", column: "veh_pat", primary_key: "veh_pat", name: "fk_orden_de_relations_vehiculo", on_update: :cascade, on_delete: :nullify

@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
   get 'admin/parametro' => 'errors#construccion'
 
-  get 'admin/registro' => 'errors#construccion'
+  get 'admin/registro'
 
   get 'admin/cotAgHerr' 
 

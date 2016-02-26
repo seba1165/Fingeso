@@ -1,2 +1,82 @@
-<h1>Admin#registro</h1>
-<p>Find me in app/views/admin/registro.html.erb</p>
+<!--Vista de la tabla log-->
+<head>
+<%= render 'shared/navbarAdmin' %>
+<%= yield %>
+</head>
+
+<body>
+<div class="container">
+    <h1 style="color:#0B2161"><FONT FACE="times new roman">REGISTRO <small>   Seleccione el registro que desea modificar y elija una opción</small></FONT></h1>
+    <hr>
+
+    <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='http://localhost:3000/vendedor/nuevaCot';"><span class="glyphicon glyphicon-plus"></span> 
+    Nueva cotización
+    </button>
+
+    <p></p>
+    
+    <div class="row">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading" style="min-height:40px;">
+                <h3 class="panel-title pull-left">REGISTRO</h3>
+                <div class="pull-right">
+                    <button href="javascript:;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
+                </div>
+            </div>
+            <table class="table"> <!-- Arreglar tabla y conectarlo con la bd-->
+                <thead>
+                    <tr class="filters">
+                        <th><input type="text" class="form-control" placeholder="Fecha Creación" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Nombre Usuario" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Tabla" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Operación" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Dato antiguo" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Dato nuevo" disabled></th>
+                        <th>Seleccionar</th>
+                    </tr>
+                </thead>
+                <tbody style="text-align: center">
+                    <tr>
+                        <td>23/12/1902</td>
+                        <td>Administrador</td>
+                        <td>empleados</td>
+                        <td>editar</td>
+                        <td>luis</td>
+                        <td>luis alfredo</td>
+                        <td>
+                            <input type="checkbox" autocomplete="off">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <input type="checkbox" autocomplete="off">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <input type="checkbox" autocomplete="off">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+<div>
+  <%= render 'shared/footer' %>
+  <%= yield %>
+</div>

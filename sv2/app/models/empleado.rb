@@ -13,7 +13,7 @@ class Empleado < ActiveRecord::Base
   attr_accessible  :emp_rut, :cargo_cod, :emp_nom, :emp_ape, :emp_tel,:email, :password, :password_confirmation, :cargo_empleado
 
   def administrador?
-    self.cargo_cod == 0
+    self.cargo_cod == 10
   end
 
   def vendedor?
