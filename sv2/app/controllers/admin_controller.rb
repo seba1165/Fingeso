@@ -81,6 +81,7 @@ class AdminController < ApplicationController
   end
 
   def registro
+    @logs = Log.all
   end  
 
   def cotPrev
