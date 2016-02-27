@@ -2,6 +2,19 @@ class AdminController < ApplicationController
   include Devise::Controllers::Helpers
   #Controlador para agregar usuarios
 
+  def articulo
+    
+  end
+  def servicio
+    
+  end
+  def servAgInstal
+    
+  end
+  def servAgRepar
+    
+  end
+########
   def editUsr
   end
 

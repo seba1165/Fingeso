@@ -1,16 +1,33 @@
 <!DOCTYPE html>
+<style> html{overflow: scroll;} </style>
 <html lang="es">
+
 <head>
-  <title>Sv2</title>
+
+  <title>- Serviventas -</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+	<% if current_empleado%> 
+		<% if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" %>
+			<%= render 'shared/navbarAdmin' %>
+		<% end %>
+		<% if current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor" %> 
+			<%= render 'shared/navbar' %>
+		<% end %>
+	<% end %>
 </head>
+
+
 <body>
-<!--%= render 'shared/navbar' %-->
-
-<%= yield %>
-
-
+<div class="container" style="min-width: 350px;">
+	<%= yield %>
+</div>
 </body>
+
+<footer>
+	<%= render 'shared/footer' %>
+</footer>
+
 </html>
