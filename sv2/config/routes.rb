@@ -24,6 +24,10 @@ Rails.application.routes.draw do
 
   get 'empleados/edit'
 
+  get 'admin/inicio'
+
+  get 'vendedor/inicio' => 'errors#construccion'
+
   devise_for :empleados, :skip => [:registrations]
   as :empleado do
     get 'empleados/edit' => 'devise/registrations#edit', :as => 'edit_empleado_registration'
@@ -70,8 +74,8 @@ Rails.application.routes.draw do
 
   get 'admin/elimUsr'
 
-  get 'admin/nCotAgregArt' => 'admin#nCotAgregArt'
-  get 'admin/nCotAgregSer' => 'admin#nCotAgregSer'
+  get 'admin/nCotAgregArt'
+  get 'admin/nCotAgregSer'
 
   get 'admin/cotizacion'
 
@@ -108,7 +112,13 @@ Rails.application.routes.draw do
 
   get 'admin/pagoNV' => 'errors#construccion'
 
-  get 'admin/inicio'
+  get 'admin/articulo'
+
+  get 'admin/servicio'
+
+  get 'admin/servAgInstal'
+
+  get 'admin/servAgRepar'
 
   get 'vendedor/nuevaOC' => 'errors#construccion'
 
@@ -131,8 +141,6 @@ Rails.application.routes.draw do
   get 'vendedor/cotizacion' => 'errors#construccion'
 
   get 'vendedor/notVen' => 'errors#construccion'
-
-  get 'vendedor/inicio' => 'errors#construccion'
 
   get 'vendedor/clientes' => 'errors#construccion'
 
