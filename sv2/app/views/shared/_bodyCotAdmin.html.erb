@@ -17,6 +17,8 @@
             <table class="table"> <!-- Arreglar tabla y conectarlo con la bd-->
                 <thead>
                     <tr class="filters">
+                        <th></th>
+                        <th></th>
                         <th><input type="text" class="form-control" placeholder="N° Cotización" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Fecha creación" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Nombre" disabled></th>
@@ -24,11 +26,16 @@
                         <th><input type="text" class="form-control" placeholder="Rut" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Con Servicio" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Estado" disabled></th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody style="text-align: center">
                     <tr>
+                        <td class="td-actions">
+                            <!--boton-->
+                        </td>
+                        <td class="td-actions">
+                            <!--boton-->
+                        </td>
                         <td>1</td>
                         <td>23/12/1902</td>
                         <td>Mark</td>
@@ -36,33 +43,6 @@
                         <td>12.345.678-9</td>
                         <td>si</td>
                         <td>Aceptado</td>
-                        <td>
-                            <input type="checkbox" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <input type="checkbox" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <input type="checkbox" autocomplete="off">
-                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -72,10 +52,7 @@
 
 <div class="container"> <!-- Arreglar botones y que se activen al seleccionar una cotizacion-->
     <div class="row">
-        <button type: "submit" class="btn btn-default pull-left" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='http://localhost:3000/admin/inicio';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
-        <button type: "submit" class="btn btn-default pull-right" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='http://localhost:3000/admin/abrirCot';"><span class="glyphicon glyphicon-open-file"></span> Abrir </button>
-        <button type: "submit" class="btn btn-default pull-right" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='http://localhost:3000/admin/anularCot';"><span class="glyphicon glyphicon-remove-circle"></span> Anular </button>
-        <button type: "submit" class="btn btn-default pull-right" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='http://localhost:3000/admin/aprobCot';"><span class="glyphicon glyphicon-ok-circle"></span> Aprobar </button>
+        <button type: "submit" class="btn btn-default pull-left" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='http://localhost:3000/admin/inicio';"><span class="glyphicon glyphicon-arrow-left"></span> Volver</button>
     </div>
     <hr>
 </div>

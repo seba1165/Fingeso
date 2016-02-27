@@ -90,10 +90,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-1">
-            <%= link_to 'Volver', admin_nCotAgregArt_path %>
+            <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/admin/nCotAgregArt';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
         </div>
-        <div class="col-md-2 pull-right">
-            <%= link_to 'Finalizar Cotización', admin_inicio_path %>
+        <div class="col-md-10"></div>
+        <div class="col-md-1">
+            <button type: "submit" class="btn btn-default pull right" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/admin/cotPrev';">Siguiente <span class="glyphicon glyphicon-arrow-right"></span></button>
         </div>
     </div>
     <hr>

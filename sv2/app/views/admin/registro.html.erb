@@ -1,20 +1,15 @@
 <!--Vista de la tabla log-->
+<style> html{overflow: scroll;} </style>
 <head>
 <%= render 'shared/navbarAdmin' %>
 <%= yield %>
 </head>
 
 <body>
-<div class="container">
+<div class="container" style="width: 100%; height: 100%">
     <h1 style="color:#0B2161"><FONT FACE="times new roman">REGISTRO <small>   Seleccione el registro que desea modificar y elija una opción</small></FONT></h1>
     <hr>
-
-    <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='http://localhost:3000/vendedor/nuevaCot';"><span class="glyphicon glyphicon-plus"></span> 
-    Nueva cotización
-    </button>
-
-    <p></p>
-    
+    <p></p>  
     <div class="row">
         <div class="panel panel-primary filterable">
             <div class="panel-heading" style="min-height:40px;">
@@ -23,7 +18,7 @@
                     <button href="javascript:;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
                 </div>
             </div>
-            <table class="table"> <!-- Arreglar tabla y conectarlo con la bd-->
+            <table class="table" style="table-layout: auto;overflow: scroll;width: 100%; height: 100%;"> <!-- Arreglar tabla y conectarlo con la bd-->
                 <thead>
                     <tr class="filters">
                         <th><input type="text" class="form-control" placeholder="Fecha de Modificación" disabled></th>
@@ -32,28 +27,29 @@
                         <th><input type="text" class="form-control" placeholder="Operación" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Dato antiguo" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Dato nuevo" disabled></th>
-                        <th>Seleccionar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody style="text-align: center">
-
-                <% @logs.each do |d| %>
-                    <tr>
-                      <td><%= d.UpdateDate %></td>
-                      <td><%= d.UserName %></td>
-                      <td><%= d.TableName %></td>
-                      <td><%= d.Operation %></td>
-                      <td><%= d.OldValue %></td>
-                      <td><%= d.NewValue %></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                <% end %>
-
+                    <% @logs.each do |d| %>
+                        <tr>
+                            <td><%= d.UpdateDate %></td>
+                            <td><%= d.UserName %></td>
+                            <td><%= d.TableName %></td>
+                            <td><%= d.Operation %></td>
+                            <td><%= d.OldValue %></td>
+                            <td><%= d.NewValue %></td>
+                            <td></td>
+                            <td class="td-actions">
+                                <button type: "submit" class="btn btn-default btn-xs" style="color:#FFFFFF; background-color:#FE2E2E;" onclick="location.href='#';"><span class="glyphicon glyphicon-remove"></span></button>
+                            </td>
+                        </tr>
+                    <% end %>
                 </tbody>
             </table>
         </div>
     </div>
+    <hr>
 </div>
 </body>
 

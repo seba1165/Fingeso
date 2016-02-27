@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   get 'admin/cotAgRepar'
 
   get 'admin/cotAgIns'
+  get 'admin/cotAgInstal'
 
   get 'admin/agregUsr'
 
@@ -70,10 +71,12 @@ Rails.application.routes.draw do
   get 'admin/elimUsr'
 
   get 'admin/nCotAgregArt' => 'admin#nCotAgregArt'
+  get 'admin/nCotAgregSer' => 'admin#nCotAgregSer'
 
   get 'admin/cotizacion'
 
   get 'admin/nuevCot'
+  get 'admin/cotNuevAgreg'
 
   get 'admin/anularCot'
 
