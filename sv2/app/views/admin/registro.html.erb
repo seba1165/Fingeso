@@ -1,11 +1,12 @@
 <!--Vista de la tabla log-->
+<style> html{overflow: scroll;} </style>
 <head>
 <%= render 'shared/navbarAdmin' %>
 <%= yield %>
 </head>
 
 <body>
-<div class="container">
+<div class="container" style="width: 100%; height: 100%">
     <h1 style="color:#0B2161"><FONT FACE="times new roman">REGISTRO <small>   Seleccione el registro que desea modificar y elija una opción</small></FONT></h1>
     <hr>
     <p></p>  
@@ -17,7 +18,7 @@
                     <button href="javascript:;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
                 </div>
             </div>
-            <table class="table"> <!-- Arreglar tabla y conectarlo con la bd-->
+            <table class="table" style="table-layout: auto;overflow: scroll;width: 100%; height: 100%;"> <!-- Arreglar tabla y conectarlo con la bd-->
                 <thead>
                     <tr class="filters">
                         <th><input type="text" class="form-control" placeholder="Fecha de Modificación" disabled></th>
@@ -41,10 +42,6 @@
                             <td></td>
                             <td class="td-actions">
                                 <button type: "submit" class="btn btn-default btn-xs" style="color:#FFFFFF; background-color:#FE2E2E;" onclick="location.href='#';"><span class="glyphicon glyphicon-remove"></span></button>
-                                <!--Antes habias echo este codigo en eliminar usuario
-                                    <%= button_to , elimUsr_path(d.emp_rut), .... etc %>
-                                    no escribi en este comentario el nombre del boton y el metodo pq no se comentaban xd
-                                -->
                             </td>
                         </tr>
                     <% end %>

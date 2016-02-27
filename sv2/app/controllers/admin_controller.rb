@@ -16,6 +16,12 @@ class AdminController < ApplicationController
 
   def nCotAgregArt
   end
+  def nCotAgregSer
+    
+  end
+  def cotNuevAgreg
+    
+  end
 
   def anularCot
   end
@@ -75,6 +81,9 @@ class AdminController < ApplicationController
   end
 
   def cotAgIns
+  end
+  def cotAgInstal
+    
   end
 
   def parametro

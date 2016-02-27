@@ -372,8 +372,8 @@ ActiveRecord::Schema.define(version: 20160227001849) do
   add_index "metodo_de_pago", ["pago_cod"], name: "metodo_de_pago_pk", unique: true, using: :btree
 
   create_table "modelo", id: false, force: :cascade do |t|
-    t.integer "marca_cod",                null: false
-    t.integer "modelo_cod",               null: false
+    t.integer "marca_cod",                                                            null: false
+    t.integer "modelo_cod",               default: "nextval('modelo_sec'::regclass)", null: false
     t.string  "modelo_nombre", limit: 30
     t.integer "modelo_ano"
   end
