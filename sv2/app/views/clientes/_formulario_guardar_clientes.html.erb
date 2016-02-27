@@ -1,0 +1,60 @@
+<%= form_for @cliente do |f| %>
+    <i>Campos obligatorios (*)</i>
+    <p></p>
+    <div class="field">
+      <%= f.label :cliente_nom, "Nombre del Cliente" %><br />
+      <%= f.text_field :cliente_nom, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :cliente_ape, "Apellido del Cliente" %><br />
+      <%= f.text_field :cliente_ape, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :cliente_direccion, "Dirección del Cliente" %><br />
+      <%= f.text_field :cliente_direccion, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :cliente_rut, "Rut del Cliente" %><br />
+      <%= f.text_field :cliente_rut, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :cliente_comuna, "Comuna del Cliente" %><br />
+      <%= f.text_field :cliente_comuna, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :cliente_tel, "Teléfono" %><br />
+      <%= f.phone_field :cliente_tel, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :cliente_correo, "Correo *" %><br />
+      <%= f.email_field :cliente_correo, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :cliente_frecuente, "Frecuente?" %><br />
+      <%= f.check_box :cliente_frecuente %>
+    </div>
+
+    <div class="field">
+      <%= f.label :cliente_emp, "Empresa del Cliente" %><br />
+      <%= f.text_field :cliente_emp, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :cargo_cod, "Tipo de Cliente" %><br/>
+      <%= collection_select(:cliente, :tipo_cliente_cod, TipoCliente.all, :id, :tipo_cliente_descr, prompt: true) %>
+    </div>
+
+
+    <p></p>
+    <div class="actions">
+      <%= f.submit "Registrar" %>
+    </div>
+
+<% end %>

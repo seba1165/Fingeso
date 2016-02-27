@@ -1,24 +1,15 @@
-<% if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" %>
-    <head>
-      <%= render 'shared/navbarAdmin' %>
-      <%= yield %>
-    </head>
-<% end %>
-<% if current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor" %>
-    <head>
-      <%= render 'shared/navbar' %>
-      <%= yield %>
-    </head>
-<% end %>
-
+<head>
+  <%= render 'shared/navbarAdmin' %>
+  <%= yield %>
+</head>
 <% flash.each do |key, value| %>
     <p> <%= value %> </p>
 <% end %>
 <body>
 <div class="container">
-  <h1 style="color:#0B2161"><FONT FACE="times new roman">ADMINISTRAR USUARIOS <small>   Editar, eliminar y crear nuevos usuarios</small></FONT></h1>
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">ADMINISTRAR CLIENTES <small>   Editar, eliminar y crear nuevos clientes</small></FONT></h1>
   <hr>
-  <div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/empleados/new';"><span class="glyphicon glyphicon-plus"></span> Crear Nuevo Usuario</button>
+  <div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/clientes/new';"><span class="glyphicon glyphicon-plus"></span> Crear Nuevo Cliente</button>
     <hr>
   </div>
 </div>
@@ -26,7 +17,7 @@
   <div class="row">
     <div class="panel panel-primary filterable">
       <div class="panel-heading" style="min-height:40px;">
-        <h3 class="panel-title pull-left">Usuarios del Sistema</h3>
+        <h3 class="panel-title pull-left">Clientes de la Empresa</h3>
         <div class="pull-right">
           <button href="javascript:;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
         </div>
@@ -36,29 +27,31 @@
         <tr class="filters">
           <th></th>
           <th></th>
-          <th><input type="text" class="form-control" placeholder="Cargo" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Codigo" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Tipo" disabled></th>
           <th><input type="text" class="form-control" placeholder="Nombre" disabled></th>
           <th><input type="text" class="form-control" placeholder="Apellido" disabled></th>
-          <th><input type="text" class="form-control" placeholder="RUT" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Empresa" disabled></th>
           <th><input type="text" class="form-control" placeholder="Teléfono" disabled></th>
           <th><input type="text" class="form-control" placeholder="e-mail" disabled></th>
         </tr>
         </thead>
-        <tbody>
-        <% @empleados.each do |d| %>
+        <tbody style="text-align: center">
+        <% @clientes.each do |d| %>
             <tr>
               <td class="td-actions">
-                <%= button_to "Editar", edit_empleado_path(d), :method => :get %>
+                <%= button_to "Editar", edit_cliente_path(d), :method => :get %>
               </td>
               <td class="td-actions">
-                <%= button_to "Borrar", elimUsr_path(d.emp_rut), :method => :post %>
+                <%= button_to "Borrar", elimCliente_path(d.cliente_cod), :method => :post %>
               </td>
-              <td><%= d.cargo_empleado.cargo_nom %></td>
-              <td><%= d.emp_nom %></td>
-              <td><%= d.emp_ape %></td>
-              <td><%= d.emp_rut %></td>
-              <td><%= d.emp_tel %></td>
-              <td><%= d.email %></td>
+              <td><%= d.cliente_cod %></td>
+              <td><%= d.tipo_cliente.tipo_cliente_descr %></td>
+              <td><%= d.cliente_nom %></td>
+              <td><%= d.cliente_ape %></td>
+              <td><%= d.cliente_emp %></td>
+              <td><%= d.cliente_tel %></td>
+              <td><%= d.cliente_correo %></td>
               <td></td>
               <td></td>
               <td></td>

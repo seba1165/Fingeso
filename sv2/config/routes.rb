@@ -1,22 +1,36 @@
 Rails.application.routes.draw do
 
+  get 'clientes/index'
+
+  get 'clientes/new'
+
+  get 'clientes/edit'
+
+  get 'tipo_cliente/index'
+
+  get 'tipo_cliente/new'
+
+  get 'tipo_cliente/create'
+
+  get 'tipo_cliente/edit'
+
+  get 'tipo_cliente/update'
+
+  get 'tipo_cliente/destroy'
+
   get 'empleados/index'
 
   get 'empleados/new'
 
-  get 'empleados/create'
-
   get 'empleados/edit'
-
-  get 'empleados/update'
-
-  get 'empleados/destroy'
 
   devise_for :empleados, :skip => [:registrations]
   as :empleado do
     get 'empleados/edit' => 'devise/registrations#edit', :as => 'edit_empleado_registration'
     put 'empleados' => 'devise/registrations#update', :as => 'empleado_registration'
   end
+
+  resources :clientes, :except => [:show]
 
   #devise_for :empleados
   resources :empleados, :except => [:show]
@@ -28,6 +42,7 @@ Rails.application.routes.draw do
   #  put 'empleados' => 'devise/registrations#update', :as => 'empleado_registration'
   #end
 
+  post "clientes/del/:id" => 'clientes#elimCliente' , as: :elimCliente
   post "empleado/del/:id" => 'admin#elimUsr' , as: :elimUsr
 
   get 'admin/cotPrev'

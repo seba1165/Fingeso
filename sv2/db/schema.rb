@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227001849) do
+ActiveRecord::Schema.define(version: 20160227155348) do
 
   create_table "accesorio", primary_key: "art_cod", force: :cascade do |t|
     t.integer "art_tipo_cod"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20160227001849) do
   add_index "cargo_empleado", ["cargo_cod"], name: "cargo_empleado_pk", unique: true, using: :btree
 
   create_table "cliente", primary_key: "cliente_cod", force: :cascade do |t|
-    t.integer "tipo_cliente_cod",             null: false
+    t.integer "tipo_cliente_cod"
     t.string  "cliente_nom",       limit: 30
     t.string  "cliente_ape",       limit: 30
     t.string  "cliente_direccion", limit: 50
@@ -372,8 +372,8 @@ ActiveRecord::Schema.define(version: 20160227001849) do
   add_index "metodo_de_pago", ["pago_cod"], name: "metodo_de_pago_pk", unique: true, using: :btree
 
   create_table "modelo", id: false, force: :cascade do |t|
-    t.integer "marca_cod",                null: false
-    t.integer "modelo_cod",               null: false
+    t.integer "marca_cod",                                                            null: false
+    t.integer "modelo_cod",               default: "nextval('modelo_sec'::regclass)", null: false
     t.string  "modelo_nombre", limit: 30
     t.integer "modelo_ano"
   end
@@ -426,13 +426,14 @@ ActiveRecord::Schema.define(version: 20160227001849) do
   add_index "orden_de_despacho", ["od_est_cod"], name: "relationship_55_fk", using: :btree
 
   create_table "orden_de_trabajo", primary_key: "ot_cod", force: :cascade do |t|
-    t.string  "veh_pat",     limit: 6,   null: false
+    t.string  "veh_pat",     limit: 6
     t.integer "not_ven_cod"
     t.integer "doc_cod",                 null: false
-    t.integer "ot_est_cod",              null: false
-    t.string  "emp_rut",     limit: 10,  null: false
-    t.date    "ot_fecha"
+    t.integer "ot_est_cod"
+    t.string  "emp_rut",     limit: 10
+    t.date    "ot_fecha",                null: false
     t.string  "ot_obs",      limit: 100
+    t.integer "modelo_cod"
   end
 
   add_index "orden_de_trabajo", ["doc_cod"], name: "relationship_36_fk", using: :btree

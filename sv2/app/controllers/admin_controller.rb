@@ -89,4 +89,8 @@ class AdminController < ApplicationController
 
   def cotFinal
   end
+
+  def elimUsr
+    @empleado = Empleado.find(params[:id]);
+  end
 end
