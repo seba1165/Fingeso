@@ -1,7 +1,7 @@
 class EmpleadosController < ApplicationController
   include Devise::Controllers::Helpers
   def index
-      if current_empleado.cargo_empleado.cargo_nom != "Administrador"
+      if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
         redirect_to '/errors/not_found'
       else
         @cargos = CargoEmpleado.all
@@ -11,7 +11,7 @@ class EmpleadosController < ApplicationController
   end
 
   def new
-    if current_empleado.cargo_cod != 0
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
       redirect_to '/errors/not_found'
     else
       @empleado = Empleado.new();
@@ -20,7 +20,7 @@ class EmpleadosController < ApplicationController
   end
 
   def create
-    if current_empleado.cargo_cod != 0
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
       redirect_to '/errors/not_found'
     else
       #Recuperamos las varibles POST que vinieron desde la acción new.
@@ -55,7 +55,7 @@ class EmpleadosController < ApplicationController
   end
 
   def edit
-    if current_empleado.cargo_cod != 0
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
       redirect_to '/errors/not_found'
     else
       @empleado = Empleado.find(params[:id]);
@@ -71,7 +71,7 @@ class EmpleadosController < ApplicationController
   end
 
   def update
-    if current_empleado.cargo_cod != 0
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
       redirect_to '/errors/not_found'
     else
       @emp_nom = params[:empleado]["emp_nom"];
@@ -98,7 +98,7 @@ class EmpleadosController < ApplicationController
   end
 
   def destroy
-    if current_empleado.cargo_cod != 0
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
       redirect_to '/errors/not_found'
     else
       @empleado = Empleado.find(params[:id]);

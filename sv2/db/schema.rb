@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160226211408) do
+ActiveRecord::Schema.define(version: 20160227001849) do
 
   create_table "accesorio", primary_key: "art_cod", force: :cascade do |t|
     t.integer "art_tipo_cod"
@@ -350,17 +350,14 @@ ActiveRecord::Schema.define(version: 20160226211408) do
 
   add_index "insumo", ["art_cod"], name: "insumo_pk", unique: true, using: :btree
 
-  create_table "log", primary_key: "cod", force: :cascade do |t|
-    t.date   "fecha"
-    t.string "user_id",      limit: 30
-    t.string "tabla",        limit: 30
-    t.string "operacion",    limit: 30
-    t.string "instruccion",  limit: 50
-    t.string "dato_antiguo", limit: 50
-    t.string "dato_nuevo",   limit: 50
+  create_table "log", primary_key: "pk_audit", force: :cascade do |t|
+    t.string   "TableName",  limit: 45, null: false
+    t.string   "Operation",  limit: 1,  null: false
+    t.text     "OldValue"
+    t.text     "NewValue"
+    t.datetime "UpdateDate",            null: false
+    t.string   "UserName",   limit: 45, null: false
   end
-
-  add_index "log", ["cod"], name: "log_pk", unique: true, using: :btree
 
   create_table "marca", primary_key: "marca_cod", force: :cascade do |t|
     t.string "marca_nombre", limit: 30

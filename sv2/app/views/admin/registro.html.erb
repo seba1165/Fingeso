@@ -20,7 +20,7 @@
             <table class="table"> <!-- Arreglar tabla y conectarlo con la bd-->
                 <thead>
                     <tr class="filters">
-                        <th><input type="text" class="form-control" placeholder="Fecha Creación" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Fecha de Modificación" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Nombre Usuario" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Tabla" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Operación" disabled></th>
@@ -30,39 +30,24 @@
                     </tr>
                 </thead>
                 <tbody style="text-align: center">
-                    <tr>
-                        <td>23/12/1902</td>
-                        <td>Administrador</td>
-                        <td>empleados</td>
-                        <td>editar</td>
-                        <td>luis</td>
-                        <td>luis alfredo</td>
-                        <td class="td-actions">
-                            <button type: "submit" class="btn btn-default btn-xs" style="color:#FFFFFF; background-color:#FE2E2E;" onclick="location.href='#';"><span class="glyphicon glyphicon-remove"></span></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="td-actions">
-                            <button type: "submit" class="btn btn-default btn-xs" style="color:#FFFFFF; background-color:#FE2E2E;" onclick="location.href='#';"><span class="glyphicon glyphicon-remove"></span></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="td-actions">
-                            <button type: "submit" class="btn btn-default btn-xs" style="color:#FFFFFF; background-color:#FE2E2E;" onclick="location.href='#';"><span class="glyphicon glyphicon-remove"></span></button>
-                        </td>
-                    </tr>
+                    <% @logs.each do |d| %>
+                        <tr>
+                            <td><%= d.UpdateDate %></td>
+                            <td><%= d.UserName %></td>
+                            <td><%= d.TableName %></td>
+                            <td><%= d.Operation %></td>
+                            <td><%= d.OldValue %></td>
+                            <td><%= d.NewValue %></td>
+                            <td></td>
+                            <td class="td-actions">
+                                <button type: "submit" class="btn btn-default btn-xs" style="color:#FFFFFF; background-color:#FE2E2E;" onclick="location.href='#';"><span class="glyphicon glyphicon-remove"></span></button>
+                                <!--Antes habias echo este codigo en eliminar usuario
+                                    <%= button_to , elimUsr_path(d.emp_rut), .... etc %>
+                                    no escribi en este comentario el nombre del boton y el metodo pq no se comentaban xd
+                                -->
+                            </td>
+                        </tr>
+                    <% end %>
                 </tbody>
             </table>
         </div>
