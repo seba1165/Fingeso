@@ -1,16 +1,3 @@
-<% if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" %>
-    <head>
-      <%= render 'shared/navbarAdmin' %>
-      <%= yield %>
-    </head>
-<% end %>
-<% if current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor" %>
-    <head>
-      <%= render 'shared/navbar' %>
-      <%= yield %>
-    </head>
-<% end %>
-
 <% flash.each do |key, value| %>
     <p> <%= value %> </p>
 <% end %>

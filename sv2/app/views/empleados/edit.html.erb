@@ -1,8 +1,3 @@
-<head>
-  <%= render 'shared/navbarAdmin' %>
-  <%= yield %>
-</head>
-
 <% if @empleado.errors.any? %>
     <ul>
       <% @empleado.errors.each do |atributo, mensaje| %>
@@ -53,9 +48,4 @@
   <% end %>
 
   <hr>
-</div>
-
-<div>
-  <%= render 'shared/footer' %>
-  <%= yield %>
 </div>
