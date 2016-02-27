@@ -8,13 +8,7 @@
 <div class="container">
     <h1 style="color:#0B2161"><FONT FACE="times new roman">REGISTRO <small>   Seleccione el registro que desea modificar y elija una opción</small></FONT></h1>
     <hr>
-
-    <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='http://localhost:3000/vendedor/nuevaCot';"><span class="glyphicon glyphicon-plus"></span> 
-    Nueva cotización
-    </button>
-
-    <p></p>
-    
+    <p></p>  
     <div class="row">
         <div class="panel panel-primary filterable">
             <div class="panel-heading" style="min-height:40px;">
@@ -32,7 +26,7 @@
                         <th><input type="text" class="form-control" placeholder="Operación" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Dato antiguo" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Dato nuevo" disabled></th>
-                        <th>Seleccionar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody style="text-align: center">
@@ -43,8 +37,8 @@
                         <td>editar</td>
                         <td>luis</td>
                         <td>luis alfredo</td>
-                        <td>
-                            <input type="checkbox" autocomplete="off">
+                        <td class="td-actions">
+                            <button type: "submit" class="btn btn-default btn-xs" style="color:#FFFFFF; background-color:#FE2E2E;" onclick="location.href='#';"><span class="glyphicon glyphicon-remove"></span></button>
                         </td>
                     </tr>
                     <tr>
@@ -54,8 +48,8 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>
-                            <input type="checkbox" autocomplete="off">
+                        <td class="td-actions">
+                            <button type: "submit" class="btn btn-default btn-xs" style="color:#FFFFFF; background-color:#FE2E2E;" onclick="location.href='#';"><span class="glyphicon glyphicon-remove"></span></button>
                         </td>
                     </tr>
                     <tr>
@@ -65,14 +59,15 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>
-                            <input type="checkbox" autocomplete="off">
+                        <td class="td-actions">
+                            <button type: "submit" class="btn btn-default btn-xs" style="color:#FFFFFF; background-color:#FE2E2E;" onclick="location.href='#';"><span class="glyphicon glyphicon-remove"></span></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <hr>
 </div>
 </body>
 
