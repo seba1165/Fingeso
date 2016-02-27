@@ -116,10 +116,6 @@ Rails.application.routes.draw do
 
   get 'admin/servicio'
 
-  get 'admin/servAgInstal'
-
-  get 'admin/servAgRepar'
-
   get 'vendedor/nuevaOC' => 'errors#construccion'
 
   get 'vendedor/anularOC' => 'errors#construccion'
