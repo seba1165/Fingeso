@@ -426,14 +426,13 @@ ActiveRecord::Schema.define(version: 20160227233957) do
   add_index "orden_de_despacho", ["od_est_cod"], name: "relationship_55_fk", using: :btree
 
   create_table "orden_de_trabajo", primary_key: "ot_cod", force: :cascade do |t|
-    t.string  "veh_pat",     limit: 6
+    t.string  "veh_pat",     limit: 6,   null: false
     t.integer "not_ven_cod"
     t.integer "doc_cod",                 null: false
-    t.integer "ot_est_cod"
-    t.string  "emp_rut",     limit: 10
-    t.date    "ot_fecha",                null: false
+    t.integer "ot_est_cod",              null: false
+    t.string  "emp_rut",     limit: 10,  null: false
+    t.date    "ot_fecha"
     t.string  "ot_obs",      limit: 100
-    t.integer "modelo_cod"
   end
 
   add_index "orden_de_trabajo", ["doc_cod"], name: "relationship_36_fk", using: :btree

@@ -8,13 +8,14 @@ class AdminController < ApplicationController
   def servicio
     
   end
-  def servAgInstal
+
+  def servEdInstal
     
   end
-  def servAgRepar
-    
+  def servEdRep
+    #Editar reparacion
   end
-########
+
   def editUsr
   end
 
