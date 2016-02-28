@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160228045642) do
 
+
   create_table "accesorio", primary_key: "art_cod", force: :cascade do |t|
     t.integer "art_tipo_cod"
     t.string  "art_nom",      limit: 40
