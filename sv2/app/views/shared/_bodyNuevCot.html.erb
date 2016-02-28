@@ -10,45 +10,11 @@
 	        <fieldset>
 	          <!-- Form Name -->
 	          <legend>Cliente</legend>
-
-	          <!-- Text input-->
-	          <div class="form-group">
-	            <label class="col-sm-2 control-label" for="textinput">RUT</label>
-	            <div class="col-sm-10">
-	              <input type="text" placeholder="Ingrese RUT" class="form-control">
-	            </div>
-	          </div>
-
-	          <!-- Text input-->
-	          <div class="form-group">
-	            <label class="col-sm-2 control-label" for="textinput">Nombre</label>
-	            <div class="col-sm-10">
-	              <input type="text" placeholder="Ingrese Nombre" class="form-control">
-	            </div>
-	          </div>
-
-	          <!-- Text input-->
-	          <div class="form-group">
-	            <label class="col-sm-2 control-label" for="textinput">Apellido</label>
-	            <div class="col-sm-10">
-	              <input type="text" placeholder="Ingrese Apellido" class="form-control">
-	            </div>
-	          </div>
-
-	          <!-- Text input-->
-	          <div class="form-group">
-	            <label class="col-sm-2 control-label" for="textinput">e-mail</label>
-	            <div class="col-sm-10">
-	              <input type="text" placeholder="Ingrese e-mail" class="form-control">
-	            </div>
-	          </div>
-
-	          <div class="form-group">
-	          	<label class="col-sm-2 control-label" for="textinput">Teléfono</label>
-	            <div class="col-sm-10">
-	              <input type="text" placeholder="Ingrese teléfono" class="form-control">
-	            </div>
-	          </div>
+            <i>Campos obligatorios (*)</i>
+            <p></p>
+            <%= form_for @cliente do |f| %>
+                <%= c.autocomplete_field :nombre, autocomplete_cliente_cliente_nombre_clientes_path, :placeholder => "Nombre del cliente", :multiple => false, :update_elements => {:cliente_direccion => '#cliAhora comprobar que funcionaent_direccion', :cliente_tel => '#client_telefono', :cliente_correo 'data-delimiter' => ',' 'data-delimiter' => ',' => "#client_email"} %>
+          <% end %>
 	        </fieldset>
 	      </form>
 	    </div><!-- /.col-lg-12 -->
