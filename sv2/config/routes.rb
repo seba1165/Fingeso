@@ -4,13 +4,7 @@ Rails.application.routes.draw do
 
   get 'cot_odc_arts/new'
 
-  get 'cot_odc_arts/create'
-
   get 'cot_odc_arts/edit'
-
-  get 'cot_odc_arts/update'
-
-  get 'cot_odc_arts/destroy'
 
   get 'clientes/index'
 
@@ -49,8 +43,11 @@ Rails.application.routes.draw do
   #devise_for :empleados
   resources :empleados, :except => [:show]
 
-  resources :tipo_cliente, :except => [:show]
+  resources :tipo_clientes, :except => [:show]
 
+  resources :cot_odc_arts, :except => [:show]
+
+  resources :doc_previos, :except => [:show]
 
   #devise_for :empleados, :controllers => { :registrations => "registrations" } , :skip => [:registrations]
   #as :empleado do
@@ -60,7 +57,7 @@ Rails.application.routes.draw do
 
   post "clientes/del/:id" => 'clientes#elimCliente' , as: :elimCliente
   post "empleado/del/:id" => 'admin#elimUsr' , as: :elimUsr
-
+  post "cot_odc_arts/del/:id" => 'cot_odc_arts#elimCotODCArt' , as: :elimCotODCArt
 
 
   get 'admin/cotPrev'
