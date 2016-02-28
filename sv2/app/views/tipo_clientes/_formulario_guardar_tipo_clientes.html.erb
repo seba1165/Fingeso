@@ -1,0 +1,14 @@
+<%= form_for @tipoCliente do |f| %>
+    <i>Campos obligatorios (*)</i>
+    <p></p>
+    <div class="field">
+      <%= f.label :tipo_cliente_descr, "Descripción tipo de cliente" %><br />
+      <%= f.text_field :tipo_cliente_descr, autofocus: true %>
+    </div>
+
+    <p></p>
+    <div class="actions">
+      <%= f.submit "Registrar" %>
+    </div>
+
+<% end %>

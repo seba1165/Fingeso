@@ -12,11 +12,11 @@ Rails.application.routes.draw do
 
   get 'clientes/edit'
 
-  get 'tipo_cliente/index'
+  get 'tipo_clientes/index'
 
-  get 'tipo_cliente/new'
+  get 'tipo_clientes/new'
 
-  get 'tipo_cliente/edit'
+  get 'tipo_clientes/edit'
 
   get 'empleados/index'
 
@@ -57,7 +57,10 @@ Rails.application.routes.draw do
 
   post "clientes/del/:id" => 'clientes#elimCliente' , as: :elimCliente
   post "empleado/del/:id" => 'admin#elimUsr' , as: :elimUsr
+
   post "cot_odc_arts/del/:id" => 'cot_odc_arts#elimCotODCArt' , as: :elimCotODCArt
+  post "tipo_clientes/del/:id" => 'tipo_clientes#elimTipoCliente', as: :elimTipoCliente
+
 
 
   get 'admin/cotPrev'
