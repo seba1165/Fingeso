@@ -1,2 +1,49 @@
-<h1>CotOdcArts#new</h1>
-<p>Find me in app/views/cot_odc_arts/new.html.erb</p>
+<% if @doc.errors.any? %>
+    <ul>
+      <% @doc.errors.each do |atributo, mensaje| %>
+          <li> <%= mensaje %> </li>
+      <% end %>
+    </ul>
+<% end %>
+<div class="container">
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">INGRESE CLIENTE</FONT></h1>
+  <hr>
+  <%= form_for @doc, :html => { :class => 'form-horizontal' } do |f| %>
+      <%= fields_for @doc.cliente do |c| %>
+        <%#= c.text_field :nombre, :placeholder => "Nombre del cliente" %>
+
+          <%= c.label :cliente_correo, "Correo del Cliente" %>
+          <%= c.autocomplete_field :cliente_correo, autocomplete_cliente_cliente_correo_clientes_path, :placeholder => "Correo del Cliente", :multiple => false, :update_elements => {:cliente_direccion => '#cliente_cliente_direccion', :cliente_tel => '#cliente_cliente_tel', :cliente_nom => '#cliente_cliente_nom', :cliente_ape => '#cliente_cliente_ape', :cliente_comuna => '#cliente_cliente_comuna', :tipo_cliente_cod => '#cliente_tipo_cliente_cod', :cliente_emp => '#cliente_cliente_emp', :cliente_frecuente => '#cliente_cliente_frecuente', :cliente_rut => '#cliente_cliente_rut'} %>
+
+          <%= c.label :cliente_nom, "Nombre del Cliente" %>
+          <%= c.text_field :cliente_nom, :placeholder => "Nombre" %>
+
+          <%= c.label :cliente_ape, "Apellido del Cliente" %>
+          <%= c.text_field :cliente_ape, :placeholder => "Apellido" %>
+
+          <%= c.label :cliente_ape, "Dirección del Cliente" %>
+          <%= c.text_field :cliente_direccion, :placeholder => "Dirección" %>
+
+          <%= c.label :cliente_comuna, "Comuna del Cliente" %>
+          <%= c.text_field :cliente_comuna, :placeholder => "Comuna" %>
+
+          <%= c.label :cliente_ape, "Teléfono del Cliente" %>
+          <%= c.text_field :cliente_ape, :placeholder => "Teléfono" %>
+
+          <%= c.label :cliente_emp, "Empresa del Cliente" %>
+          <%= c.text_field :cliente_emp, :placeholder => "Empresa" %>
+
+          <%= c.label :cliente_emp, "Empresa del Cliente" %>
+          <%= c.text_field :cliente_emp, :placeholder => "Empresa" %>
+
+          <%= c.label :cliente_frecuente, "Frecuente?" %><br />
+          <%= c.check_box :cliente_frecuente %>
+
+          <%= c.label :cargo_cod, "Tipo de Cliente" %><br/>
+          <%= collection_select(:cliente, :tipo_cliente_cod, TipoCliente.all, :id, :tipo_cliente_descr, prompt: true) %>
+
+    <% end %>
+
+  <% end %>
+  <hr>
+</div>

@@ -12,9 +12,7 @@
 	          <legend>Cliente</legend>
             <i>Campos obligatorios (*)</i>
             <p></p>
-            <%= form_for @cliente do |f| %>
-                <%= c.autocomplete_field :nombre, autocomplete_cliente_cliente_nombre_clientes_path, :placeholder => "Nombre del cliente", :multiple => false, :update_elements => {:cliente_direccion => '#cliAhora comprobar que funcionaent_direccion', :cliente_tel => '#client_telefono', :cliente_correo 'data-delimiter' => ',' 'data-delimiter' => ',' => "#client_email"} %>
-          <% end %>
+
 	        </fieldset>
 	      </form>
 	    </div><!-- /.col-lg-12 -->

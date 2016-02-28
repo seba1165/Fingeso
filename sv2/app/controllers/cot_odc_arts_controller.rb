@@ -1,9 +1,12 @@
 class CotOdcArtsController < ApplicationController
   def index
-    @cotodcArt = CotOdcArt.all()
+    @cotodcArts = CotOdcArt.all()
   end
 
   def new
+    @doc = DocPrevio.new
+    @doc.cliente = Cliente.new
+    @cotodcArt = CotOdcArt.new
   end
 
   def create
@@ -16,5 +19,9 @@ class CotOdcArtsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def elimCotODCArt
+    @cotodcArt = CotOdcArt.find(params[:id]);
   end
 end
