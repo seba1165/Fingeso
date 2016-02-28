@@ -18,11 +18,11 @@ Rails.application.routes.draw do
 
   get 'clientes/edit'
 
-  get 'tipo_cliente/index'
+  get 'tipo_clientes/index'
 
-  get 'tipo_cliente/new'
+  get 'tipo_clientes/new'
 
-  get 'tipo_cliente/edit'
+  get 'tipo_clientes/edit'
 
   get 'empleados/index'
 
@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   #devise_for :empleados
   resources :empleados, :except => [:show]
 
-  resources :tipo_cliente, :except => [:show]
+  resources :tipo_clientes, :except => [:show]
 
 
   #devise_for :empleados, :controllers => { :registrations => "registrations" } , :skip => [:registrations]
@@ -60,6 +60,7 @@ Rails.application.routes.draw do
 
   post "clientes/del/:id" => 'clientes#elimCliente' , as: :elimCliente
   post "empleado/del/:id" => 'admin#elimUsr' , as: :elimUsr
+  post "tipo_clientes/del/:id" => 'tipo_clientes#elimTipoCliente', as: :elimTipoCliente
 
 
 
