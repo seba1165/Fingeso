@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
 
+  get 'servicio_reparacions/index'
+
+  get 'servicio_reparacions/new'
+
+  get 'servicio_reparacions/edit'
+
   get 'cot_odc_arts/index'
 
   get 'cot_odc_arts/new'
 
-  get 'cot_odc_arts/create'
-
   get 'cot_odc_arts/edit'
-
-  get 'cot_odc_arts/update'
-
-  get 'cot_odc_arts/destroy'
 
   get 'clientes/index'
 
@@ -51,6 +51,8 @@ Rails.application.routes.draw do
 
   resources :tipo_clientes, :except => [:show]
 
+  resources :servicio_reparacions, :except => [:show]
+
 
   #devise_for :empleados, :controllers => { :registrations => "registrations" } , :skip => [:registrations]
   #as :empleado do
@@ -61,8 +63,7 @@ Rails.application.routes.draw do
   post "clientes/del/:id" => 'clientes#elimCliente' , as: :elimCliente
   post "empleado/del/:id" => 'admin#elimUsr' , as: :elimUsr
   post "tipo_clientes/del/:id" => 'tipo_clientes#elimTipoCliente', as: :elimTipoCliente
-
-
+  post "servicio_reparacions/del/:id" => 'servicio_reparacions#elimSR', as: :elimSR
 
   get 'admin/cotPrev'
 
