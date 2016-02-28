@@ -25,6 +25,7 @@ class AdminController < ApplicationController
   end
 
   def nuevCot
+    @cliente = Cliente.new
   end
 
   def nCotAgregArt

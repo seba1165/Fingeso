@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  get 'cot_odc_arts/index'
+
+  get 'cot_odc_arts/new'
+
+  get 'cot_odc_arts/create'
+
+  get 'cot_odc_arts/edit'
+
+  get 'cot_odc_arts/update'
+
+  get 'cot_odc_arts/destroy'
+
   get 'clientes/index'
 
   get 'clientes/new'
@@ -10,13 +22,7 @@ Rails.application.routes.draw do
 
   get 'tipo_cliente/new'
 
-  get 'tipo_cliente/create'
-
   get 'tipo_cliente/edit'
-
-  get 'tipo_cliente/update'
-
-  get 'tipo_cliente/destroy'
 
   get 'empleados/index'
 
@@ -34,10 +40,16 @@ Rails.application.routes.draw do
     put 'empleados' => 'devise/registrations#update', :as => 'empleado_registration'
   end
 
-  resources :clientes, :except => [:show]
+  resources :clientes, :except => [:show] do
+    collection do
+      get :autocomplete_cliente_cliente_correo
+    end
+  end
 
   #devise_for :empleados
   resources :empleados, :except => [:show]
+
+  resources :tipo_cliente, :except => [:show]
 
 
   #devise_for :empleados, :controllers => { :registrations => "registrations" } , :skip => [:registrations]
@@ -48,6 +60,8 @@ Rails.application.routes.draw do
 
   post "clientes/del/:id" => 'clientes#elimCliente' , as: :elimCliente
   post "empleado/del/:id" => 'admin#elimUsr' , as: :elimUsr
+
+
 
   get 'admin/cotPrev'
 

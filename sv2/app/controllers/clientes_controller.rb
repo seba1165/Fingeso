@@ -1,5 +1,14 @@
 class ClientesController < ApplicationController
   include Devise::Controllers::Helpers
+
+  before_action :set_cliente, only: [:edit, :update, :destroy]
+
+  autocomplete :cliente, :cliente_correo, :display_value => :cliente_correo, :extra_data => [:cliente_direccion, :cliente_tel, :cliente_nom, :cliente_ape, :cliente_comuna, :tipo_cliente_cod, :cliente_emp, :cliente_frecuente, :cliente_rut] do |items|
+    respond_to do |format|
+      format.json { render :json => @items }
+    end
+  end
+
   def index
     if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
       redirect_to '/errors/not_found'

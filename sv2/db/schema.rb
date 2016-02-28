@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227155348) do
+ActiveRecord::Schema.define(version: 20160227233957) do
 
   create_table "accesorio", primary_key: "art_cod", force: :cascade do |t|
     t.integer "art_tipo_cod"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20160227155348) do
   add_index "cargo_empleado", ["cargo_cod"], name: "cargo_empleado_pk", unique: true, using: :btree
 
   create_table "cliente", primary_key: "cliente_cod", force: :cascade do |t|
-    t.integer "tipo_cliente_cod"
+    t.integer "tipo_cliente_cod",             null: false
     t.string  "cliente_nom",       limit: 30
     t.string  "cliente_ape",       limit: 30
     t.string  "cliente_direccion", limit: 50

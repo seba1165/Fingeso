@@ -1,0 +1,2 @@
+module CotOdcArtsHelper
+end
