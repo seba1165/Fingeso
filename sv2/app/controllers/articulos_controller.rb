@@ -83,7 +83,11 @@ class ArticulosController < ApplicationController
       if @articulo.save()
         redirect_to articulos_path, :notice => "El articulo ha sido modificado";
       else
-        render "edit";
+        if @articulo_cod == ""
+          redirect_to articulos_path, :notice => "El articulo NO ha podido ser modificado";
+        else
+          render "edit";
+        end
       end
     end
   end

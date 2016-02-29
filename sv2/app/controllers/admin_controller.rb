@@ -1,6 +1,5 @@
 class AdminController < ApplicationController
   include Devise::Controllers::Helpers
-  #Controlador para agregar usuarios
 
   def articulo
 
@@ -119,6 +118,10 @@ class AdminController < ApplicationController
   end
 
   def elimUsr
-    @empleado = Empleado.find(params[:id]);
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
+      redirect_to '/errors/not_found'
+    else
+      @empleado = Empleado.find(params[:id]);
+    end
   end
 end

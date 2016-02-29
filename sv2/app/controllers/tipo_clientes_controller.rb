@@ -67,10 +67,15 @@ class TipoClientesController < ApplicationController
       redirect_to '/errors/not_found'
     else
       @tipoCliente = TipoCliente.find(params[:id]);
-      if @tipoCliente.destroy()
-        redirect_to tipo_clientes_path, :notice => "El tipo de cliente ha sido eliminado";
+      @cliente = Cliente.find_by(tipo_cliente_cod: @tipoCliente.tipo_cliente_cod)
+      if @cliente.nil?
+        if @tipoCliente.destroy()
+          redirect_to tipo_clientes_path, :notice => "El tipo de articulo ha sido eliminado";
+        else
+          redirect_to tipo_clientes_path, :notice => "El tipo de articulo NO ha podido ser eliminado";
+        end
       else
-        redirect_to tipo_clientes_path, :notice => "El tipo de cliente NO ha podido ser eliminado";
+        redirect_to tipo_clientes_path, :notice => "El tipo cliente no ha podido ser eliminado ya que tiene clientes asociados";
       end
     end
   end

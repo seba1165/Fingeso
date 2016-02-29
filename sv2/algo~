@@ -1,0 +1,151 @@
+CREATE TRIGGER articulo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+articulo ON  FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER art_hist_pre_tg_audit AFTER INSERT OR UPDATE OR DELETE
+art_hist_pre ON  FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+         
+CREATE TRIGGER art_prop_valor_tg_audit AFTER INSERT OR UPDATE OR DELETE
+art_prop_valor ON  FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER compatibilidad_tg_audit AFTER INSERT OR UPDATE OR DELETE       
+ON compatibilidad FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER accesorio_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON cliente FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER det_cot_odc_art_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON det_cot_odc_art FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER det_ot_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON det_ot FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER doc_previo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON doc_previo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER documento_de_pago_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON documento_de_pago FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER dom_val_art_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON dom_val_art FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER empleado_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON empleado FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER estado_cotizacion_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON estado_cotizacion FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER estado_factura_art_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON estado_factura FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER estado_nota_de_venta_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON estado_nota_de_venta FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER estado_oc_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON estado_oc FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER estado_od_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON estado_od FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER estado_ot_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON estado_ot FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER hist_est_cot_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON hist_est_cot FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER hist_est_fact_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON hist_est_fact FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER hist_est_nv_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON hist_est_nv FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER hist_est_oc_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON hist_est_oc FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER hist_est_od_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON hist_est_od FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER hist_est_ot_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON hist_est_ot FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+           
+CREATE TRIGGER marca_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON marca FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER metodo_de_pago_audit AFTER INSERT OR UPDATE OR DELETE
+ON metodo_de_pago FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER modelo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON modelo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER nota_de_venta_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON nota_de_venta FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER orden_de_compra_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON orden_de_compra FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER orden_de_despacho_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON orden_de_despacho FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+               
+CREATE TRIGGER orden_de_trabajo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON orden_de_trabajo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER parametros_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON parametros FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER propiedad_articulo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON propiedad_articulo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER proveedor_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON proveedor FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER proveedor_articulo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON proveedor_articulo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER servicio_reparacion_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON servicio_reparacion FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+      
+
+            
+CREATE TRIGGER serv_inst_det_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON serv_inst_det FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER serv_rep_det_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON serv_rep_det FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER si_vehiculo_articulo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON si_vehiculo_articulo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER tipo_articulo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON tipo_articulo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER tipo_cliente_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON tipo_cliente FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER tran_est_cot_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON tran_est_cot FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER trans_est_fact_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON trans_est_fact FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER trans_est_nv_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON trans_est_nv FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();  
+
+CREATE TRIGGER trans_est_oc_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON trans_est_oc FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER trans_est_od_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON trans_est_fact FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER trans_est_ot_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON trans_est_fact FOR EACH ROW EXECUTE PROCEDURE fn_log_audit(); 
+
+CREATE TRIGGER vehiculo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON vehiculo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER vehiculo_serviciorep_fact_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON vehiculo_serviciorep FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();       
+
+
+
+
+          
+

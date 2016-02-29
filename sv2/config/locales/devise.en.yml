@@ -58,3 +58,4 @@ en:
           one: "1 error impidió que este %{resource} fuese guardado:"
           other: "%{count} errores impidieron que este %{resource} fuese guardado:"
         blank: "%{attribute} no puede estar vacio"
+        invalid: "%{attribute} no es válido"

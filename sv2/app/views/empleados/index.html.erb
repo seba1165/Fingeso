@@ -3,7 +3,7 @@
 <% end %>
 <body>
 <div class="container">
-  <h1 style="color:#0B2161"><FONT FACE="times new roman">ADMINISTRAR USUARIOS <small>   Editar, eliminar y crear nuevos usuarios</small></FONT></h1>
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">ADMINISTRAR EMPLEADOS <small> Editar, eliminar y crear empleados</small></FONT></h1>
   <hr>
   <div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/empleados/new';"><span class="glyphicon glyphicon-plus"></span> Crear Nuevo Usuario</button>
     <hr>
@@ -13,7 +13,7 @@
   <div class="row">
     <div class="panel panel-primary filterable">
       <div class="panel-heading" style="min-height:40px;">
-        <h3 class="panel-title pull-left">Usuarios del Sistema</h3>
+        <h3 class="panel-title pull-left">EMPLEADOS</h3>
         <div class="pull-right">
           <button href="javascript:;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
         </div>
@@ -64,14 +64,10 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-1">
-      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/admin/inicio';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
+      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
     </div>
   </div>
   <hr>
 </div>
 </body>
-
-<div>
-  <%= render 'shared/footer' %>
-  <%= yield %>
-</div>b</p>
+</p>

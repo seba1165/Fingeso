@@ -1,8 +1,6 @@
 class ClientesController < ApplicationController
   include Devise::Controllers::Helpers
 
-  before_action :set_cliente, only: [:edit, :update, :destroy]
-
   autocomplete :cliente, :cliente_correo, :display_value => :cliente_correo, :extra_data => [:cliente_direccion, :cliente_tel, :cliente_nom, :cliente_ape, :cliente_comuna, :tipo_cliente_cod, :cliente_emp, :cliente_frecuente, :cliente_rut, :cliente_cod] do |items|
     respond_to do |format|
       format.json { render :json => @items }
@@ -57,7 +55,7 @@ class ClientesController < ApplicationController
       if @cliente.save()
         redirect_to clientes_path, :notice => "El cliente ha sido guardado con éxito";
       else
-        render "new";
+        render "new"
       end
     else
       redirect_to '/errors/not_found'
@@ -109,6 +107,7 @@ class ClientesController < ApplicationController
 
 
       if @cliente.save()
+
         redirect_to clientes_path, :notice => "El cliente ha sido modificado";
       else
         render "edit";
@@ -121,10 +120,15 @@ class ClientesController < ApplicationController
   def destroy
     if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor"
       @cliente = Cliente.find(params[:id]);
-      if @cliente.destroy()
-        redirect_to clientes_path, :notice => "El cliente ha sido eliminado";
+      @doc = DocPrevio.find_by(cliente_cod: @cliente.cliente_cod)
+      if @doc.nil?
+        if @cliente.destroy()
+          redirect_to clientes_path, :notice => "El cliente ha sido eliminado";
+        else
+          redirect_to clientes_path, :notice => "El cliente NO ha podido ser eliminado";
+        end
       else
-        redirect_to clientes_path, :notice => "El cliente NO ha podido ser eliminado";
+        redirect_to clientes_path, :notice => "El cliente NO ha podido ser eliminado ya que tiene documentos asociados";
       end
     else
       redirect_to '/errors/not_found'

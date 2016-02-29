@@ -1,0 +1,13 @@
+<% if @tipoArticulo.errors.any? %>
+    <ul>
+      <% @tipoArticulo.errors.each do |atributo, mensaje| %>
+          <li> <%= mensaje %> </li>
+      <% end %>
+    </ul>
+<% end %>
+<div class="container">
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">CREAR TIPO ARTÍCULO</FONT></h1>
+  <hr>
+  <%= render :partial => "formulario_guardar_tipo_articulos.html" %>
+  <hr>
+</div>

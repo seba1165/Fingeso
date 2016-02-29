@@ -7,8 +7,8 @@
     </div>
 
     <div class="field">
-      <%= f.label :art_tipo_cod, "Código de tipo de artículo *" %><br />
-      <%= f.text_field :art_tipo_cod, autofocus: true %>
+      <%= f.label :art_tipo_cod, "Tipo de Artículo" %><br/>
+      <%= collection_select(:articulo, :art_tipo_cod, TipoArticulo.all, :id, :tipo_nom, prompt: true) %>
     </div>
 
     <div class="field">
@@ -18,12 +18,12 @@
 
     <div class="field">
       <%= f.label :art_stock, "Stock *" %><br />
-      <%= f.text_field :art_stock, autofocus: true %>
+      <%= f.number_field :art_stock, autofocus: true, min: 1%>
     </div>
 
     <div class="field">
       <%= f.label :art_precio, "Precio *" %><br />
-      <%= f.text_field :art_precio, autofocus: true %>
+      <%= f.number_field :art_precio, autofocus: true, min: 1%>
     </div>
 
     <!--div class="form-group">

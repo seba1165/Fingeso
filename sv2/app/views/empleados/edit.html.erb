@@ -6,46 +6,10 @@
     </ul>
 <% end %>
 <div class="container">
-  <h1 style="color:#0B2161"><FONT FACE="times new roman">MODIFICAR USUARIO</FONT></h1>
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">MODIFICAR EMPLEADO</FONT></h1>
   <hr>
 
-  <%= form_for @empleado do |f| %>
-      <div class="field">
-        <%= f.label :emp_nom, "Nombre del Empleado" %><br />
-        <%= f.text_field :emp_nom, autofocus: true %>
-      </div>
-
-      <div class="field">
-        <%= f.label :emp_ape, "Apellido del Empleado" %><br />
-        <%= f.text_field :emp_ape, autofocus: true %>
-      </div>
-
-      <div class="field">
-        <%= f.label :emp_rut, "Rut del Empleado" %><br />
-        <%= f.text_field :emp_rut, autofocus: true %>
-      </div>
-
-      <div class="field">
-        <%= f.label :emp_tel, "Telefono del Empleado" %><br />
-        <%= f.text_field :emp_tel, autofocus: true %>
-      </div>
-
-      <div class="field">
-        <%= f.label :email, "Correo" %><br />
-        <%= f.email_field :email, autofocus: true %>
-      </div>
-
-      <div class="field">
-        <%= f.label :cargo_cod, "Cargo del empleado" %><br />
-        <%= collection_select(:empleado, :cargo_cod, CargoEmpleado.all, :id, :cargo_nom, prompt: true) %>
-      </div>
-
-      <p></p>
-      <div class="actions">
-        <%= f.submit "Guardar" %> <%= link_to "Cancelar", empleados_path %>
-      </div>
-
-  <% end %>
+  <%= render :partial => "formulario_modificar_empleado.html" %>
 
   <hr>
 </div>

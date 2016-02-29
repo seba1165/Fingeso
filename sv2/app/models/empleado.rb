@@ -29,7 +29,7 @@ class Empleado < ActiveRecord::Base
   end
 
   validates :cargo_cod, :presence => true
-  validates :emp_rut, rut: true
+  validates :emp_rut, :presence => true, rut: true
   validates :email, :uniqueness => true
 
 end

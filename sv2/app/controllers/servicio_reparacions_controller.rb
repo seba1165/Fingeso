@@ -1,54 +1,52 @@
 class ServicioReparacionsController < ApplicationController
   include Devise::Controllers::Helpers
   def index
-    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
-    else
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
       @serv_repar = ServicioReparacion.all();
+    else
+      redirect_to '/errors/not_found'
     end
   end
 
   def new
-    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
-    else
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
       @serv_repar = ServicioReparacion.new();
+    else
+      redirect_to '/errors/not_found'
     end
   end
 
   def create
-    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
-    else
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
       #Recuperamos las varibles POST que vinieron desde la acción new.
       @sr_nom = params[:servicio_reparacion][:serv_nom];
 
       #Creamos el objeto con los valores a ingresar.
       @serv_repar = ServicioReparacion.new({
-                                 :serv_nom => @sr_nom,
-                             });
+                                               :serv_nom => @sr_nom,
+                                           });
       #Verificamos si la tarea ha podido ser guardado correctamente.
       if @serv_repar.save()
         redirect_to servicio_reparacions_path, :notice => "El servicio de reparación ha sido guardado con éxito";
       else
         render "new";
       end
+    else
+      redirect_to '/errors/not_found'
     end
   end
 
   def edit
-    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
-    else
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
       @serv_repar = ServicioReparacion.find(params[:id]);
       @sr_nom = @serv_repar.serv_nom;
+    else
+      redirect_to '/errors/not_found'
     end
   end
 
   def update
-    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
-    else
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
       @sr_nom = params[:servicio_reparacion]["serv_nom"];
 
       @serv_repar = ServicioReparacion.find(params[:id]);
@@ -59,23 +57,29 @@ class ServicioReparacionsController < ApplicationController
       else
         render "edit";
       end
+    else
+      redirect_to '/errors/not_found'
     end
   end
 
   def destroy
-    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
-    else
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
       @serv_repar = ServicioReparacion.find(params[:id]);
       if @serv_repar.destroy()
         redirect_to servicio_reparacions_path, :notice => "El servicio de reparación ha sido eliminado";
       else
         redirect_to servicio_reparacions_path, :notice => "El servicio de reparación NO ha podido ser eliminado";
       end
+    else
+      redirect_to '/errors/not_found'
     end
   end
 
   def elimSR
-    @serv_repar = ServicioReparacion.find(params[:id]);
+      if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
+        @serv_repar = ServicioReparacion.find(params[:id]);
+      else
+        redirect_to '/errors/not_found'
+      end
   end
 end

@@ -6,4 +6,6 @@ class ErrorsController < ApplicationController
   rescue ActionController::UnknownFormat
     render status: 404, text: "nope"
   end
+
+
 end

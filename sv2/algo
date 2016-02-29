@@ -1,0 +1,300 @@
+CREATE TRIGGER articulo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+articulo ON  FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER art_hist_pre_tg_audit AFTER INSERT OR UPDATE OR DELETE
+art_hist_pre ON  FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+         
+CREATE TRIGGER art_prop_valor_tg_audit AFTER INSERT OR UPDATE OR DELETE
+art_prop_valor ON  FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER compatibilidad_tg_audit AFTER INSERT OR UPDATE OR DELETE       
+ON compatibilidad FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER accesorio_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON cliente FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER cotizacion_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON cotizacion FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER det_cot_odc_art_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON det_cot_odc_art FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER det_ot_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON det_ot FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER doc_previo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON doc_previo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER documento_de_pago_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON documento_de_pago FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER dom_val_art_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON dom_val_art FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER empleado_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON empleado FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER estado_cotizacion_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON estado_cotizacion FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER estado_factura_art_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON estado_factura FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER estado_nota_de_venta_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON estado_nota_de_venta FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER estado_oc_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON estado_oc FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER estado_od_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON estado_od FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER estado_ot_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON estado_ot FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER hist_est_cot_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON hist_est_cot FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER hist_est_fact_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON hist_est_fact FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER hist_est_nv_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON hist_est_nv FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER hist_est_oc_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON hist_est_oc FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER hist_est_od_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON hist_est_od FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER hist_est_ot_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON hist_est_ot FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+           
+CREATE TRIGGER marca_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON marca FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER metodo_de_pago_audit AFTER INSERT OR UPDATE OR DELETE
+ON metodo_de_pago FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER modelo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON modelo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER nota_de_venta_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON nota_de_venta FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER orden_de_compra_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON orden_de_compra FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER orden_de_despacho_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON orden_de_despacho FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+               
+CREATE TRIGGER orden_de_trabajo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON orden_de_trabajo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER parametros_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON parametros FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER propiedad_articulo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON propiedad_articulo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER proveedor_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON proveedor FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER proveedor_articulo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON proveedor_articulo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER servicio_reparacion_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON servicio_reparacion FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+      
+
+            
+CREATE TRIGGER serv_inst_det_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON serv_inst_det FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER serv_rep_det_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON serv_rep_det FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER si_vehiculo_articulo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON si_vehiculo_articulo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER tipo_articulo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON tipo_articulo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER tipo_cliente_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON tipo_cliente FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER tran_est_cot_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON tran_est_cot FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER trans_est_fact_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON trans_est_fact FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER trans_est_nv_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON trans_est_nv FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();  
+
+CREATE TRIGGER trans_est_oc_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON trans_est_oc FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER trans_est_od_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON trans_est_fact FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER trans_est_ot_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON trans_est_fact FOR EACH ROW EXECUTE PROCEDURE fn_log_audit(); 
+
+CREATE TRIGGER vehiculo_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON vehiculo FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+
+CREATE TRIGGER vehiculo_serviciorep_fact_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON vehiculo_serviciorep FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();       
+
+CREATE TRIGGER cargo_empleado_fact_tg_audit AFTER INSERT OR UPDATE OR DELETE
+ON cargo_empleado FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();       
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION creaOT() RETURNS trigger AS
+$$
+DECLARE reg RECORD;
+BEGIN
+
+if (SELECT cot_est_descr FROM estado_cotizacion WHERE cot_est_cod = NEW.cot_est_cod) = 'Aprobada' then
+	if (SELECT * FROM serv_rep WHERE doc_cod = NEW.doc_cod) <> NULL then
+		FOR reg IN SELECT * FROM serv_rep_det LOOP
+			INSERT INTO orden_de_trabajo (doc_cod, modelo_cod) VALUES (reg.doc_cod, reg.modelo_cod);
+		END LOOP;
+	end if;
+	if (SELECT * FROM serv_inst WHERE doc_cod = NEW.doc_cod) <> NULL then
+		FOR reg IN SELECT * FROM serv_inst_det LOOP
+			INSERT INTO orden_de_trabajo (doc_cod, modelo_cod) VALUES (reg.doc_cod, reg.modelo_cod);
+		END LOOP;
+	end if;
+end if;
+return NULL;
+END;
+$$
+LANGUAGE 'plpgsql' VOLATILE COST 100;
+ALTER FUNCTION creaOT() OWNER TO seba;
+
+CREATE TRIGGER CreaOT_COT AFTER UPDATE
+ON cotizacion FOR EACH ROW EXECUTE PROCEDURE creaOT();
+
+CREATE TRIGGER CreaOT_OC AFTER UPDATE
+ON orden_de_compra FOR EACH ROW EXECUTE PROCEDURE creaOT();
+
+
+
+CREATE OR REPLACE FUNCTION descStock() RETURNS trigger AS
+$$
+DECLARE reg RECORD;
+begin
+if (SELECT not_ven_est_descr FROM estado_nota_de_venta WHERE not_ven_est_cod = NEW.not_ven_est_cod) = 'Pagada' then
+	FOR reg IN SELECT * FROM det_cot_odc_art WHERE doc_cod = NEW.doc_cod LOOP
+		UPDATE articulo SET art_stock = art_stock-reg.art_cant WHERE art_cod = reg.art_cod;
+	END LOOP;
+END if;
+return NULL;
+END;
+$$
+
+LANGUAGE 'plpgsql' VOLATILE COST 100;
+ALTER FUNCTION creaOT() OWNER TO seba;
+
+
+CREATE TRIGGER controlStock AFTER UPDATE
+ON nota_de_venta FOR EACH ROW EXECUTE PROCEDURE descStock();
+
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION cambiodeEstOT() RETURNS trigger AS
+$$
+begin
+if (OLD.ot_est_cod <> NEW.ot_est_cod) then
+	UPDATE hist_est_ot SET ot_estado_hasta = now() WHERE ot_cod = NEW.ot_cod;
+	INSERT INTO hist_est_ot (ot_cod, ot_est_cod, ot_estado_desde) VALUES (NEW.ot_cod, NEW.ot_est_cod, now());
+END if;
+END;
+$$
+
+LANGUAGE 'plpgsql' VOLATILE COST 100;
+ALTER FUNCTION cambiodeEstOT() OWNER TO seba;
+
+CREATE TRIGGER cambio_est_ot BEFORE UPDATE ON orden_de_trabajo
+FOR EACH ROW EXECUTE PROCEDURE cambiodeEstOT();
+
+
+CREATE OR REPLACE FUNCTION cambiodeEstCot_in() RETURNS trigger AS
+$$
+begin
+	INSERT INTO hist_est_cot (doc_cod, cot_est_cod, cot_estado_desde) VALUES (NEW.doc_cod, NEW.cot_est_cod, now());
+	RETURN NEW;
+END;
+$$
+
+LANGUAGE 'plpgsql' VOLATILE COST 100;
+ALTER FUNCTION cambiodeEstot_in() OWNER TO seba;
+
+CREATE TRIGGER cambio_est_cot_in AFTER INSERT ON cotizacion
+FOR EACH ROW EXECUTE PROCEDURE cambiodeEstCot_in();
+
+alter table orden_de_trabajo
+add constraint FK_OT_modelo_cod
+foreign key (modelo_cod)
+references modelo(modelo_cod);
+
+CREATE TRIGGER CreaOT_paraCot AFTER UPDATE
+ON cotizacion FOR EACH ROW EXECUTE PROCEDURE creaOT();
+
+
+CREATE VIEW vista_herramientas
+ AS SELECT *
+ FROM herramienta. 
+
+CREATE VIEW vista_insumos
+ AS SELECT *
+ FROM insumo;
+          
+CREATE VIEW vista_repuestos
+ AS SELECT *
+ FROM repuesto;
+
+ CREATE VIEW vista_accesorio
+ AS SELECT *
+ FROM accesorio;
+
+CREATE VIEW vista_articulos_instalacion
+ AS SELECT *
+ FROM para_instalacion;
+
+
+CREATE TYPE a1 AS
+   (det_num_linea integer,
+    art_cod character varying(20),
+    art_cant integer,
+    art_precio integer );
+	
+
+CREATE OR REPLACE FUNCTION precio_cot_odc_art(integer) RETURNS integer AS $$
+DECLARE
+ resultado integer;
+ precio_linea integer;
+ DECLARE reg RECORD;
+ DECLARE reg2 RECORD;
+BEGIN
+	FOR reg IN SELECT art_cod, art_cant, art_desc FROM det_cot_odc_art WHERE doc_cod = $1 LOOP
+		FOR reg2 IN SELECT art_precio FROM articulo WHERE art_cod = reg.art_cod LOOP
+ 			precio_linea = (reg.art_cant * reg2.art_precio)- ((reg.art_cant * reg2.art_precio)* reg.art_desc)/100;
+		END LOOP;
+		resultado = resultado + precio_linea;
+	END LOOP;
+ RETURN resultado;
+END;
+$$ LANGUAGE plpgsql;

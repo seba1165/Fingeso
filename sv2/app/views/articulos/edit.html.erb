@@ -1,6 +1,6 @@
 <% if @articulo.errors.any? %>
     <ul>
-      <% @empleado.errors.each do |atributo, mensaje| %>
+      <% @articulo.errors.each do |atributo, mensaje| %>
           <li> <%= mensaje %> </li>
       <% end %>
     </ul>

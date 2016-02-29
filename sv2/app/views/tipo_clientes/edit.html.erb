@@ -1,6 +1,6 @@
 <% if @tipoCliente.errors.any? %>
     <ul>
-      <% @empleado.errors.each do |atributo, mensaje| %>
+      <% @tipoCliente.errors.each do |atributo, mensaje| %>
           <li> <%= mensaje %> </li>
       <% end %>
     </ul>

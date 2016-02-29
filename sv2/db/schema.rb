@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160228135136) do
-=======
-ActiveRecord::Schema.define(version: 20160228205010) do
->>>>>>> 40506305e26a526bc52163624d17da6c2922a332
+ActiveRecord::Schema.define(version: 20160229033559) do
 
   create_table "accesorio", primary_key: "art_cod", force: :cascade do |t|
     t.integer "art_tipo_cod"
@@ -144,9 +140,9 @@ ActiveRecord::Schema.define(version: 20160228205010) do
   add_index "cotizacion", ["doc_cod"], name: "cotizacion_pk", unique: true, using: :btree
 
   create_table "det_cot_odc_art", id: false, force: :cascade do |t|
-    t.integer "doc_cod",                      null: false
-    t.integer "det_num_linea",                null: false
-    t.string  "art_cod",           limit: 20, null: false
+    t.integer "doc_cod",                                                                     null: false
+    t.integer "det_num_linea",                default: "nextval('det_linea_sec'::regclass)", null: false
+    t.string  "art_cod",           limit: 20,                                                null: false
     t.integer "art_cant"
     t.integer "art_desc"
     t.integer "art_precio_unidad"
@@ -575,11 +571,11 @@ ActiveRecord::Schema.define(version: 20160228205010) do
   add_index "si_vehiculo_articulo", ["marca_cod", "art_cod", "modelo_cod"], name: "si_vehiculo_articulo_pk", unique: true, using: :btree
   add_index "si_vehiculo_articulo", ["marca_cod", "modelo_cod"], name: "relationship_17_fk", using: :btree
 
-  create_table "tipo_articulo", primary_key: "art_tipo_cod", force: :cascade do |t|
+  create_table "tipo_articulos", primary_key: "art_tipo_cod", force: :cascade do |t|
     t.string "tipo_nom", limit: 40
   end
 
-  add_index "tipo_articulo", ["art_tipo_cod"], name: "tipo_articulo_pk", unique: true, using: :btree
+  add_index "tipo_articulos", ["art_tipo_cod"], name: "tipo_articulo_pk", unique: true, using: :btree
 
   create_table "tipo_cliente", primary_key: "tipo_cliente_cod", force: :cascade do |t|
     t.string "tipo_cliente_descr", limit: 30
@@ -668,7 +664,7 @@ ActiveRecord::Schema.define(version: 20160228205010) do
   add_foreign_key "art_prop_valor", "articulo", column: "art_cod", primary_key: "art_cod", name: "fk_art_prop_relations_articulo", on_update: :cascade, on_delete: :cascade
   add_foreign_key "art_prop_valor", "dom_val_art", column: "dom_cod", primary_key: "dom_cod", name: "fk_art_prop_relations_dom_val_", on_update: :cascade, on_delete: :nullify
   add_foreign_key "art_prop_valor", "propiedad_articulo", column: "prop_cod", primary_key: "prop_cod", name: "fk_art_prop_relations_propieda", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "articulo", "tipo_articulo", column: "art_tipo_cod", primary_key: "art_tipo_cod", name: "fk_articulo_relations_tipo_art", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "articulo", "tipo_articulos", column: "art_tipo_cod", primary_key: "art_tipo_cod", name: "fk_articulo_relations_tipo_art", on_update: :cascade, on_delete: :nullify
   add_foreign_key "boleta", "documento_de_pago", column: "doc_pago_cod", primary_key: "doc_pago_cod", name: "fk_boleta_inheritan_document", on_update: :cascade, on_delete: :cascade
   add_foreign_key "cliente", "tipo_cliente", column: "tipo_cliente_cod", primary_key: "tipo_cliente_cod", name: "fk_cliente_relations_tipo_cli", on_update: :cascade, on_delete: :nullify
   add_foreign_key "compatibilidad", "modelo", column: "marca_cod", primary_key: "marca_cod", name: "fk_compatib_relations_modelo", on_update: :cascade, on_delete: :cascade
@@ -717,7 +713,7 @@ ActiveRecord::Schema.define(version: 20160228205010) do
   add_foreign_key "orden_de_trabajo", "vehiculo", column: "veh_pat", primary_key: "veh_pat", name: "fk_orden_de_relations_vehiculo", on_update: :cascade, on_delete: :nullify
   add_foreign_key "para_instalacion", "articulo", column: "art_cod", primary_key: "art_cod", name: "fk_para_ins_inheritan_articulo", on_update: :cascade, on_delete: :cascade
   add_foreign_key "propiedad_articulo", "dom_val_art", column: "dom_cod", primary_key: "dom_cod", name: "fk_propieda_relations_dom_val_", on_update: :cascade, on_delete: :nullify
-  add_foreign_key "propiedad_articulo", "tipo_articulo", column: "art_tipo_cod", primary_key: "art_tipo_cod", name: "fk_propieda_relations_tipo_art", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "propiedad_articulo", "tipo_articulos", column: "art_tipo_cod", primary_key: "art_tipo_cod", name: "fk_propieda_relations_tipo_art", on_update: :cascade, on_delete: :nullify
   add_foreign_key "proveedor_articulo", "articulo", column: "art_cod", primary_key: "art_cod", name: "fk_proveedo_relations_articulo", on_update: :cascade, on_delete: :cascade
   add_foreign_key "proveedor_articulo", "proveedor", column: "prov_cod", primary_key: "prov_cod", name: "fk_proveedo_relations_proveedo", on_update: :cascade, on_delete: :cascade
   add_foreign_key "repuesto", "para_instalacion", column: "art_cod", primary_key: "art_cod", name: "fk_repuesto_inheritan_para_ins", on_update: :cascade, on_delete: :cascade

@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'tipo_articulos/index'
+
+  get 'tipo_articulos/new'
+
+  get 'tipo_articulos/edit'
+
   #resource :carro, only: [:show]
   #resources :det_cot_odc_arts, only: [:create, :update, :destroy]
 
@@ -15,13 +21,13 @@ Rails.application.routes.draw do
 
   get 'servicio_reparacions/edit'
 
-  get 'cot_odc_arts/index'
-
   get 'articulos/index'
 
   get 'doc_previos/create'
   get 'doc_previos/new'
   get 'doc_previos/index'
+
+  get 'vendedor/inicio'
 
   #get 'det_cot_odc_arts/index'
 
@@ -59,8 +65,6 @@ Rails.application.routes.draw do
 
   get 'admin/inicio'
 
-  get 'vendedor/inicio' => 'errors#construccion'
-
   devise_for :empleados, :skip => [:registrations]
   as :empleado do
     get 'empleados/edit' => 'devise/registrations#edit', :as => 'edit_empleado_registration'
@@ -88,6 +92,8 @@ Rails.application.routes.draw do
 
   resources :articulos, :except => [:show]
 
+  resources :tipo_articulos, :except => [:show]
+
   #devise_for :empleados, :controllers => { :registrations => "registrations" } , :skip => [:registrations]
   #as :empleado do
   #  get 'empleado/edit' => 'devise/registrations#edit', :as => 'edit_empleado_registration'
@@ -96,60 +102,25 @@ Rails.application.routes.draw do
 
   post "clientes/del/:id" => 'clientes#elimCliente' , as: :elimCliente
   post "empleado/del/:id" => 'admin#elimUsr' , as: :elimUsr
-
   #post "cot_odc_arts/del/:id" => 'cot_odc_arts#elimCotODCArt' , as: :elimCotODCArt
   post "tipo_clientes/del/:id" => 'tipo_clientes#elimTipoCliente', as: :elimTipoCliente
-
-
   post "doc_previos/del/:id" => 'doc_previos#elimDocPrevio', as: :elimDocPrevio
-
   post "servicio_reparacions/del/:id" => 'servicio_reparacions#elimSR', as: :elimSR
   post "articulos/del/:id" => 'articulos#elimArt', as: :elimArt
-
-  get 'admin/cotPrev'
-
-  get 'admin/cotFinal'
+  post "tipo_articulos/del/:id" => 'tipo_articulos#elimTipoArt', as: :elimTipoArt
 
   get 'admin/parametro' => 'errors#construccion'
 
   get 'admin/registro'
 
+  get 'vehiculos' => 'errors#construccion'
 
-  get 'admin/cotAgHerr' 
+  get 'ventas' => 'errors#construccion'
 
-  get 'admin/cotAgRepto'
+  get 'precioArt' => 'errors#construccion'
+  get 'precioServ' => 'errors#construccion'
 
-  get 'admin/cotAgAcc'
-
-  get 'admin/cotAgRepar'
-
-  get 'admin/cotAgIns'
-
-  get 'admin/cotAgInstal'
-
-  get 'admin/agregUsr'
-
-  get 'admin/editUsr'
-
-  get 'admin/elimUsr'
-
-  get 'admin/nCotAgregArt'
-
-  get 'admin/nCotAgregSer'
-
-  get 'admin/cotizacion'
-
-  get 'admin/nuevCot'
-  
-  get 'admin/cotNuevAgreg'
-
-  get 'admin/anularCot'
-
-  get 'admin/aprobCot'
-
-  get 'admin/abrirCot'
-
-  get 'admin/ordComp'
+  get 'admin/ordComp' => 'errors#construccion'
 
   get 'admin/nuevaOC' => 'errors#construccion'
 

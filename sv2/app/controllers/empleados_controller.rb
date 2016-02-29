@@ -91,7 +91,11 @@ class EmpleadosController < ApplicationController
       if @empleado.save()
         redirect_to empleados_path, :notice => "El empleado ha sido modificado";
       else
-        render "edit";
+        if @emp_rut == ""
+          redirect_to empleados_path, :notice => "El empleado NO ha sido modificado";
+        else
+          render "edit"
+        end
       end
     end
   end
@@ -101,10 +105,15 @@ class EmpleadosController < ApplicationController
       redirect_to '/errors/not_found'
     else
       @empleado = Empleado.find(params[:id]);
-      if @empleado.destroy()
-        redirect_to empleados_path, :notice => "El empleado ha sido eliminado";
+      @doc = DocPrevio.find_by(emp_rut: @empleado.emp_rut)
+      if @doc.nil?
+        if @empleado.destroy()
+          redirect_to empleados_path, :notice => "El empleado ha sido eliminado";
+        else
+          redirect_to empleados_path, :notice => "El empleado NO ha podido ser eliminado";
+        end
       else
-        redirect_to empleados_path, :notice => "El empleado NO ha podido ser eliminado";
+        redirect_to empleados_path, :notice => "El empleado NO ha podido ser eliminado ya que tiene documentos asociados";
       end
     end
   end

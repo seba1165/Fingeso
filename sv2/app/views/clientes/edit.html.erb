@@ -1,13 +1,12 @@
 <% if @cliente.errors.any? %>
     <ul>
-      <% @empleado.errors.each do |atributo, mensaje| %>
+      <% @cliente.errors.each do |atributo, mensaje| %>
           <li> <%= mensaje %> </li>
       <% end %>
     </ul>
 <% end %>
-
 <div class="container">
-  <h1 style="color:#0B2161"><FONT FACE="times new roman">CREAR USUARIO</FONT></h1>
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">MODIFICAR CLIENTE</FONT></h1>
   <hr>
   <%= render :partial => "formulario_guardar_clientes.html" %>
   <hr>
