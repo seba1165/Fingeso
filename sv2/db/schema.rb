@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228045642) do
-
+ActiveRecord::Schema.define(version: 20160228205010) do
 
   create_table "accesorio", primary_key: "art_cod", force: :cascade do |t|
     t.integer "art_tipo_cod"

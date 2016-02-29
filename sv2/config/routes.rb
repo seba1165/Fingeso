@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'articulos/index'
+
+  get 'articulos/new'
+
+  get 'articulos/edit'
+
   get 'servicio_reparacions/index'
 
   get 'servicio_reparacions/new'
@@ -57,6 +63,8 @@ Rails.application.routes.draw do
 
   resources :doc_previos, :except => [:show]
 
+  resources :articulos, :except => [:show]
+
   #devise_for :empleados, :controllers => { :registrations => "registrations" } , :skip => [:registrations]
   #as :empleado do
   #  get 'empleado/edit' => 'devise/registrations#edit', :as => 'edit_empleado_registration'
@@ -69,6 +77,7 @@ Rails.application.routes.draw do
   post "cot_odc_arts/del/:id" => 'cot_odc_arts#elimCotODCArt' , as: :elimCotODCArt
   post "tipo_clientes/del/:id" => 'tipo_clientes#elimTipoCliente', as: :elimTipoCliente
   post "servicio_reparacions/del/:id" => 'servicio_reparacions#elimSR', as: :elimSR
+  post "articulos/del/:id" => 'articulos#elimArt', as: :elimArt
 
   get 'admin/cotPrev'
 
@@ -87,6 +96,7 @@ Rails.application.routes.draw do
   get 'admin/cotAgRepar'
 
   get 'admin/cotAgIns'
+
   get 'admin/cotAgInstal'
 
   get 'admin/agregUsr'
@@ -96,11 +106,13 @@ Rails.application.routes.draw do
   get 'admin/elimUsr'
 
   get 'admin/nCotAgregArt'
+
   get 'admin/nCotAgregSer'
 
   get 'admin/cotizacion'
 
   get 'admin/nuevCot'
+  
   get 'admin/cotNuevAgreg'
 
   get 'admin/anularCot'
@@ -133,7 +145,7 @@ Rails.application.routes.draw do
 
   get 'admin/pagoNV' => 'errors#construccion'
 
-  get 'admin/articulo'
+  get 'admin/articulo' => 'errors#construccion'
 
   get 'admin/servicio'
 

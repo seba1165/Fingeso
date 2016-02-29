@@ -1,0 +1,13 @@
+<% if @articulo.errors.any? %>
+    <ul>
+      <% @articulo.errors.each do |atributo, mensaje| %>
+          <li> <%= mensaje %> </li>
+      <% end %>
+    </ul>
+<% end %>
+<div class="container">
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">CREAR ARTICULO</FONT></h1>
+  <hr>
+  <%= render :partial => "formulario_guardar_articulo.html" %>
+  <hr>
+</div>
