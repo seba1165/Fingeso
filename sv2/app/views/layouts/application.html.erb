@@ -20,11 +20,15 @@
 </head>
 
 
-<body>
-<div class="container" style="min-width: 350px;">
-	<%= yield %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 text-right">
+      <h1 class="cart-text"><%= render 'layouts/carro_texto' %></h1>
+    </div>
+  </div>
+  <hr>
+  <%= yield %>
 </div>
-</body>
 
 <footer>
 	<%= render 'shared/footer' %>

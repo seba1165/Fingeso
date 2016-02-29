@@ -3,32 +3,30 @@ class ClientesController < ApplicationController
 
   before_action :set_cliente, only: [:edit, :update, :destroy]
 
-  autocomplete :cliente, :cliente_correo, :display_value => :cliente_correo, :extra_data => [:cliente_direccion, :cliente_tel, :cliente_nom, :cliente_ape, :cliente_comuna, :tipo_cliente_cod, :cliente_emp, :cliente_frecuente, :cliente_rut] do |items|
+  autocomplete :cliente, :cliente_correo, :display_value => :cliente_correo, :extra_data => [:cliente_direccion, :cliente_tel, :cliente_nom, :cliente_ape, :cliente_comuna, :tipo_cliente_cod, :cliente_emp, :cliente_frecuente, :cliente_rut, :cliente_cod] do |items|
     respond_to do |format|
       format.json { render :json => @items }
     end
   end
 
   def index
-    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
-    else
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor"
       @clientes = Cliente.all();
+    else
+      redirect_to '/errors/not_found'
     end
   end
 
   def new
-    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
-    else
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor"
       @cliente = Cliente.new();
+    else
+      redirect_to '/errors/not_found'
     end
   end
 
   def create
-    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
-    else
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor"
       #Recuperamos las varibles POST que vinieron desde la acción new.
       @tipo_cliente_cod = params[:cliente][:tipo_cliente_cod];
       @cliente_nom = params[:cliente][:cliente_nom];
@@ -61,13 +59,13 @@ class ClientesController < ApplicationController
       else
         render "new";
       end
+    else
+      redirect_to '/errors/not_found'
     end
   end
 
   def edit
-    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
-    else
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor"
       @cliente = Cliente.find(params[:id]);
       @tipo_cliente_cod = @cliente.tipo_cliente_cod;
       @cliente_nom = @cliente.cliente_nom;
@@ -79,13 +77,13 @@ class ClientesController < ApplicationController
       @cliente_emp = @cliente.cliente_emp;
       @cliente_frecuente = @cliente.cliente_frecuente;
       @cliente_rut = @cliente.cliente_rut;
+    else
+      redirect_to '/errors/not_found'
     end
   end
 
   def update
-    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
-    else
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor"
       @tipo_cliente_cod = params[:cliente]["tipo_cliente_cod"];
       @cliente_nom = params[:cliente]["cliente_nom"];
       @cliente_ape = params[:cliente]["cliente_ape"];
@@ -115,23 +113,29 @@ class ClientesController < ApplicationController
       else
         render "edit";
       end
+    else
+      redirect_to '/errors/not_found'
     end
   end
 
   def destroy
-    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
-    else
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor"
       @cliente = Cliente.find(params[:id]);
       if @cliente.destroy()
         redirect_to clientes_path, :notice => "El cliente ha sido eliminado";
       else
         redirect_to clientes_path, :notice => "El cliente NO ha podido ser eliminado";
       end
+    else
+      redirect_to '/errors/not_found'
     end
   end
 
   def elimCliente
-    @cliente = Cliente.find(params[:id]);
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
+      redirect_to '/errors/not_found'
+    else
+      @cliente = Cliente.find(params[:id]);
+    end
   end
 end

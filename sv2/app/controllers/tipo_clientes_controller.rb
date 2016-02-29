@@ -76,6 +76,10 @@ class TipoClientesController < ApplicationController
   end
 
   def elimTipoCliente
-    @tipoCliente = TipoCliente.find(params[:id]);
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
+      redirect_to '/errors/not_found'
+    else
+      @tipoCliente = TipoCliente.find(params[:id]);
+    end
   end
 end

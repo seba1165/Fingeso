@@ -12,8 +12,13 @@
       <%= fields_for @doc.cliente do |c| %>
         <%#= c.text_field :nombre, :placeholder => "Nombre del cliente" %>
 
+          <%= c.hidden_field :cliente_cod %>
+
           <%= c.label :cliente_correo, "Correo del Cliente" %>
-          <%= c.autocomplete_field :cliente_correo, autocomplete_cliente_cliente_correo_clientes_path, :placeholder => "Correo del Cliente", :multiple => false, :update_elements => {:cliente_direccion => '#cliente_cliente_direccion', :cliente_tel => '#cliente_cliente_tel', :cliente_nom => '#cliente_cliente_nom', :cliente_ape => '#cliente_cliente_ape', :cliente_comuna => '#cliente_cliente_comuna', :tipo_cliente_cod => '#cliente_tipo_cliente_cod', :cliente_emp => '#cliente_cliente_emp', :cliente_frecuente => '#cliente_cliente_frecuente', :cliente_rut => '#cliente_cliente_rut'} %>
+          <%= c.autocomplete_field :cliente_correo, autocomplete_cliente_cliente_correo_clientes_path, :placeholder => "Correo del Cliente", :multiple => false, :update_elements => {:cliente_direccion => '#cliente_cliente_direccion', :cliente_tel => '#cliente_cliente_tel', :cliente_nom => '#cliente_cliente_nom', :cliente_ape => '#cliente_cliente_ape', :cliente_comuna => '#cliente_cliente_comuna', :tipo_cliente_cod => '#cliente_tipo_cliente_cod', :cliente_emp => '#cliente_cliente_emp', :cliente_frecuente => '#cliente_cliente_frecuente', :cliente_rut => '#cliente_cliente_rut', :cliente_cod => '#cliente_cliente_cod'} %>
+
+          <%= c.label :cliente_nom, "Nombre del Cliente" %>
+          <%= c.text_field :cliente_nom, :placeholder => "Nombre" %>
 
           <%= c.label :cliente_nom, "Nombre del Cliente" %>
           <%= c.text_field :cliente_nom, :placeholder => "Nombre" %>

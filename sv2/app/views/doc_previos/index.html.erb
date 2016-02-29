@@ -1,0 +1,75 @@
+<% flash.each do |key, value| %>
+    <p> <%= value %> </p>
+<% end %>
+<body>
+<div class="container">
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">ADMINISTRAR COTIZACIONES <small>   Editar, eliminar y crear nuevas cotizaciones</small></FONT></h1>
+  <hr>
+  <div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/doc_previos/new';"><span class="glyphicon glyphicon-plus"></span> Crear Nueva Cotizacion</button>
+    <hr>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="panel panel-primary filterable">
+      <div class="panel-heading" style="min-height:40px;">
+        <h3 class="panel-title pull-left">Cotizaciones por Articulos</h3>
+        <div class="pull-right">
+          <button href="javascript:;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+        <tr class="filters">
+          <th></th>
+          <th></th>
+          <th><input type="text" class="form-control" placeholder="Documento" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Cliente" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Empleado" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Fecha" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Total" disabled></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @docs.each do |d| %>
+            <tr>
+              <td class="td-actions">
+                <%= button_to "Editar" %>
+              </td>
+              <td class="td-actions">
+                <%= button_to "Borrar", elimDocPrevio_path(d.doc_cod), :method => :post %>
+              </td>
+              <td><%= d.doc_cod %></td>
+              <td><%= d.cliente_cod %></td>
+              <td><%= d.emp_rut %></td>
+              <td><%= d.doc_fecha %></td>
+              <td><%= d.doc_total %></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+</div>
+<div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-1">
+      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/admin/inicio';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
+    </div>
+  </div>
+  <hr>
+</div>
+</body>
+
+<div>
+  <%= render 'shared/footer' %>
+  <%= yield %>
+</div>b</p>

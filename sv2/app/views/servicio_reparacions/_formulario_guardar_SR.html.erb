@@ -1,0 +1,14 @@
+<%= form_for @serv_repar do |f| %>
+    <i>Campos obligatorios (*)</i>
+    <p></p>
+    <div class="field">
+      <%= f.label :serv_nom, "Nombre del servicio de reparación" %><br />
+      <%= f.text_field :serv_nom, autofocus: true %>
+    </div>
+
+    <p></p>
+    <div class="actions">
+      <%= f.submit "Registrar" %>
+    </div>
+
+<% end %>

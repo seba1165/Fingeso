@@ -1,8 +1,21 @@
 Rails.application.routes.draw do
 
-  resources :articulos, only: [:index]
   #resource :carro, only: [:show]
   #resources :det_cot_odc_arts, only: [:create, :update, :destroy]
+
+  get 'articulos/index'
+
+  get 'articulos/new'
+
+  get 'articulos/edit'
+
+  get 'servicio_reparacions/index'
+
+  get 'servicio_reparacions/new'
+
+  get 'servicio_reparacions/edit'
+
+  get 'cot_odc_arts/index'
 
   get 'articulos/index'
 
@@ -65,9 +78,15 @@ Rails.application.routes.draw do
 
   resources :tipo_clientes, :except => [:show]
 
+
   #resources :cot_odc_arts, :except => [:show]
+  resources :servicio_reparacions, :except => [:show]
+
+  resources :cot_odc_arts, :except => [:show]
 
   resources :doc_previos, :except => [:show]
+
+  resources :articulos, :except => [:show]
 
   #devise_for :empleados, :controllers => { :registrations => "registrations" } , :skip => [:registrations]
   #as :empleado do
@@ -81,11 +100,48 @@ Rails.application.routes.draw do
   #post "cot_odc_arts/del/:id" => 'cot_odc_arts#elimCotODCArt' , as: :elimCotODCArt
   post "tipo_clientes/del/:id" => 'tipo_clientes#elimTipoCliente', as: :elimTipoCliente
 
+
   post "doc_previos/del/:id" => 'doc_previos#elimDocPrevio', as: :elimDocPrevio
+
+  post "servicio_reparacions/del/:id" => 'servicio_reparacions#elimSR', as: :elimSR
+  post "articulos/del/:id" => 'articulos#elimArt', as: :elimArt
+
+  get 'admin/cotPrev'
+
+  get 'admin/cotFinal'
 
   get 'admin/parametro' => 'errors#construccion'
 
   get 'admin/registro'
+
+
+  get 'admin/cotAgHerr' 
+
+  get 'admin/cotAgRepto'
+
+  get 'admin/cotAgAcc'
+
+  get 'admin/cotAgRepar'
+
+  get 'admin/cotAgIns'
+
+  get 'admin/cotAgInstal'
+
+  get 'admin/agregUsr'
+
+  get 'admin/editUsr'
+
+  get 'admin/elimUsr'
+
+  get 'admin/nCotAgregArt'
+
+  get 'admin/nCotAgregSer'
+
+  get 'admin/cotizacion'
+
+  get 'admin/nuevCot'
+  
+  get 'admin/cotNuevAgreg'
 
   get 'admin/anularCot'
 
@@ -117,7 +173,7 @@ Rails.application.routes.draw do
 
   get 'admin/pagoNV' => 'errors#construccion'
 
-  get 'admin/articulo'
+  get 'admin/articulo' => 'errors#construccion'
 
   get 'admin/servicio'
 

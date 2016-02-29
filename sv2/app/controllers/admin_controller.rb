@@ -3,14 +3,14 @@ class AdminController < ApplicationController
   #Controlador para agregar usuarios
 
   def articulo
-    
+
   end
   def servicio
-    
+
   end
 
   def servEdInstal
-    
+
   end
   def servEdRep
     #Editar reparacion
@@ -19,7 +19,7 @@ class AdminController < ApplicationController
   def editUsr
   end
 
-  def inicio  
+  def inicio
   end
 
   def cotizacion
@@ -105,7 +105,11 @@ class AdminController < ApplicationController
   end
 
   def registro
-    @logs = Log.all
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
+      redirect_to '/errors/not_found'
+    else
+      @logs = Log.all
+    end
   end  
 
   def cotPrev

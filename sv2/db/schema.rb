@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160228135136) do
+=======
+ActiveRecord::Schema.define(version: 20160228205010) do
+>>>>>>> 40506305e26a526bc52163624d17da6c2922a332
 
   create_table "accesorio", primary_key: "art_cod", force: :cascade do |t|
     t.integer "art_tipo_cod"

@@ -1,0 +1,22 @@
+<div class="well">
+
+  <div class="row">
+    <div class="col-xs-8">
+      <h4><%= articulo.art_nom %></small></h4>
+    </div>
+    <div class="col-xs-4">
+
+      <!--%= form_for detalle, remote: true do |f| %-->
+          <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency articulo.art_precio  %></span></h4>
+          <div class="input-group">
+            <!--%= f.number_field :_art_cant, value: 1, class: "form-control", min: 1 %-->
+            <div class="input-group-btn">
+              <!--%= f.hidden_field :art_cod, value: articulo.art_cod %!-->
+              <!--%= f.submit "Add to Cart", class: "btn btn-primary" %!-->
+            </div>
+          </div>
+      <!--%end %-->
+    </div>
+
+  </div>
+</div>
