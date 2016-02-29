@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227001849) do
-
+ActiveRecord::Schema.define(version: 20160228135136) do
 
   create_table "accesorio", primary_key: "art_cod", force: :cascade do |t|
     t.integer "art_tipo_cod"
@@ -141,11 +140,12 @@ ActiveRecord::Schema.define(version: 20160227001849) do
   add_index "cotizacion", ["doc_cod"], name: "cotizacion_pk", unique: true, using: :btree
 
   create_table "det_cot_odc_art", id: false, force: :cascade do |t|
-    t.integer "doc_cod",                  null: false
-    t.integer "det_num_linea",            null: false
-    t.string  "art_cod",       limit: 20, null: false
+    t.integer "doc_cod",                      null: false
+    t.integer "det_num_linea",                null: false
+    t.string  "art_cod",           limit: 20, null: false
     t.integer "art_cant"
     t.integer "art_desc"
+    t.integer "art_precio_unidad"
   end
 
   add_index "det_cot_odc_art", ["art_cod"], name: "relationship_2_fk", using: :btree

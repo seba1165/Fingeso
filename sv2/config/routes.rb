@@ -1,10 +1,30 @@
 Rails.application.routes.draw do
 
-  get 'cot_odc_arts/index'
+  resources :articulos, only: [:index]
+  #resource :carro, only: [:show]
+  #resources :det_cot_odc_arts, only: [:create, :update, :destroy]
 
-  get 'cot_odc_arts/new'
+  get 'articulos/index'
 
-  get 'cot_odc_arts/edit'
+  get 'doc_previos/create'
+  get 'doc_previos/new'
+  get 'doc_previos/index'
+
+  #get 'det_cot_odc_arts/index'
+
+  #get 'det_cot_odc_arts/create'
+
+  #get 'det_cot_odc_arts/update'
+
+  #get 'det_cot_odc_arts/destroy'
+
+  #get 'cot_odc_arts/index'
+
+  #get 'cot_odc_arts/new'
+
+  #get 'cot_odc_arts/edit'
+
+  #get 'cot_odc_arts/clienteCot'
 
   get 'clientes/index'
 
@@ -45,7 +65,7 @@ Rails.application.routes.draw do
 
   resources :tipo_clientes, :except => [:show]
 
-  resources :cot_odc_arts, :except => [:show]
+  #resources :cot_odc_arts, :except => [:show]
 
   resources :doc_previos, :except => [:show]
 
@@ -58,43 +78,14 @@ Rails.application.routes.draw do
   post "clientes/del/:id" => 'clientes#elimCliente' , as: :elimCliente
   post "empleado/del/:id" => 'admin#elimUsr' , as: :elimUsr
 
-  post "cot_odc_arts/del/:id" => 'cot_odc_arts#elimCotODCArt' , as: :elimCotODCArt
+  #post "cot_odc_arts/del/:id" => 'cot_odc_arts#elimCotODCArt' , as: :elimCotODCArt
   post "tipo_clientes/del/:id" => 'tipo_clientes#elimTipoCliente', as: :elimTipoCliente
 
-
-
-  get 'admin/cotPrev'
-
-  get 'admin/cotFinal'
+  post "doc_previos/del/:id" => 'doc_previos#elimDocPrevio', as: :elimDocPrevio
 
   get 'admin/parametro' => 'errors#construccion'
 
   get 'admin/registro'
-
-  get 'admin/cotAgHerr' 
-
-  get 'admin/cotAgRepto'
-
-  get 'admin/cotAgAcc'
-
-  get 'admin/cotAgRepar'
-
-  get 'admin/cotAgIns'
-  get 'admin/cotAgInstal'
-
-  get 'admin/agregUsr'
-
-  get 'admin/editUsr'
-
-  get 'admin/elimUsr'
-
-  get 'admin/nCotAgregArt'
-  get 'admin/nCotAgregSer'
-
-  get 'admin/cotizacion'
-
-  get 'admin/nuevCot'
-  get 'admin/cotNuevAgreg'
 
   get 'admin/anularCot'
 
