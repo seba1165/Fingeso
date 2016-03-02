@@ -234,6 +234,39 @@ $$;
 ALTER FUNCTION public.cambiodeestot_in() OWNER TO seba;
 
 --
+-- Name: creaarticulo(); Type: FUNCTION; Schema: public; Owner: seba
+--
+
+CREATE FUNCTION creaarticulo() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+  INSERT INTO articulo (art_cod, art_tipo_cod, art_nom, art_stock, art_precio) VALUES (NEW.art_cod, NEW.art_tipo_cod, NEW.art_nom, NEW.art_stock, NEW.art_precio);
+  INSERT INTO para_instalacion (art_cod, art_tipo_cod, art_nom, art_stock, art_precio) VALUES (NEW.art_cod, NEW.art_tipo_cod, NEW.art_nom, NEW.art_stock, NEW.art_precio);
+  return NEW;
+END;
+$$;
+
+
+ALTER FUNCTION public.creaarticulo() OWNER TO seba;
+
+--
+-- Name: creaarticuloni(); Type: FUNCTION; Schema: public; Owner: seba
+--
+
+CREATE FUNCTION creaarticuloni() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+  INSERT INTO articulo (art_cod, art_tipo_cod, art_nom, art_stock, art_precio) VALUES (NEW.art_cod, NEW.art_tipo_cod, NEW.art_nom, NEW.art_stock, NEW.art_precio);
+  return NEW;
+END;
+$$;
+
+
+ALTER FUNCTION public.creaarticuloni() OWNER TO seba;
+
+--
 -- Name: creaot(); Type: FUNCTION; Schema: public; Owner: seba
 --
 
@@ -712,7 +745,7 @@ ALTER TABLE public.cliente_sec OWNER TO seba;
 -- Name: cliente_sec; Type: SEQUENCE SET; Schema: public; Owner: seba
 --
 
-SELECT pg_catalog.setval('cliente_sec', 25, true);
+SELECT pg_catalog.setval('cliente_sec', 26, true);
 
 
 --
@@ -827,7 +860,8 @@ COMMENT ON COLUMN cliente.cliente_rut IS 'Rut del cliente';
 CREATE TABLE compatibilidad (
     art_cod character varying(20) NOT NULL,
     marca_cod integer NOT NULL,
-    modelo_cod integer NOT NULL
+    modelo_cod integer NOT NULL,
+	modelo_ano integer NOT NULL
 );
 
 
@@ -1249,6 +1283,7 @@ CREATE TABLE det_ot (
     serv_cod integer NOT NULL,
     marca_cod integer NOT NULL,
     modelo_cod integer NOT NULL,
+modelo_ano integer NOT NULL,
     sr_ad_precio integer,
     sr_ad_cant integer
 );
@@ -1330,7 +1365,7 @@ ALTER TABLE public.doc_previo_sec OWNER TO seba;
 -- Name: doc_previo_sec; Type: SEQUENCE SET; Schema: public; Owner: seba
 --
 
-SELECT pg_catalog.setval('doc_previo_sec', 60, true);
+SELECT pg_catalog.setval('doc_previo_sec', 61, true);
 
 
 --
@@ -2408,7 +2443,7 @@ ALTER TABLE public.marca_sec OWNER TO seba;
 -- Name: marca_sec; Type: SEQUENCE SET; Schema: public; Owner: seba
 --
 
-SELECT pg_catalog.setval('marca_sec', 1, false);
+SELECT pg_catalog.setval('marca_sec', 14, true);
 
 
 --
@@ -2516,7 +2551,7 @@ ALTER TABLE public.modelo_sec OWNER TO seba;
 -- Name: modelo_sec; Type: SEQUENCE SET; Schema: public; Owner: seba
 --
 
-SELECT pg_catalog.setval('modelo_sec', 1, false);
+SELECT pg_catalog.setval('modelo_sec', 2, true);
 
 
 --
@@ -2527,7 +2562,7 @@ CREATE TABLE modelo (
     marca_cod integer NOT NULL,
     modelo_cod integer DEFAULT nextval('modelo_sec'::regclass) NOT NULL,
     modelo_nombre character varying(30),
-    modelo_ano integer
+    modelo_ano integer NOT NULL
 );
 
 
@@ -3465,6 +3500,7 @@ CREATE TABLE serv_inst_det (
     marca_cod integer NOT NULL,
     art_cod character varying(20) NOT NULL,
     modelo_cod integer NOT NULL,
+modelo_ano integer NOT NULL,
     si_desc integer
 );
 
@@ -3627,6 +3663,7 @@ CREATE TABLE serv_rep_det (
     serv_cod integer NOT NULL,
     marca_cod integer NOT NULL,
     modelo_cod integer NOT NULL,
+modelo_ano integer NOT NULL,
     sr_desc integer,
     sr_precio integer,
     sr_cant integer
@@ -3716,7 +3753,7 @@ ALTER TABLE public.sr_sec OWNER TO seba;
 -- Name: sr_sec; Type: SEQUENCE SET; Schema: public; Owner: seba
 --
 
-SELECT pg_catalog.setval('sr_sec', 5, true);
+SELECT pg_catalog.setval('sr_sec', 6, true);
 
 
 --
@@ -3760,6 +3797,7 @@ CREATE TABLE si_vehiculo_articulo (
     art_cod character varying(20) NOT NULL,
     marca_cod integer NOT NULL,
     modelo_cod integer NOT NULL,
+modelo_ano integer NOT NULL,
     s_v_a_mo_pr integer
 );
 
@@ -3826,7 +3864,7 @@ ALTER SEQUENCE tbl_audit_pk_audit_seq OWNED BY log.pk_audit;
 -- Name: tbl_audit_pk_audit_seq; Type: SEQUENCE SET; Schema: public; Owner: seba
 --
 
-SELECT pg_catalog.setval('tbl_audit_pk_audit_seq', 283, true);
+SELECT pg_catalog.setval('tbl_audit_pk_audit_seq', 338, true);
 
 
 --
@@ -3847,7 +3885,7 @@ ALTER TABLE public.tipo_art_sec OWNER TO seba;
 -- Name: tipo_art_sec; Type: SEQUENCE SET; Schema: public; Owner: seba
 --
 
-SELECT pg_catalog.setval('tipo_art_sec', 15, true);
+SELECT pg_catalog.setval('tipo_art_sec', 17, true);
 
 
 --
@@ -3901,7 +3939,7 @@ ALTER TABLE public.tipo_cliente_sec OWNER TO seba;
 -- Name: tipo_cliente_sec; Type: SEQUENCE SET; Schema: public; Owner: seba
 --
 
-SELECT pg_catalog.setval('tipo_cliente_sec', 6, true);
+SELECT pg_catalog.setval('tipo_cliente_sec', 8, true);
 
 
 --
@@ -4143,6 +4181,7 @@ CREATE TABLE vehiculo (
     veh_pat character varying(6) NOT NULL,
     marca_cod integer NOT NULL,
     modelo_cod integer NOT NULL,
+modelo_ano integer NOT NULL,
     veh_km integer,
     veh_color character varying(10)
 );
@@ -4200,6 +4239,7 @@ CREATE TABLE vehiculo_serviciorep (
     serv_cod integer NOT NULL,
     marca_cod integer NOT NULL,
     modelo_cod integer NOT NULL,
+modelo_ano integer NOT NULL,
     sr_v_mo_pr integer,
     sr_v_in_pr integer
 );
@@ -4291,6 +4331,7 @@ ALTER TABLE ONLY log ALTER COLUMN pk_audit SET DEFAULT nextval('tbl_audit_pk_aud
 --
 
 COPY accesorio (art_cod, art_tipo_cod, art_nom, art_stock, art_precio, art_imagen) FROM stdin;
+asd2	16	Radio	50	1	\N
 \.
 
 
@@ -4315,11 +4356,16 @@ COPY art_prop_valor (prop_cod, dom_cod, art_cod, valor) FROM stdin;
 --
 
 COPY articulo (art_cod, art_tipo_cod, art_nom, art_stock, art_precio, art_imagen) FROM stdin;
- TW72	11	Piola Equalizer	30	10000	\N
- HDK629	15	Soporte Amplio de parabrisas Equalizer® Heavy-Duty 28"	50	15000	\N
- Qc-200	15	Tirador Metálico	100	5000	\N
-RK-160	7	Tirador Aluminio Sólido	30	10000	\N
- PKXL	2	Espada Original PipeKnife OPK	100	15000	\N
+asd2	17	Radio	1	1	\N
+codigo2	10	asd	1	1	\N
+ TW72	11	Piola Equalizer	30	1	\N
+RK-160	7	Tirador Aluminio Sólido	30	1	\N
+ Qc-200	15	Tirador Metálico	100	1	\N
+ PKXL	2	Espada Original PipeKnife OPK	100	1	\N
+ HDK629	15	Soporte Amplio de parabrisas Equalizer® Heavy-Duty 28"	50	1	\N
+codigo-10	17	adasd	12	1	\N
+asd	17	radio	100	1	\N
+asdweq	17	algo	1	1	\N
 \.
 
 
@@ -4358,6 +4404,7 @@ COPY cliente (cliente_cod, tipo_cliente_cod, cliente_nom, cliente_ape, cliente_d
 20	6	Rodrigo				\N	ro_saez@yahoo.es		f	11890333-1
 22	3	Hugo		avenida santa victoria 6548	avenida santa victoria 6548	\N	Hugo_cepeda@hotmail.com		f	
 25	6					\N	francisco@hotmail.com		f	
+26	3	jp	2222	jp	jp	\N	x@x.com	empresa	f	17673797-2
 \.
 
 
@@ -4365,7 +4412,7 @@ COPY cliente (cliente_cod, tipo_cliente_cod, cliente_nom, cliente_ape, cliente_d
 -- Data for Name: compatibilidad; Type: TABLE DATA; Schema: public; Owner: seba
 --
 
-COPY compatibilidad (art_cod, marca_cod, modelo_cod) FROM stdin;
+COPY compatibilidad (art_cod, marca_cod, modelo_cod, modelo_ano) FROM stdin;
 \.
 
 
@@ -4380,6 +4427,7 @@ COPY cot_odc_art (doc_cod, cliente_cod, not_ven_cod, emp_rut, doc_fecha, doc_obs
 58	20	\N	18293486-0	2016-02-29	\N	\N	\N	\N	\N
 59	22	\N	18293486-0	2016-02-29	\N	\N	\N	\N	\N
 60	\N	\N	18293486-0	2016-02-29	\N	\N	\N	\N	\N
+61	\N	\N	17673797-2	2016-03-02	\N	\N	\N	\N	\N
 \.
 
 
@@ -4402,6 +4450,7 @@ COPY cotizacion (doc_cod, cot_est_cod, cliente_cod, not_ven_cod, emp_rut, doc_fe
 58	0	20	\N	18293486-0	2016-02-29	\N	\N	\N	\N	\N
 59	0	22	\N	18293486-0	2016-02-29	\N	\N	\N	\N	\N
 60	0	\N	\N	18293486-0	2016-02-29	\N	\N	\N	\N	\N
+61	0	\N	\N	17673797-2	2016-03-02	\N	\N	\N	\N	\N
 \.
 
 
@@ -4417,7 +4466,7 @@ COPY det_cot_odc_art (doc_cod, det_num_linea, art_cod, art_cant, art_desc, art_p
 -- Data for Name: det_ot; Type: TABLE DATA; Schema: public; Owner: seba
 --
 
-COPY det_ot (ot_cod, ot_num_linea, serv_cod, marca_cod, modelo_cod, sr_ad_precio, sr_ad_cant) FROM stdin;
+COPY det_ot (ot_cod, ot_num_linea, serv_cod, marca_cod, modelo_cod, modelo_ano, sr_ad_precio, sr_ad_cant) FROM stdin;
 \.
 
 
@@ -4432,6 +4481,7 @@ COPY doc_previo (doc_cod, cliente_cod, not_ven_cod, emp_rut, doc_fecha, doc_obs,
 58	20	\N	18293486-0	2016-02-29	\N	\N	\N	\N	\N
 59	22	\N	18293486-0	2016-02-29	\N	\N	\N	\N	\N
 60	25	\N	18293486-0	2016-02-29	\N	\N	\N	\N	\N
+61	26	\N	17673797-2	2016-03-02	\N	\N	\N	\N	\N
 \.
 
 
@@ -4456,11 +4506,12 @@ COPY dom_val_art (dom_cod, dom_nom, dom_tipo, dom_min, dom_max) FROM stdin;
 --
 
 COPY empleado (emp_rut, cargo_cod, emp_nom, emp_ape, emp_tel, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip) FROM stdin;
-18293486-0	0	Sebastian	Calderon	78018863	scalderon@serviventas.cl	$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK	\N	\N	\N	16	2016-02-29 06:32:11.993332	2016-02-29 06:18:57.706489	127.0.0.1	127.0.0.1
-5893349-k	0	Rodrigo	Bravo	78945612	rbravo@serviventas.cl	$2a$10$UKStv36kU9FJc.lZlOEGLuI3lHCljd1qaWxxtVQJqlkDJNdBUx2NS	\N	\N	\N	0	\N	\N	\N	\N
-18122672-2	1	Gustavo 	Aguayo	78945612	gaguayo@serviventas.cl	$2a$10$N4l/1LFP9Hy64l0ZkchOwuiga281u1qkTTCtCIZg77kGRGDNz7ucW	\N	\N	\N	0	\N	\N	\N	\N
+18122672-2	1	Gustavo 	Aguayo	78945612	gaguayo@serviventas.cl	$2a$10$N4l/1LFP9Hy64l0ZkchOwuiga281u1qkTTCtCIZg77kGRGDNz7ucW	\N	\N	\N	1	2016-03-02 04:16:02.044437	2016-03-02 04:16:02.044437	127.0.0.1	127.0.0.1
+5893349-k	0	Rodrigo	Bravo	78945612	rbravo@serviventas.cl	$2a$10$UKStv36kU9FJc.lZlOEGLuI3lHCljd1qaWxxtVQJqlkDJNdBUx2NS	\N	\N	\N	1	2016-03-02 04:16:48.807421	2016-03-02 04:16:48.807421	127.0.0.1	127.0.0.1
+17673797-2	0	jp	jp		a@a.xx	$2a$10$U0yukdIzSE5T.IQu3PjGPeU0kAci4rZENfekZYwN/u8He0Fh1tl6e	\N	\N	\N	1	2016-03-02 11:27:15.785996	2016-03-02 11:27:15.785996	127.0.0.1	127.0.0.1
+21882841-8	2	Karla	Bravo	78945612	kbravo@serviventas.cl	$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi	\N	\N	\N	5	2016-03-02 18:32:16.047217	2016-03-02 18:31:27.432664	127.0.0.1	127.0.0.1
+18293486-0	0	Sebastian	Calderon	78018863	scalderon@serviventas.cl	$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK	2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced	2016-03-01 16:55:24.773185	\N	23	2016-03-02 18:33:11.638244	2016-03-02 11:21:19.783412	127.0.0.1	127.0.0.1
 23578433-5	1	Jorge			jorge@serviventas.cl	$2a$10$xBKqMsIwEUDjBgWdSqjhv.rz0rbt0GaReSB8EOweu8Cyfa4y1BcT.	\N	\N	\N	0	\N	\N	\N	\N
-21882841-8	2	Karla	Bravo	78945612	kbravo@serviventas.cl	$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi	\N	\N	\N	0	\N	\N	\N	\N
 \.
 
 
@@ -4527,6 +4578,7 @@ COPY factura (doc_pago_cod, fact_est_cod, doc_pago_fecha, doc_pago_obs) FROM std
 --
 
 COPY herramienta (art_cod, art_tipo_cod, art_nom, art_stock, art_precio, art_imagen) FROM stdin;
+asdweq	17	algo	1	4	\N
 \.
 
 
@@ -4541,6 +4593,7 @@ COPY hist_est_cot (doc_cod, cot_est_cod, cot_estado_desde, cot_estado_hasta) FRO
 58	0	2016-02-29	\N
 59	0	2016-02-29	\N
 60	0	2016-02-29	\N
+61	0	2016-03-02	\N
 \.
 
 
@@ -4589,6 +4642,7 @@ COPY hist_est_ot (ot_cod, ot_est_cod, ot_estado_desde, ot_estado_hasta) FROM std
 --
 
 COPY insumo (art_cod, art_tipo_cod, art_nom, art_stock, art_precio, art_imagen) FROM stdin;
+codigo2	10	asd	1	1	\N
 \.
 
 
@@ -4597,12 +4651,40 @@ COPY insumo (art_cod, art_tipo_cod, art_nom, art_stock, art_precio, art_imagen) 
 --
 
 COPY log (pk_audit, "TableName", "Operation", "OldValue", "NewValue", "UpdateDate", "UserName") FROM stdin;
+284	empleado                                     	U	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,,,,16,"2016-02-29 06:32:11.993332","2016-02-29 06:18:57.706489",127.0.0.1,127.0.0.1)	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,,,,17,"2016-03-01 16:38:21.100811","2016-02-29 06:32:11.993332",127.0.0.1,127.0.0.1)	2016-03-01 16:38:21.101343	seba                                         
+285	empleado                                     	U	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,,,,17,"2016-03-01 16:38:21.100811","2016-02-29 06:32:11.993332",127.0.0.1,127.0.0.1)	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,17,"2016-03-01 16:38:21.100811","2016-02-29 06:32:11.993332",127.0.0.1,127.0.0.1)	2016-03-01 16:55:24.773396	seba                                         
+286	empleado                                     	U	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,17,"2016-03-01 16:38:21.100811","2016-02-29 06:32:11.993332",127.0.0.1,127.0.0.1)	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,18,"2016-03-01 16:55:39.577193","2016-03-01 16:38:21.100811",127.0.0.1,127.0.0.1)	2016-03-01 16:55:39.577712	seba                                         
+298	empleado                                     	U	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,19,"2016-03-02 04:45:12.725241","2016-03-01 16:55:39.577193",127.0.0.1,127.0.0.1)	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,20,"2016-03-02 10:38:23.161741","2016-03-02 04:45:12.725241",127.0.0.1,127.0.0.1)	2016-03-02 10:38:23.162359	seba                                         
+299	empleado                                     	U	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,20,"2016-03-02 10:38:23.161741","2016-03-02 04:45:12.725241",127.0.0.1,127.0.0.1)	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,21,"2016-03-02 11:19:33.174898","2016-03-02 10:38:23.161741",127.0.0.1,127.0.0.1)	2016-03-02 11:19:33.175427	seba                                         
+300	empleado                                     	U	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,21,"2016-03-02 11:19:33.174898","2016-03-02 10:38:23.161741",127.0.0.1,127.0.0.1)	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,22,"2016-03-02 11:21:19.783412","2016-03-02 11:19:33.174898",127.0.0.1,127.0.0.1)	2016-03-02 11:21:19.784076	seba                                         
+301	empleado                                     	I	\N	(17673797-2,0,jp,jp,"",a@a.xx,$2a$10$U0yukdIzSE5T.IQu3PjGPeU0kAci4rZENfekZYwN/u8He0Fh1tl6e,,,,0,,,,)	2016-03-02 11:24:45.017934	seba                                         
+302	empleado                                     	U	(17673797-2,0,jp,jp,"",a@a.xx,$2a$10$U0yukdIzSE5T.IQu3PjGPeU0kAci4rZENfekZYwN/u8He0Fh1tl6e,,,,0,,,,)	(17673797-2,0,jp,jp,"",a@a.xx,$2a$10$U0yukdIzSE5T.IQu3PjGPeU0kAci4rZENfekZYwN/u8He0Fh1tl6e,,,,1,"2016-03-02 11:27:15.785996","2016-03-02 11:27:15.785996",127.0.0.1,127.0.0.1)	2016-03-02 11:27:15.786401	seba                                         
+303	tipo_articulo                                	I	\N	(16,sunroof)	2016-03-02 11:29:00.691799	seba                                         
+304	cliente                                      	I	\N	(26,3,jp,2222,jp,jp,,x@x.com,empresa,f,17673797-2)	2016-03-02 11:44:19.06897	seba                                         
 205	tipo_articulo                                	I	\N	(10,Cinta)	2016-02-29 08:53:25.725458	seba                                         
 206	tipo_articulo                                	I	\N	(11,Piola)	2016-02-29 08:53:52.686604	seba                                         
 207	tipo_articulo                                	I	\N	(12,Luneta)	2016-02-29 08:53:57.082723	seba                                         
 208	tipo_articulo                                	I	\N	(13,"Vidrio Puerta")	2016-02-29 08:54:03.417042	seba                                         
 209	tipo_articulo                                	I	\N	(14,Parabrisas)	2016-02-29 08:54:10.502698	seba                                         
 210	cliente                                      	D	(16,0,"","","","","",seba@hotmail.com,"",f,"")	\N	2016-02-29 08:54:54.454081	seba                                         
+305	doc_previo                                   	I	\N	(61,26,,17673797-2,2016-03-02,,,,,)	2016-03-02 11:44:19.06897	seba                                         
+306	hist_est_cot                                 	I	\N	(61,0,2016-03-02,)	2016-03-02 11:44:19.426433	seba                                         
+307	cotizacion                                   	I	\N	(61,0,,,17673797-2,2016-03-02,,,,,)	2016-03-02 11:44:19.426433	seba                                         
+308	tipo_articulo                                	D	(16,sunroof)	\N	2016-03-02 11:52:30.832635	seba                                         
+309	servicio_reparacion                          	I	\N	(6,"reparacion de embrague")	2016-03-02 11:55:40.388156	seba                                         
+287	empleado                                     	U	(18122672-2,1,"Gustavo ",Aguayo,78945612,gaguayo@serviventas.cl,$2a$10$N4l/1LFP9Hy64l0ZkchOwuiga281u1qkTTCtCIZg77kGRGDNz7ucW,,,,0,,,,)	(18122672-2,1,"Gustavo ",Aguayo,78945612,gaguayo@serviventas.cl,$2a$10$N4l/1LFP9Hy64l0ZkchOwuiga281u1qkTTCtCIZg77kGRGDNz7ucW,,,"2016-03-02 04:16:01.742799",0,,,,)	2016-03-02 04:16:01.743077	seba                                         
+288	empleado                                     	U	(18122672-2,1,"Gustavo ",Aguayo,78945612,gaguayo@serviventas.cl,$2a$10$N4l/1LFP9Hy64l0ZkchOwuiga281u1qkTTCtCIZg77kGRGDNz7ucW,,,"2016-03-02 04:16:01.742799",0,,,,)	(18122672-2,1,"Gustavo ",Aguayo,78945612,gaguayo@serviventas.cl,$2a$10$N4l/1LFP9Hy64l0ZkchOwuiga281u1qkTTCtCIZg77kGRGDNz7ucW,,,"2016-03-02 04:16:01.742799",1,"2016-03-02 04:16:02.044437","2016-03-02 04:16:02.044437",127.0.0.1,127.0.0.1)	2016-03-02 04:16:02.04479	seba                                         
+289	empleado                                     	U	(18122672-2,1,"Gustavo ",Aguayo,78945612,gaguayo@serviventas.cl,$2a$10$N4l/1LFP9Hy64l0ZkchOwuiga281u1qkTTCtCIZg77kGRGDNz7ucW,,,"2016-03-02 04:16:01.742799",1,"2016-03-02 04:16:02.044437","2016-03-02 04:16:02.044437",127.0.0.1,127.0.0.1)	(18122672-2,1,"Gustavo ",Aguayo,78945612,gaguayo@serviventas.cl,$2a$10$N4l/1LFP9Hy64l0ZkchOwuiga281u1qkTTCtCIZg77kGRGDNz7ucW,,,,1,"2016-03-02 04:16:02.044437","2016-03-02 04:16:02.044437",127.0.0.1,127.0.0.1)	2016-03-02 04:16:24.192866	seba                                         
+290	empleado                                     	U	(5893349-k,0,Rodrigo,Bravo,78945612,rbravo@serviventas.cl,$2a$10$UKStv36kU9FJc.lZlOEGLuI3lHCljd1qaWxxtVQJqlkDJNdBUx2NS,,,,0,,,,)	(5893349-k,0,Rodrigo,Bravo,78945612,rbravo@serviventas.cl,$2a$10$UKStv36kU9FJc.lZlOEGLuI3lHCljd1qaWxxtVQJqlkDJNdBUx2NS,,,"2016-03-02 04:16:48.783252",0,,,,)	2016-03-02 04:16:48.783517	seba                                         
+291	empleado                                     	U	(5893349-k,0,Rodrigo,Bravo,78945612,rbravo@serviventas.cl,$2a$10$UKStv36kU9FJc.lZlOEGLuI3lHCljd1qaWxxtVQJqlkDJNdBUx2NS,,,"2016-03-02 04:16:48.783252",0,,,,)	(5893349-k,0,Rodrigo,Bravo,78945612,rbravo@serviventas.cl,$2a$10$UKStv36kU9FJc.lZlOEGLuI3lHCljd1qaWxxtVQJqlkDJNdBUx2NS,,,"2016-03-02 04:16:48.783252",1,"2016-03-02 04:16:48.807421","2016-03-02 04:16:48.807421",127.0.0.1,127.0.0.1)	2016-03-02 04:16:48.807741	seba                                         
+292	empleado                                     	U	(5893349-k,0,Rodrigo,Bravo,78945612,rbravo@serviventas.cl,$2a$10$UKStv36kU9FJc.lZlOEGLuI3lHCljd1qaWxxtVQJqlkDJNdBUx2NS,,,"2016-03-02 04:16:48.783252",1,"2016-03-02 04:16:48.807421","2016-03-02 04:16:48.807421",127.0.0.1,127.0.0.1)	(5893349-k,0,Rodrigo,Bravo,78945612,rbravo@serviventas.cl,$2a$10$UKStv36kU9FJc.lZlOEGLuI3lHCljd1qaWxxtVQJqlkDJNdBUx2NS,,,,1,"2016-03-02 04:16:48.807421","2016-03-02 04:16:48.807421",127.0.0.1,127.0.0.1)	2016-03-02 04:16:52.577518	seba                                         
+293	empleado                                     	U	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,,0,,,,)	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,,1,"2016-03-02 04:17:08.541744","2016-03-02 04:17:08.541744",127.0.0.1,127.0.0.1)	2016-03-02 04:17:08.542194	seba                                         
+310	tipo_articulo                                	I	\N	(17,Radio)	2016-03-02 13:38:10.675883	seba                                         
+294	empleado                                     	U	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,,1,"2016-03-02 04:17:08.541744","2016-03-02 04:17:08.541744",127.0.0.1,127.0.0.1)	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,"2016-03-02 04:40:35.883656",1,"2016-03-02 04:17:08.541744","2016-03-02 04:17:08.541744",127.0.0.1,127.0.0.1)	2016-03-02 04:40:35.883968	seba                                         
+295	empleado                                     	U	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,"2016-03-02 04:40:35.883656",1,"2016-03-02 04:17:08.541744","2016-03-02 04:17:08.541744",127.0.0.1,127.0.0.1)	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,"2016-03-02 04:40:35.883656",2,"2016-03-02 04:40:35.931749","2016-03-02 04:17:08.541744",127.0.0.1,127.0.0.1)	2016-03-02 04:40:35.932306	seba                                         
+296	empleado                                     	U	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,"2016-03-02 04:40:35.883656",2,"2016-03-02 04:40:35.931749","2016-03-02 04:17:08.541744",127.0.0.1,127.0.0.1)	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,,2,"2016-03-02 04:40:35.931749","2016-03-02 04:17:08.541744",127.0.0.1,127.0.0.1)	2016-03-02 04:42:40.930117	seba                                         
+297	empleado                                     	U	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,18,"2016-03-01 16:55:39.577193","2016-03-01 16:38:21.100811",127.0.0.1,127.0.0.1)	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,19,"2016-03-02 04:45:12.725241","2016-03-01 16:55:39.577193",127.0.0.1,127.0.0.1)	2016-03-02 04:45:12.725979	seba                                         
+311	empleado                                     	U	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,,2,"2016-03-02 04:40:35.931749","2016-03-02 04:17:08.541744",127.0.0.1,127.0.0.1)	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,,3,"2016-03-02 18:16:03.976156","2016-03-02 04:40:35.931749",127.0.0.1,127.0.0.1)	2016-03-02 18:16:03.976729	seba                                         
 211	doc_previo                                   	D	(54,15,,18293486-0,2016-02-29,,,,,)	\N	2016-02-29 05:55:38.608319	seba                                         
 212	cotizacion                                   	D	(54,0,,,18293486-0,2016-02-29,,,,,)	\N	2016-02-29 05:55:38.608319	seba                                         
 213	hist_est_cot                                 	D	(54,0,2016-02-29,)	\N	2016-02-29 05:55:38.608319	seba                                         
@@ -4615,6 +4697,33 @@ COPY log (pk_audit, "TableName", "Operation", "OldValue", "NewValue", "UpdateDat
 220	doc_previo                                   	D	(51,4,,18293486-0,2016-02-29,,,,,)	\N	2016-02-29 05:55:38.663752	seba                                         
 221	cotizacion                                   	D	(51,0,4,,18293486-0,2016-02-29,,,,,)	\N	2016-02-29 05:55:38.663752	seba                                         
 222	hist_est_cot                                 	D	(51,0,2016-02-29,)	\N	2016-02-29 05:55:38.663752	seba                                         
+312	empleado                                     	U	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,,3,"2016-03-02 18:16:03.976156","2016-03-02 04:40:35.931749",127.0.0.1,127.0.0.1)	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,,4,"2016-03-02 18:31:27.432664","2016-03-02 18:16:03.976156",127.0.0.1,127.0.0.1)	2016-03-02 18:31:27.433279	seba                                         
+313	empleado                                     	U	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,,4,"2016-03-02 18:31:27.432664","2016-03-02 18:16:03.976156",127.0.0.1,127.0.0.1)	(21882841-8,2,Karla,Bravo,78945612,kbravo@serviventas.cl,$2a$10$b18wFkVQqJ/G0..HadOdv.Cp5LWGgBYrWYrkP3knlF7VbuYV6AHJi,,,,5,"2016-03-02 18:32:16.047217","2016-03-02 18:31:27.432664",127.0.0.1,127.0.0.1)	2016-03-02 18:32:16.047789	seba                                         
+314	empleado                                     	U	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,22,"2016-03-02 11:21:19.783412","2016-03-02 11:19:33.174898",127.0.0.1,127.0.0.1)	(18293486-0,0,Sebastian,Calderon,78018863,scalderon@serviventas.cl,$2a$10$zgHEpX2hL4./edVCBoK3OuDmWtJN6rUaXupUQOi0hAKR5VfGcQtlK,2664509a87dfa736730d08987ca7df97da538bba69584ac913ec4b0b12397ced,"2016-03-01 16:55:24.773185",,23,"2016-03-02 18:33:11.638244","2016-03-02 11:21:19.783412",127.0.0.1,127.0.0.1)	2016-03-02 18:33:11.638751	seba                                         
+315	tipo_cliente                                 	I	\N	(7,Otro2)	2016-03-02 19:51:47.506603	seba                                         
+316	tipo_cliente                                 	I	\N	(8,Otro5)	2016-03-02 19:52:18.855485	seba                                         
+317	tipo_cliente                                 	U	(3,Particular)	(3,Particular215)	2016-03-02 19:52:28.208615	seba                                         
+318	tipo_cliente                                 	D	(8,Otro5)	\N	2016-03-02 19:54:58.031041	seba                                         
+319	tipo_articulo                                	U	(11,Piola)	(11,Piola2)	2016-03-02 19:56:21.291975	seba                                         
+320	marca                                        	I	\N	(1,Chevrolet)	2016-03-02 20:13:53.267198	seba                                         
+321	marca                                        	I	\N	(2,Nissan)	2016-03-02 20:14:54.38064	seba                                         
+322	marca                                        	I	\N	(3,Toyota)	2016-03-02 20:15:02.362966	seba                                         
+323	marca                                        	I	\N	(4,Audi)	2016-03-02 20:15:12.231656	seba                                         
+324	marca                                        	I	\N	(5,BMW)	2016-03-02 20:15:22.027267	seba                                         
+325	marca                                        	I	\N	(6,Porsche)	2016-03-02 20:15:34.062408	seba                                         
+326	marca                                        	I	\N	(7,Ferrari)	2016-03-02 20:15:40.495331	seba                                         
+327	marca                                        	I	\N	(8,Dodge)	2016-03-02 20:15:57.748858	seba                                         
+328	marca                                        	I	\N	(9,Subaru)	2016-03-02 20:16:11.922629	seba                                         
+329	marca                                        	I	\N	(10,Honda)	2016-03-02 20:16:17.771338	seba                                         
+330	marca                                        	I	\N	(11,"Alfa Romeo")	2016-03-02 20:16:47.548375	seba                                         
+331	marca                                        	I	\N	(12,Citroen)	2016-03-02 20:17:29.333606	seba                                         
+332	marca                                        	I	\N	(13,Fiat)	2016-03-02 20:17:35.210509	seba                                         
+333	marca                                        	U	(13,Fiat)	(13,Fiat1)	2016-03-02 20:18:13.540649	seba                                         
+334	marca                                        	U	(13,Fiat1)	(13,"")	2016-03-02 20:18:46.122796	seba                                         
+335	marca                                        	U	(13,"")	(13,Fiat)	2016-03-02 20:18:57.499531	seba                                         
+336	marca                                        	D	(13,Fiat)	\N	2016-03-02 20:23:16.871922	seba                                         
+337	marca                                        	I	\N	(14,Fiat)	2016-03-02 20:23:30.086231	seba                                         
+338	modelo                                       	I	\N	(2,2,Murano,2015)	2016-03-02 20:47:56.287973	seba                                         
 270	doc_previo                                   	I	\N	(60,25,,18293486-0,2016-02-29,,,,,)	2016-02-29 09:15:42.908074	seba                                         
 271	hist_est_cot                                 	I	\N	(60,0,2016-02-29,)	2016-02-29 09:15:42.972634	seba                                         
 272	cotizacion                                   	I	\N	(60,0,,,18293486-0,2016-02-29,,,,,)	2016-02-29 09:15:42.972634	seba                                         
@@ -4637,6 +4746,19 @@ COPY log (pk_audit, "TableName", "Operation", "OldValue", "NewValue", "UpdateDat
 --
 
 COPY marca (marca_cod, marca_nombre) FROM stdin;
+1	Chevrolet
+2	Nissan
+3	Toyota
+4	Audi
+5	BMW
+6	Porsche
+7	Ferrari
+8	Dodge
+9	Subaru
+10	Honda
+11	Alfa Romeo
+12	Citroen
+14	Fiat
 \.
 
 
@@ -4653,6 +4775,7 @@ COPY metodo_de_pago (pago_cod, pago_tipo) FROM stdin;
 --
 
 COPY modelo (marca_cod, modelo_cod, modelo_nombre, modelo_ano) FROM stdin;
+2	2	Murano	\N
 \.
 
 
@@ -4684,7 +4807,7 @@ COPY orden_de_despacho (od_cod, not_ven_cod, od_est_cod, od_fecha, od_obs, desp_
 -- Data for Name: orden_de_trabajo; Type: TABLE DATA; Schema: public; Owner: seba
 --
 
-COPY orden_de_trabajo (ot_cod, veh_pat, not_ven_cod, doc_cod, ot_est_cod, emp_rut, ot_fecha, ot_obs, modelo_cod) FROM stdin;
+COPY orden_de_trabajo (ot_cod, veh_pat, not_ven_cod, doc_cod, ot_est_cod, emp_rut, ot_fecha, ot_obs, modelo_cod, modelo_ano) FROM stdin;
 \.
 
 
@@ -4693,6 +4816,8 @@ COPY orden_de_trabajo (ot_cod, veh_pat, not_ven_cod, doc_cod, ot_est_cod, emp_ru
 --
 
 COPY para_instalacion (art_cod, art_tipo_cod, art_nom, art_stock, art_precio, art_imagen) FROM stdin;
+asd2	17	Radio	1	1	\N
+codigo-10	17	adasd	12	12	\N
 \.
 
 
@@ -4733,6 +4858,7 @@ COPY proveedor_articulo (prov_cod, art_cod, cod_prov_art) FROM stdin;
 --
 
 COPY repuesto (art_cod, art_tipo_cod, art_nom, art_stock, art_precio, art_imagen) FROM stdin;
+codigo-10	17	adasd	12	12	\N
 \.
 
 
@@ -4753,6 +4879,14 @@ COPY schema_migrations (version) FROM stdin;
 20160228135136
 20160228045642
 20160229033559
+20160302131654
+20160302131659
+20160302131707
+20160302131712
+20160302173732
+20160302175520
+20160302193507
+20160302193517
 \.
 
 
@@ -4768,7 +4902,7 @@ COPY serv_inst (doc_cod, cliente_cod, not_ven_cod, emp_rut, doc_fecha, doc_obs, 
 -- Data for Name: serv_inst_det; Type: TABLE DATA; Schema: public; Owner: seba
 --
 
-COPY serv_inst_det (doc_cod, si_num_linea, marca_cod, art_cod, modelo_cod, si_desc) FROM stdin;
+COPY serv_inst_det (doc_cod, si_num_linea, marca_cod, art_cod, modelo_cod, modelo_ano, si_desc) FROM stdin;
 \.
 
 
@@ -4784,7 +4918,7 @@ COPY serv_rep (doc_cod, cliente_cod, not_ven_cod, emp_rut, doc_fecha, doc_obs, d
 -- Data for Name: serv_rep_det; Type: TABLE DATA; Schema: public; Owner: seba
 --
 
-COPY serv_rep_det (doc_cod, sr_num_linea, serv_cod, marca_cod, modelo_cod, sr_desc, sr_precio, sr_cant) FROM stdin;
+COPY serv_rep_det (doc_cod, sr_num_linea, serv_cod, marca_cod, modelo_cod, modelo_ano, sr_desc, sr_precio, sr_cant) FROM stdin;
 \.
 
 
@@ -4795,6 +4929,7 @@ COPY serv_rep_det (doc_cod, sr_num_linea, serv_cod, marca_cod, modelo_cod, sr_de
 COPY servicio_reparacion (serv_cod, serv_nom) FROM stdin;
 4	Piquetes
 5	Defroster
+6	reparacion de embrague
 \.
 
 
@@ -4802,7 +4937,7 @@ COPY servicio_reparacion (serv_cod, serv_nom) FROM stdin;
 -- Data for Name: si_vehiculo_articulo; Type: TABLE DATA; Schema: public; Owner: seba
 --
 
-COPY si_vehiculo_articulo (art_cod, marca_cod, modelo_cod, s_v_a_mo_pr) FROM stdin;
+COPY si_vehiculo_articulo (art_cod, marca_cod, modelo_cod, modelo_ano, s_v_a_mo_pr) FROM stdin;
 \.
 
 
@@ -4820,11 +4955,12 @@ COPY tipo_articulo (art_tipo_cod, tipo_nom) FROM stdin;
 8	Moldura
 9	Sensor de Lluvia
 10	Cinta
-11	Piola
 12	Luneta
 13	Vidrio Puerta
 14	Parabrisas
 15	Otro
+17	Radio
+11	Piola2
 \.
 
 
@@ -4833,10 +4969,11 @@ COPY tipo_articulo (art_tipo_cod, tipo_nom) FROM stdin;
 --
 
 COPY tipo_cliente (tipo_cliente_cod, tipo_cliente_descr) FROM stdin;
-3	Particular
 4	Automotora
 5	Rent-a-Car
 6	Otro
+7	Otro2
+3	Particular215
 \.
 
 
@@ -4892,7 +5029,7 @@ COPY trans_est_ot (ot_est_cod, est_ot_est_cod) FROM stdin;
 -- Data for Name: vehiculo; Type: TABLE DATA; Schema: public; Owner: seba
 --
 
-COPY vehiculo (veh_pat, marca_cod, modelo_cod, veh_km, veh_color) FROM stdin;
+COPY vehiculo (veh_pat, marca_cod, modelo_cod, modelo_ano, veh_km, veh_color) FROM stdin;
 \.
 
 
@@ -4900,7 +5037,7 @@ COPY vehiculo (veh_pat, marca_cod, modelo_cod, veh_km, veh_color) FROM stdin;
 -- Data for Name: vehiculo_serviciorep; Type: TABLE DATA; Schema: public; Owner: seba
 --
 
-COPY vehiculo_serviciorep (serv_cod, marca_cod, modelo_cod, sr_v_mo_pr, sr_v_in_pr) FROM stdin;
+COPY vehiculo_serviciorep (serv_cod, marca_cod, modelo_cod, modelo_ano, sr_v_mo_pr, sr_v_in_pr) FROM stdin;
 \.
 
 
@@ -4973,7 +5110,7 @@ ALTER TABLE ONLY cliente
 --
 
 ALTER TABLE ONLY compatibilidad
-    ADD CONSTRAINT pk_compatibilidad PRIMARY KEY (marca_cod, art_cod, modelo_cod);
+    ADD CONSTRAINT pk_compatibilidad PRIMARY KEY (marca_cod, art_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -5189,7 +5326,7 @@ ALTER TABLE ONLY metodo_de_pago
 --
 
 ALTER TABLE ONLY modelo
-    ADD CONSTRAINT pk_modelo PRIMARY KEY (marca_cod, modelo_cod);
+    ADD CONSTRAINT pk_modelo PRIMARY KEY (marca_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -5317,7 +5454,7 @@ ALTER TABLE ONLY servicio_reparacion
 --
 
 ALTER TABLE ONLY si_vehiculo_articulo
-    ADD CONSTRAINT pk_si_vehiculo_articulo PRIMARY KEY (marca_cod, art_cod, modelo_cod);
+    ADD CONSTRAINT pk_si_vehiculo_articulo PRIMARY KEY (marca_cod, art_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -5397,7 +5534,7 @@ ALTER TABLE ONLY vehiculo
 --
 
 ALTER TABLE ONLY vehiculo_serviciorep
-    ADD CONSTRAINT pk_vehiculo_serviciorep PRIMARY KEY (serv_cod, marca_cod, modelo_cod);
+    ADD CONSTRAINT pk_vehiculo_serviciorep PRIMARY KEY (serv_cod, marca_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -5453,7 +5590,7 @@ CREATE UNIQUE INDEX cliente_pk ON cliente USING btree (cliente_cod);
 -- Name: compatibilidad_pk; Type: INDEX; Schema: public; Owner: seba; Tablespace: 
 --
 
-CREATE UNIQUE INDEX compatibilidad_pk ON compatibilidad USING btree (marca_cod, art_cod, modelo_cod);
+CREATE UNIQUE INDEX compatibilidad_pk ON compatibilidad USING btree (marca_cod, art_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -5649,7 +5786,7 @@ CREATE UNIQUE INDEX metodo_de_pago_pk ON metodo_de_pago USING btree (pago_cod);
 -- Name: modelo_pk; Type: INDEX; Schema: public; Owner: seba; Tablespace: 
 --
 
-CREATE UNIQUE INDEX modelo_pk ON modelo USING btree (marca_cod, modelo_cod);
+CREATE UNIQUE INDEX modelo_pk ON modelo USING btree (marca_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -5782,14 +5919,14 @@ CREATE INDEX relationship_11_fk ON modelo USING btree (marca_cod);
 -- Name: relationship_12_fk; Type: INDEX; Schema: public; Owner: seba; Tablespace: 
 --
 
-CREATE INDEX relationship_12_fk ON vehiculo_serviciorep USING btree (marca_cod, modelo_cod);
+CREATE INDEX relationship_12_fk ON vehiculo_serviciorep USING btree (marca_cod, modelo_cod, modelo_ano);
 
 
 --
 -- Name: relationship_13_fk; Type: INDEX; Schema: public; Owner: seba; Tablespace: 
 --
 
-CREATE INDEX relationship_13_fk ON serv_rep_det USING btree (serv_cod, marca_cod, modelo_cod);
+CREATE INDEX relationship_13_fk ON serv_rep_det USING btree (serv_cod, marca_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -5817,14 +5954,14 @@ CREATE INDEX relationship_16_fk ON si_vehiculo_articulo USING btree (art_cod);
 -- Name: relationship_17_fk; Type: INDEX; Schema: public; Owner: seba; Tablespace: 
 --
 
-CREATE INDEX relationship_17_fk ON si_vehiculo_articulo USING btree (marca_cod, modelo_cod);
+CREATE INDEX relationship_17_fk ON si_vehiculo_articulo USING btree (marca_cod, modelo_cod, modelo_ano);
 
 
 --
 -- Name: relationship_18_fk; Type: INDEX; Schema: public; Owner: seba; Tablespace: 
 --
 
-CREATE INDEX relationship_18_fk ON serv_inst_det USING btree (marca_cod, art_cod, modelo_cod);
+CREATE INDEX relationship_18_fk ON serv_inst_det USING btree (marca_cod, art_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -5859,7 +5996,7 @@ CREATE INDEX relationship_27_fk ON compatibilidad USING btree (art_cod);
 -- Name: relationship_28_fk; Type: INDEX; Schema: public; Owner: seba; Tablespace: 
 --
 
-CREATE INDEX relationship_28_fk ON compatibilidad USING btree (marca_cod, modelo_cod);
+CREATE INDEX relationship_28_fk ON compatibilidad USING btree (marca_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -5922,7 +6059,7 @@ CREATE INDEX relationship_37_fk ON orden_de_trabajo USING btree (not_ven_cod);
 -- Name: relationship_38_fk; Type: INDEX; Schema: public; Owner: seba; Tablespace: 
 --
 
-CREATE INDEX relationship_38_fk ON vehiculo USING btree (marca_cod, modelo_cod);
+CREATE INDEX relationship_38_fk ON vehiculo USING btree (marca_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -5943,7 +6080,7 @@ CREATE INDEX relationship_40_fk ON det_ot USING btree (ot_cod);
 -- Name: relationship_41_fk; Type: INDEX; Schema: public; Owner: seba; Tablespace: 
 --
 
-CREATE INDEX relationship_41_fk ON det_ot USING btree (serv_cod, marca_cod, modelo_cod);
+CREATE INDEX relationship_41_fk ON det_ot USING btree (serv_cod, marca_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -6230,7 +6367,7 @@ CREATE UNIQUE INDEX servicio_reparacion_pk ON servicio_reparacion USING btree (s
 -- Name: si_vehiculo_articulo_pk; Type: INDEX; Schema: public; Owner: seba; Tablespace: 
 --
 
-CREATE UNIQUE INDEX si_vehiculo_articulo_pk ON si_vehiculo_articulo USING btree (marca_cod, art_cod, modelo_cod);
+CREATE UNIQUE INDEX si_vehiculo_articulo_pk ON si_vehiculo_articulo USING btree (marca_cod, art_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -6307,7 +6444,7 @@ CREATE UNIQUE INDEX vehiculo_pk ON vehiculo USING btree (veh_pat);
 -- Name: vehiculo_serviciorep_pk; Type: INDEX; Schema: public; Owner: seba; Tablespace: 
 --
 
-CREATE UNIQUE INDEX vehiculo_serviciorep_pk ON vehiculo_serviciorep USING btree (serv_cod, marca_cod, modelo_cod);
+CREATE UNIQUE INDEX vehiculo_serviciorep_pk ON vehiculo_serviciorep USING btree (serv_cod, marca_cod, modelo_cod, modelo_ano);
 
 
 --
@@ -6478,6 +6615,46 @@ CREATE TRIGGER cotizacion_tg_audit
     AFTER INSERT OR DELETE OR UPDATE ON cotizacion
     FOR EACH ROW
     EXECUTE PROCEDURE fn_log_audit();
+
+
+--
+-- Name: creaarticulohetrg; Type: TRIGGER; Schema: public; Owner: seba
+--
+
+CREATE TRIGGER creaarticulohetrg
+    BEFORE INSERT ON herramienta
+    FOR EACH ROW
+    EXECUTE PROCEDURE creaarticuloni();
+
+
+--
+-- Name: creaarticulointrg; Type: TRIGGER; Schema: public; Owner: seba
+--
+
+CREATE TRIGGER creaarticulointrg
+    BEFORE INSERT ON insumo
+    FOR EACH ROW
+    EXECUTE PROCEDURE creaarticuloni();
+
+
+--
+-- Name: creaarticuloretrg; Type: TRIGGER; Schema: public; Owner: seba
+--
+
+CREATE TRIGGER creaarticuloretrg
+    BEFORE INSERT ON repuesto
+    FOR EACH ROW
+    EXECUTE PROCEDURE creaarticulo();
+
+
+--
+-- Name: creaarticulotrg; Type: TRIGGER; Schema: public; Owner: seba
+--
+
+CREATE TRIGGER creaarticulotrg
+    BEFORE INSERT ON accesorio
+    FOR EACH ROW
+    EXECUTE PROCEDURE creaarticulo();
 
 
 --
@@ -6999,7 +7176,7 @@ ALTER TABLE ONLY cliente
 --
 
 ALTER TABLE ONLY compatibilidad
-    ADD CONSTRAINT fk_compatib_relations_modelo FOREIGN KEY (marca_cod, modelo_cod) REFERENCES modelo(marca_cod, modelo_cod) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_compatib_relations_modelo FOREIGN KEY (marca_cod, modelo_cod, modelo_ano) REFERENCES modelo(marca_cod, modelo_cod, modelo_ano) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -7071,7 +7248,7 @@ ALTER TABLE ONLY det_ot
 --
 
 ALTER TABLE ONLY det_ot
-    ADD CONSTRAINT fk_det_ot_relations_vehiculo FOREIGN KEY (serv_cod, marca_cod, modelo_cod) REFERENCES vehiculo_serviciorep(serv_cod, marca_cod, modelo_cod) ON UPDATE CASCADE ON DELETE SET NULL;
+    ADD CONSTRAINT fk_det_ot_relations_vehiculo FOREIGN KEY (serv_cod, marca_cod, modelo_cod, modelo_ano) REFERENCES vehiculo_serviciorep(serv_cod, marca_cod, modelo_cod, modelo_ano) ON UPDATE CASCADE ON DELETE SET NULL;
 
 
 --
@@ -7415,7 +7592,7 @@ ALTER TABLE ONLY serv_inst_det
 --
 
 ALTER TABLE ONLY serv_inst_det
-    ADD CONSTRAINT fk_serv_ins_relations_si_vehic FOREIGN KEY (marca_cod, art_cod, modelo_cod) REFERENCES si_vehiculo_articulo(marca_cod, art_cod, modelo_cod) ON UPDATE CASCADE ON DELETE SET NULL;
+    ADD CONSTRAINT fk_serv_ins_relations_si_vehic FOREIGN KEY (marca_cod, art_cod, modelo_cod, modelo_ano) REFERENCES si_vehiculo_articulo(marca_cod, art_cod, modelo_cod, modelo_ano) ON UPDATE CASCADE ON DELETE SET NULL;
 
 
 --
@@ -7439,7 +7616,7 @@ ALTER TABLE ONLY serv_rep_det
 --
 
 ALTER TABLE ONLY serv_rep_det
-    ADD CONSTRAINT fk_serv_rep_relations_vehiculo FOREIGN KEY (serv_cod, marca_cod, modelo_cod) REFERENCES vehiculo_serviciorep(serv_cod, marca_cod, modelo_cod) ON UPDATE CASCADE ON DELETE SET NULL;
+    ADD CONSTRAINT fk_serv_rep_relations_vehiculo FOREIGN KEY (serv_cod, marca_cod, modelo_cod, modelo_ano) REFERENCES vehiculo_serviciorep(serv_cod, marca_cod, modelo_cod, modelo_ano) ON UPDATE CASCADE ON DELETE SET NULL;
 
 
 --
@@ -7447,7 +7624,7 @@ ALTER TABLE ONLY serv_rep_det
 --
 
 ALTER TABLE ONLY si_vehiculo_articulo
-    ADD CONSTRAINT fk_si_vehic_relations_modelo FOREIGN KEY (marca_cod, modelo_cod) REFERENCES modelo(marca_cod, modelo_cod) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_si_vehic_relations_modelo FOREIGN KEY (marca_cod, modelo_cod, modelo_ano) REFERENCES modelo(marca_cod, modelo_cod, modelo_ano) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -7559,7 +7736,7 @@ ALTER TABLE ONLY trans_est_ot
 --
 
 ALTER TABLE ONLY vehiculo
-    ADD CONSTRAINT fk_vehiculo_relations_modelo FOREIGN KEY (marca_cod, modelo_cod) REFERENCES modelo(marca_cod, modelo_cod) ON UPDATE CASCADE ON DELETE SET NULL;
+    ADD CONSTRAINT fk_vehiculo_relations_modelo FOREIGN KEY (marca_cod, modelo_cod, modelo_ano) REFERENCES modelo(marca_cod, modelo_cod, modelo_ano) ON UPDATE CASCADE ON DELETE SET NULL;
 
 
 --
@@ -7567,7 +7744,7 @@ ALTER TABLE ONLY vehiculo
 --
 
 ALTER TABLE ONLY vehiculo_serviciorep
-    ADD CONSTRAINT fk_vehiculo_relations_modelo FOREIGN KEY (marca_cod, modelo_cod) REFERENCES modelo(marca_cod, modelo_cod) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_vehiculo_relations_modelo FOREIGN KEY (marca_cod, modelo_cod, modelo_ano) REFERENCES modelo(marca_cod, modelo_cod, modelo_ano) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

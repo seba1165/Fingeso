@@ -1,0 +1,34 @@
+<%= form_for @repuesto do |f| %>
+    <i>Campos obligatorios (*)</i>
+    <p></p>
+    <div class="field">
+      <%= f.label :art_cod, "Código Accesorio *" %><br />
+      <%= f.text_field :art_cod, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :art_tipo_cod, "Tipo Accesorio *" %><br />
+      <%= f.text_field :art_tipo_cod, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :art_nom, "Nombre Accesorio *" %><br />
+      <%= f.text_field :art_nom, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :art_stock, "Stock *" %><br />
+      <%= f.number_field :art_stock, autofocus: true, min: 1%>
+    </div>
+
+    <div class="field">
+      <%= f.label :art_precio, "Precio *" %><br />
+      <%= f.number_field :art_precio, autofocus: true, min: 1%>
+    </div>
+
+    <p></p>
+    <div class="actions">
+      <%= f.submit "Registrar" %>
+    </div>
+
+<% end %>

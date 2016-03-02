@@ -84,6 +84,9 @@ class DocPreviosController < ApplicationController
                                              :cliente_cod => @cliente_cod,
                                              :doc_cod => @doc.doc_cod
                                            });
+
+              @det_cot_odc_art = DetCotOdcArt.new
+
               if @cot_odc_art.save
                 format.html { redirect_to doc_previos_path, notice: 'Cotizacion por artículos generada para el cliente.' }
                 format.json { render :show, status: :created, location: @doc }
@@ -130,6 +133,5 @@ class DocPreviosController < ApplicationController
       redirect_to '/errors/not_found'
     end
   end
-
 
 end

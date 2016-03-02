@@ -1,4 +1,4 @@
-class TipoClientesController < ApplicationController
+class TiposClienteController < ApplicationController
   include Devise::Controllers::Helpers
   def index
     if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
@@ -29,7 +29,7 @@ class TipoClientesController < ApplicationController
                              });
       #Verificamos si la tarea ha podido ser guardado correctamente.
       if @tipoCliente.save()
-        redirect_to tipo_clientes_path, :notice => "El tipo cliente ha sido guardado con éxito";
+        redirect_to tipos_cliente_path, :notice => "El tipo cliente ha sido guardado con éxito";
       else
         render "new";
       end
@@ -55,7 +55,7 @@ class TipoClientesController < ApplicationController
       @tipoCliente.tipo_cliente_descr = @tipo_cliente_descr;
 
       if @tipoCliente.save()
-        redirect_to tipo_clientes_path, :notice => "El cliente ha sido modificado";
+        redirect_to tipos_cliente_path, :notice => "El cliente ha sido modificado";
       else
         render "edit";
       end
@@ -70,12 +70,12 @@ class TipoClientesController < ApplicationController
       @cliente = Cliente.find_by(tipo_cliente_cod: @tipoCliente.tipo_cliente_cod)
       if @cliente.nil?
         if @tipoCliente.destroy()
-          redirect_to tipo_clientes_path, :notice => "El tipo de articulo ha sido eliminado";
+          redirect_to tipos_cliente_path, :notice => "El tipo de cliente ha sido eliminado";
         else
-          redirect_to tipo_clientes_path, :notice => "El tipo de articulo NO ha podido ser eliminado";
+          redirect_to tipos_cliente_path, :notice => "El tipo de cliente NO ha podido ser eliminado";
         end
       else
-        redirect_to tipo_clientes_path, :notice => "El tipo cliente no ha podido ser eliminado ya que tiene clientes asociados";
+        redirect_to tipos_cliente_path, :notice => "El tipo cliente no ha podido ser eliminado ya que tiene clientes asociados";
       end
     end
   end

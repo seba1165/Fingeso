@@ -1,5 +1,77 @@
 Rails.application.routes.draw do
 
+  get 'modelos/index'
+
+  get 'modelos/new'
+
+  get 'modelos/create'
+
+  get 'modelos/edit'
+
+  get 'modelos/update'
+
+  get 'modelos/destroy'
+
+  get 'marcas/index'
+
+  get 'marcas/new'
+
+  get 'marcas/create'
+
+  get 'marcas/edit'
+
+  get 'marcas/update'
+
+  get 'marcas/destroy'
+
+  get 'herramientas/index'
+
+  get 'herramientas/new'
+
+  get 'herramientas/create'
+
+  get 'herramientas/edit'
+
+  get 'herramientas/update'
+
+  get 'herramientas/destroy'
+
+  get 'repuestos/index'
+
+  get 'repuestos/new'
+
+  get 'repuestos/create'
+
+  get 'repuestos/edit'
+
+  get 'repuestos/update'
+
+  get 'repuestos/destroy'
+
+  get 'insumos/index'
+
+  get 'insumos/new'
+
+  get 'insumos/create'
+
+  get 'insumos/edit'
+
+  get 'insumos/update'
+
+  get 'insumos/destroy'
+
+  get 'accesorios/index'
+
+  get 'accesorios/new'
+
+  get 'accesorios/create'
+
+  get 'accesorios/edit'
+
+  get 'accesorios/update'
+
+  get 'accesorios/destroy'
+
   get 'tipo_articulos/index'
 
   get 'tipo_articulos/new'
@@ -51,11 +123,11 @@ Rails.application.routes.draw do
 
   get 'clientes/edit'
 
-  get 'tipo_clientes/index'
+  get 'tipos_cliente/index'
 
-  get 'tipo_clientes/new'
+  get 'tipos_cliente/new'
 
-  get 'tipo_clientes/edit'
+  get 'tipos_cliente/edit'
 
   get 'empleados/index'
 
@@ -80,7 +152,7 @@ Rails.application.routes.draw do
   #devise_for :empleados
   resources :empleados, :except => [:show]
 
-  resources :tipo_clientes, :except => [:show]
+  resources :tipos_cliente, :except => [:show]
 
 
   #resources :cot_odc_arts, :except => [:show]
@@ -91,8 +163,15 @@ Rails.application.routes.draw do
   resources :doc_previos, :except => [:show]
 
   resources :articulos, :except => [:show]
+  resources :accesorios, :except => [:show]
+  resources :insumos, :except => [:show]
+  resources :repuestos, :except => [:show]
+  resources :herramientas, :except => [:show]
 
   resources :tipo_articulos, :except => [:show]
+
+  resources :marcas, :except => [:show]
+  resources :modelos, :except => [:show]
 
   #devise_for :empleados, :controllers => { :registrations => "registrations" } , :skip => [:registrations]
   #as :empleado do
@@ -103,11 +182,13 @@ Rails.application.routes.draw do
   post "clientes/del/:id" => 'clientes#elimCliente' , as: :elimCliente
   post "empleado/del/:id" => 'admin#elimUsr' , as: :elimUsr
   #post "cot_odc_arts/del/:id" => 'cot_odc_arts#elimCotODCArt' , as: :elimCotODCArt
-  post "tipo_clientes/del/:id" => 'tipo_clientes#elimTipoCliente', as: :elimTipoCliente
+  post "tipos_cliente/del/:id" => 'tipos_cliente#elimTipoCliente', as: :elimTipoCliente
   post "doc_previos/del/:id" => 'doc_previos#elimDocPrevio', as: :elimDocPrevio
   post "servicio_reparacions/del/:id" => 'servicio_reparacions#elimSR', as: :elimSR
   post "articulos/del/:id" => 'articulos#elimArt', as: :elimArt
   post "tipo_articulos/del/:id" => 'tipo_articulos#elimTipoArt', as: :elimTipoArt
+  post "marcas/del/:id" => 'marcas#elimMarca', as: :elimMarca
+  post "modelos/del/:id" => 'modelos#elimModelo', as: :elimModelo
 
   get 'admin/parametro' => 'errors#construccion'
 
@@ -144,13 +225,13 @@ Rails.application.routes.draw do
 
   get 'admin/pagoNV' => 'errors#construccion'
 
-  get 'admin/articulo' => 'errors#construccion'
+  get 'admin/articulo'
 
-  get 'admin/servicio'
+  get 'admin/servicio' => 'errors#construccion'
 
-  get 'admin/servEdRep'
+  get 'admin/servEdRep' => 'errors#construccion'
   
-  get 'admin/servEdInstal'
+  get 'admin/servEdInstal' => 'errors#construccion'
   
   get 'vendedor/nuevaOC' => 'errors#construccion'
 
@@ -162,7 +243,7 @@ Rails.application.routes.draw do
 
   get 'vendedor/ordComp' => 'errors#construccion'
 
-  get 'vendedor/nuevaCot' => 'errors#construccion'
+  get 'vendedor/nuevaCot'
 
   get 'vendedor/anular' => 'errors#construccion'
 
@@ -180,12 +261,19 @@ Rails.application.routes.draw do
 
   root to: 'welcome#home', constraints: lambda { |request| !request.env['warden'].user }
 
+
   root to: 'admin#inicio', as: 'admin_root',
        constraints: lambda { |request| request.env['warden'].user.administrador? }
 
   root to: 'vendedor#inicio', as: 'vendedor_root',
        constraints: lambda { |request| request.env['warden'].user.vendedor? }
 
+  root to: 'otros#inicio', as: 'jedeDeVentas_root',
+       constraints: lambda { |request| request.env['warden'].user.jefeDeVentas? }
+  root to: 'otros#inicio', as: 'jefeDeServicios_root',
+       constraints: lambda { |request| request.env['warden'].user.jefeDeServicios? }
+  root to: 'otros#inicio', as: 'jefeDeBodega_root',
+       constraints: lambda { |request| request.env['warden'].user.jefeDeBodega? }
 
   #get 'welcome/home'
   # The priority is based upon order of creation: first created -> highest priority.

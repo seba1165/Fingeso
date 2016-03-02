@@ -1,0 +1,2 @@
+module AccesoriosHelper
+end

@@ -1,0 +1,13 @@
+<%= form_for @marca do |f| %>
+    <i>Campos obligatorios (*)</i>
+    <p></p>
+    <div class="field">
+      <%= f.label :marca_nombre, "Nombre de Marca *" %><br />
+      <%= f.text_field :marca_nombre, autofocus: true %>
+    </div>
+
+    <p></p>
+    <div class="actions">
+      <%= f.submit "Registrar" %>
+    </div>
+<% end %>

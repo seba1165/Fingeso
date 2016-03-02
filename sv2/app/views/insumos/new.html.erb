@@ -1,0 +1,13 @@
+<% if @insumo.errors.any? %>
+    <ul>
+      <% @insumo.errors.each do |atributo, mensaje| %>
+          <li> <%= mensaje %> </li>
+      <% end %>
+    </ul>
+<% end %>
+<div class="container">
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">CREAR INSUMO</FONT></h1>
+  <hr>
+  <%= render :partial => "insumos/formulario_guardar_insumo.html" %>
+  <hr>
+</div>

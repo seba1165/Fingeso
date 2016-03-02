@@ -22,7 +22,7 @@
           <div class="collapse navbar-collapse" id="navbar-collapse-1">
             <%= form_for(:empleado, :url => session_path(:empleado), html: { class: "navbar-form navbar-right form-inline" }) do |f| %>
               <div class="form-group">
-                <%= f.text_field :emp_email %>
+                <%= f.text_field :email %>
               </div>
               <div class="form-group">
                 <%= f.password_field :password %>
@@ -54,8 +54,8 @@
           <%= devise_error_messages! %>
 
           <div class="field">
-            <%= f.label :emp_email, "Correo" %><br />
-            <%= f.email_field :emp_email, autofocus: true %>
+            <%= f.label :email, "Correo" %><br />
+            <%= f.email_field :email, autofocus: true %>
           </div>
 
           <div class="actions">

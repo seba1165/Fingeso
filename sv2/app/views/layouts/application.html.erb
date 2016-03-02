@@ -13,9 +13,12 @@
 		<% if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" %>
 			<%= render 'shared/navbarAdmin' %>
 		<% end %>
-		<% if current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor" %> 
+		<% if current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor" %>
 			<%= render 'shared/navbar' %>
 		<% end %>
+    <% if current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de bodega" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicio" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de ventas"%>
+        <%= render 'shared/navbar2' %>
+    <% end %>
 	<% end %>
 </head>
 
