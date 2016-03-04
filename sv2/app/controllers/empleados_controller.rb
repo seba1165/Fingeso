@@ -1,5 +1,6 @@
 class EmpleadosController < ApplicationController
   include Devise::Controllers::Helpers
+
   def index
       if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador"
         @empleados = Empleado.all();

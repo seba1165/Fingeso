@@ -13,4 +13,20 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:emp_nom, :emp_ape, :emp_rut, :emp_tel, :email, :cargo_cod, :password, :password_confirmation) }
   end
 
+  def carrito_actual
+    if session[:cart] then
+      @cart = session[:cart]
+    else
+      @cart = {}
+    end
+  end
+
+  def carrito_actual_arts
+    if session[:cart_art] then
+      @cart = session[:cart_art]
+    else
+      @cart_art = {}
+    end
+  end
+
 end

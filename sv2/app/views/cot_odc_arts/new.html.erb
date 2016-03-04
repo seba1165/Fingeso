@@ -1,54 +1,60 @@
-<% if @doc.errors.any? %>
-    <ul>
-      <% @doc.errors.each do |atributo, mensaje| %>
-          <li> <%= mensaje %> </li>
-      <% end %>
-    </ul>
+<% flash.each do |key, value| %>
+    <p> <%= value %> </p>
 <% end %>
+<body>
 <div class="container">
-  <h1 style="color:#0B2161"><FONT FACE="times new roman">INGRESE CLIENTE</FONT></h1>
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">AGREGAR ARTICULOS A LA COTIZACION <small> </small></FONT></h1>
   <hr>
-  <%= form_for @doc, :html => { :class => 'form-horizontal' } do |f| %>
-      <%= fields_for @doc.cliente do |c| %>
-        <%#= c.text_field :nombre, :placeholder => "Nombre del cliente" %>
 
-          <%= c.hidden_field :cliente_cod %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="panel panel-primary filterable">
+      <div class="panel-heading" style="min-height:40px;">
+        <h3 class="panel-title pull-left">Artículos</h3>
+        <div class="pull-right">
+          <button href="javascript:;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+        <tr class="filters">
+          <th></th>
+          <th></th>
+          <th><input type="text" class="form-control" placeholder="Nombre" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Tipo" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Stock" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Precio" disabled></th>
+        </tr>
+        </thead>
+        <tbody style="text-align: center">
+        <% @arts.each do |d| %>
+            <tr>
+              <td class="td-actions">
+                <%= button_to "Agregar", addArt_path(d.art_cod), :method => :get %>
+              </td>
+              <td class="td-actions">
+              </td>
+              <td><%= d.art_nom %> </td>
+              <td><%= d.tipo_articulo.tipo_nom %></td>
+              <td><%= d.art_stock %> </td>
+              <td><%= d.art_precio %> </td>
 
-          <%= c.label :cliente_correo, "Correo del Cliente" %>
-          <%= c.autocomplete_field :cliente_correo, autocomplete_cliente_cliente_correo_clientes_path, :placeholder => "Correo del Cliente", :multiple => false, :update_elements => {:cliente_direccion => '#cliente_cliente_direccion', :cliente_tel => '#cliente_cliente_tel', :cliente_nom => '#cliente_cliente_nom', :cliente_ape => '#cliente_cliente_ape', :cliente_comuna => '#cliente_cliente_comuna', :tipo_cliente_cod => '#cliente_tipo_cliente_cod', :cliente_emp => '#cliente_cliente_emp', :cliente_frecuente => '#cliente_cliente_frecuente', :cliente_rut => '#cliente_cliente_rut', :cliente_cod => '#cliente_cliente_cod'} %>
-
-          <%= c.label :cliente_nom, "Nombre del Cliente" %>
-          <%= c.text_field :cliente_nom, :placeholder => "Nombre" %>
-
-          <%= c.label :cliente_nom, "Nombre del Cliente" %>
-          <%= c.text_field :cliente_nom, :placeholder => "Nombre" %>
-
-          <%= c.label :cliente_ape, "Apellido del Cliente" %>
-          <%= c.text_field :cliente_ape, :placeholder => "Apellido" %>
-
-          <%= c.label :cliente_ape, "Dirección del Cliente" %>
-          <%= c.text_field :cliente_direccion, :placeholder => "Dirección" %>
-
-          <%= c.label :cliente_comuna, "Comuna del Cliente" %>
-          <%= c.text_field :cliente_comuna, :placeholder => "Comuna" %>
-
-          <%= c.label :cliente_ape, "Teléfono del Cliente" %>
-          <%= c.text_field :cliente_ape, :placeholder => "Teléfono" %>
-
-          <%= c.label :cliente_emp, "Empresa del Cliente" %>
-          <%= c.text_field :cliente_emp, :placeholder => "Empresa" %>
-
-          <%= c.label :cliente_emp, "Empresa del Cliente" %>
-          <%= c.text_field :cliente_emp, :placeholder => "Empresa" %>
-
-          <%= c.label :cliente_frecuente, "Frecuente?" %><br />
-          <%= c.check_box :cliente_frecuente %>
-
-          <%= c.label :cargo_cod, "Tipo de Cliente" %><br/>
-          <%= collection_select(:cliente, :tipo_cliente_cod, TipoCliente.all, :id, :tipo_cliente_descr, prompt: true) %>
-
-    <% end %>
-
-  <% end %>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <hr>
 </div>
+<div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-1">
+      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
+    </div>
+  </div>
+  <hr>
+</div>
+</body>

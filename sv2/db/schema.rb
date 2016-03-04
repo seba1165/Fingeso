@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160302193517) do
+ActiveRecord::Schema.define(version: 20160304180413) do
 
   create_table "accesorio", primary_key: "art_cod", force: :cascade do |t|
     t.integer "art_tipo_cod"
@@ -89,11 +89,12 @@ ActiveRecord::Schema.define(version: 20160302193517) do
     t.string  "art_cod",    limit: 20, null: false
     t.integer "marca_cod",             null: false
     t.integer "modelo_cod",            null: false
+    t.integer "modelo_ano",            null: false
   end
 
   add_index "compatibilidad", ["art_cod"], name: "relationship_27_fk", using: :btree
-  add_index "compatibilidad", ["marca_cod", "art_cod", "modelo_cod"], name: "compatibilidad_pk", unique: true, using: :btree
-  add_index "compatibilidad", ["marca_cod", "modelo_cod"], name: "relationship_28_fk", using: :btree
+  add_index "compatibilidad", ["marca_cod", "art_cod", "modelo_cod", "modelo_ano"], name: "compatibilidad_pk", unique: true, using: :btree
+  add_index "compatibilidad", ["marca_cod", "modelo_cod", "modelo_ano"], name: "relationship_28_fk", using: :btree
 
   create_table "cot_odc_art", primary_key: "doc_cod", force: :cascade do |t|
     t.integer "cliente_cod"
@@ -158,13 +159,14 @@ ActiveRecord::Schema.define(version: 20160302193517) do
     t.integer "serv_cod",     null: false
     t.integer "marca_cod",    null: false
     t.integer "modelo_cod",   null: false
+    t.integer "modelo_ano",   null: false
     t.integer "sr_ad_precio"
     t.integer "sr_ad_cant"
   end
 
   add_index "det_ot", ["ot_cod", "ot_num_linea"], name: "det_ot_pk", unique: true, using: :btree
   add_index "det_ot", ["ot_cod"], name: "relationship_40_fk", using: :btree
-  add_index "det_ot", ["serv_cod", "marca_cod", "modelo_cod"], name: "relationship_41_fk", using: :btree
+  add_index "det_ot", ["serv_cod", "marca_cod", "modelo_cod", "modelo_ano"], name: "relationship_41_fk", using: :btree
 
   create_table "doc_previo", primary_key: "doc_cod", force: :cascade do |t|
     t.integer "cliente_cod",                null: false
@@ -376,10 +378,10 @@ ActiveRecord::Schema.define(version: 20160302193517) do
     t.integer "marca_cod",                                                            null: false
     t.integer "modelo_cod",               default: "nextval('modelo_sec'::regclass)", null: false
     t.string  "modelo_nombre", limit: 30
-    t.integer "modelo_ano"
+    t.integer "modelo_ano",                                                           null: false
   end
 
-  add_index "modelo", ["marca_cod", "modelo_cod"], name: "modelo_pk", unique: true, using: :btree
+  add_index "modelo", ["marca_cod", "modelo_cod", "modelo_ano"], name: "modelo_pk", unique: true, using: :btree
   add_index "modelo", ["marca_cod"], name: "relationship_11_fk", using: :btree
 
   create_table "nota_de_venta", primary_key: "not_ven_cod", force: :cascade do |t|
@@ -499,7 +501,6 @@ ActiveRecord::Schema.define(version: 20160302193517) do
   add_index "repuesto", ["art_cod"], name: "repuesto_pk", unique: true, using: :btree
 
   create_table "serv_inst", primary_key: "doc_cod", force: :cascade do |t|
-    t.integer "cliente_cod"
     t.integer "not_ven_cod"
     t.string  "emp_rut",        limit: 10
     t.date    "doc_fecha"
@@ -508,6 +509,7 @@ ActiveRecord::Schema.define(version: 20160302193517) do
     t.integer "doc_iva"
     t.integer "doc_total"
     t.integer "doc_total_desc"
+    t.integer "cliente_cod"
   end
 
   add_index "serv_inst", ["doc_cod"], name: "serv_inst_pk", unique: true, using: :btree
@@ -518,12 +520,13 @@ ActiveRecord::Schema.define(version: 20160302193517) do
     t.integer "marca_cod",               null: false
     t.string  "art_cod",      limit: 20, null: false
     t.integer "modelo_cod",              null: false
+    t.integer "modelo_ano",              null: false
     t.integer "si_desc"
   end
 
   add_index "serv_inst_det", ["doc_cod", "si_num_linea"], name: "serv_inst_det_pk", unique: true, using: :btree
   add_index "serv_inst_det", ["doc_cod"], name: "relationship_4_fk", using: :btree
-  add_index "serv_inst_det", ["marca_cod", "art_cod", "modelo_cod"], name: "relationship_18_fk", using: :btree
+  add_index "serv_inst_det", ["marca_cod", "art_cod", "modelo_cod", "modelo_ano"], name: "relationship_18_fk", using: :btree
 
   create_table "serv_rep", primary_key: "doc_cod", force: :cascade do |t|
     t.integer "cliente_cod"
@@ -545,6 +548,7 @@ ActiveRecord::Schema.define(version: 20160302193517) do
     t.integer "serv_cod",     null: false
     t.integer "marca_cod",    null: false
     t.integer "modelo_cod",   null: false
+    t.integer "modelo_ano",   null: false
     t.integer "sr_desc"
     t.integer "sr_precio"
     t.integer "sr_cant"
@@ -552,7 +556,7 @@ ActiveRecord::Schema.define(version: 20160302193517) do
 
   add_index "serv_rep_det", ["doc_cod", "sr_num_linea"], name: "serv_rep_det_pk", unique: true, using: :btree
   add_index "serv_rep_det", ["doc_cod"], name: "relationship_6_fk", using: :btree
-  add_index "serv_rep_det", ["serv_cod", "marca_cod", "modelo_cod"], name: "relationship_13_fk", using: :btree
+  add_index "serv_rep_det", ["serv_cod", "marca_cod", "modelo_cod", "modelo_ano"], name: "relationship_13_fk", using: :btree
 
   create_table "servicio_reparacion", primary_key: "serv_cod", force: :cascade do |t|
     t.string "serv_nom", limit: 40
@@ -561,15 +565,18 @@ ActiveRecord::Schema.define(version: 20160302193517) do
   add_index "servicio_reparacion", ["serv_cod"], name: "servicio_reparacion_pk", unique: true, using: :btree
 
   create_table "si_vehiculo_articulo", id: false, force: :cascade do |t|
-    t.string  "art_cod",     limit: 20, null: false
-    t.integer "marca_cod",              null: false
-    t.integer "modelo_cod",             null: false
+    t.string  "art_cod",     limit: 20,                                         null: false
+    t.integer "marca_cod",                                                      null: false
+    t.integer "modelo_cod",                                                     null: false
+    t.integer "modelo_ano",                                                     null: false
     t.integer "s_v_a_mo_pr"
+    t.integer "s_v_a_in_pr"
+    t.integer "si_cod",                 default: "nextval('si_sec'::regclass)"
   end
 
   add_index "si_vehiculo_articulo", ["art_cod"], name: "relationship_16_fk", using: :btree
-  add_index "si_vehiculo_articulo", ["marca_cod", "art_cod", "modelo_cod"], name: "si_vehiculo_articulo_pk", unique: true, using: :btree
-  add_index "si_vehiculo_articulo", ["marca_cod", "modelo_cod"], name: "relationship_17_fk", using: :btree
+  add_index "si_vehiculo_articulo", ["marca_cod", "art_cod", "modelo_cod", "modelo_ano"], name: "si_vehiculo_articulo_pk", unique: true, using: :btree
+  add_index "si_vehiculo_articulo", ["marca_cod", "modelo_cod", "modelo_ano"], name: "relationship_17_fk", using: :btree
 
   create_table "tipo_articulo", primary_key: "art_tipo_cod", force: :cascade do |t|
     t.string "tipo_nom", limit: 40
@@ -640,23 +647,25 @@ ActiveRecord::Schema.define(version: 20160302193517) do
   create_table "vehiculo", primary_key: "veh_pat", force: :cascade do |t|
     t.integer "marca_cod",             null: false
     t.integer "modelo_cod",            null: false
+    t.integer "modelo_ano",            null: false
     t.integer "veh_km"
     t.string  "veh_color",  limit: 10
   end
 
-  add_index "vehiculo", ["marca_cod", "modelo_cod"], name: "relationship_38_fk", using: :btree
+  add_index "vehiculo", ["marca_cod", "modelo_cod", "modelo_ano"], name: "relationship_38_fk", using: :btree
   add_index "vehiculo", ["veh_pat"], name: "vehiculo_pk", unique: true, using: :btree
 
   create_table "vehiculo_serviciorep", id: false, force: :cascade do |t|
     t.integer "serv_cod",   null: false
     t.integer "marca_cod",  null: false
     t.integer "modelo_cod", null: false
+    t.integer "modelo_ano", null: false
     t.integer "sr_v_mo_pr"
     t.integer "sr_v_in_pr"
   end
 
-  add_index "vehiculo_serviciorep", ["marca_cod", "modelo_cod"], name: "relationship_12_fk", using: :btree
-  add_index "vehiculo_serviciorep", ["serv_cod", "marca_cod", "modelo_cod"], name: "vehiculo_serviciorep_pk", unique: true, using: :btree
+  add_index "vehiculo_serviciorep", ["marca_cod", "modelo_cod", "modelo_ano"], name: "relationship_12_fk", using: :btree
+  add_index "vehiculo_serviciorep", ["serv_cod", "marca_cod", "modelo_cod", "modelo_ano"], name: "vehiculo_serviciorep_pk", unique: true, using: :btree
   add_index "vehiculo_serviciorep", ["serv_cod"], name: "relationship_10_fk", using: :btree
 
   add_foreign_key "accesorio", "para_instalacion", column: "art_cod", primary_key: "art_cod", name: "fk_accesori_inheritan_para_ins", on_update: :cascade, on_delete: :cascade
@@ -717,6 +726,7 @@ ActiveRecord::Schema.define(version: 20160302193517) do
   add_foreign_key "proveedor_articulo", "articulo", column: "art_cod", primary_key: "art_cod", name: "fk_proveedo_relations_articulo", on_update: :cascade, on_delete: :cascade
   add_foreign_key "proveedor_articulo", "proveedor", column: "prov_cod", primary_key: "prov_cod", name: "fk_proveedo_relations_proveedo", on_update: :cascade, on_delete: :cascade
   add_foreign_key "repuesto", "para_instalacion", column: "art_cod", primary_key: "art_cod", name: "fk_repuesto_inheritan_para_ins", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "serv_inst", "cliente", column: "cliente_cod", primary_key: "cliente_cod", name: "fk_cliente_serv_inst"
   add_foreign_key "serv_inst", "cot_odc_serv", column: "doc_cod", primary_key: "doc_cod", name: "fk_serv_ins_inheritan_cot_odc_", on_update: :cascade, on_delete: :cascade
   add_foreign_key "serv_inst_det", "serv_inst", column: "doc_cod", primary_key: "doc_cod", name: "fk_serv_ins_relations_serv_ins", on_update: :cascade, on_delete: :cascade
   add_foreign_key "serv_inst_det", "si_vehiculo_articulo", column: "marca_cod", primary_key: "marca_cod", name: "fk_serv_ins_relations_si_vehic", on_update: :cascade, on_delete: :nullify

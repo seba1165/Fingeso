@@ -1,4 +1,5 @@
 class MarcasController < ApplicationController
+  include Devise::Controllers::Helpers
   def index
     if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
       redirect_to '/errors/not_found'

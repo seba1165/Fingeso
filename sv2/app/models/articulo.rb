@@ -1,5 +1,6 @@
 class Articulo < ActiveRecord::Base
   has_many :si_vehiculo_articulos, :foreign_key => :art_cod
+  belongs_to :tipo_articulo , foreign_key: "art_tipo_cod"
 
   attr_accessible  :art_cod, :art_tipo_cod, :art_nom, :art_stock, :art_precio
   validates :art_cod, :presence => true, :uniqueness => true

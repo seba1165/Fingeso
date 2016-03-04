@@ -1,0 +1,40 @@
+<%= form_for @SI do |f| %>
+    <div class="field">
+      <%= f.label :art_cod, "Articulo" %><br />
+      <select name="sis_vehiculo_articulo[art_cod]">
+        <% @arts.each do |f| %>
+          <option value="<%= f.art_cod %>"><%= f.art_nom %></option>
+        <%end%>
+      </select><br />
+    </div><br />
+
+    <div>
+      <%= f.label :modelo_cod, "Modelo del Vehiculo" %><br />
+      <select name="sis_vehiculo_articulo[modelo_cod]">
+        <% @marcas.each do |d| %>
+            <optgroup label="<%= d.marca_nombre %>">
+              <% Modelo.where(marca_cod: d.marca_cod).each do |e| %>
+                  <option value="<%= e.modelo_cod %>"><%= e.modelo_nombre %>  <%= e.modelo_ano%></option>
+              <% end %>
+            </optgroup>
+        <% end %>
+      </select><br />
+    </div><br />
+
+    <div class="field">
+      <%= f.label :s_v_a_mo_pr, "Costo de Mano de Obra" %><br />
+      <%= f.number_field :s_v_a_mo_pr, autofocus: true, min: 1%>
+    </div>
+
+    <div class="field">
+      <%= f.label :s_v_a_in_pr, "Costo en Insumos" %><br />
+      <%= f.number_field :s_v_a_in_pr, autofocus: true, min: 1%>
+    </div>
+
+
+
+    <div class="actions">
+      <%= f.submit "Registrar" %>
+    </div><br />
+
+<% end %>

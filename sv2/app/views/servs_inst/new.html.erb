@@ -3,41 +3,40 @@
 <% end %>
 <body>
 <div class="container">
-  <h1 style="color:#0B2161"><FONT FACE="times new roman">ADMINISTRAR SERVICIOS DE REPARACIÓN <small>   Editar, eliminar y crear servicios de reparación</small></FONT></h1>
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">AGREGAR INSTALACIONES A LA COTIZACION <small> </small></FONT></h1>
   <hr>
-  <div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/servicio_reparacions/new';"><span class="glyphicon glyphicon-plus"></span> Crear Nueva Reparación</button>
-    <hr>
-  </div>
+
 </div>
 <div class="container">
   <div class="row">
     <div class="panel panel-primary filterable">
       <div class="panel-heading" style="min-height:40px;">
-        <h3 class="panel-title pull-left">Servicios de Reparación</h3>
+        <h3 class="panel-title pull-left">Servicios de Intalación</h3>
         <div class="pull-right">
           <button href="javascript:;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
         </div>
       </div>
-      <table class="table" >
+      <table class="table">
         <thead>
         <tr class="filters">
           <th></th>
           <th></th>
-          <th><input type="text" class="form-control" placeholder="Código" disabled></th>
-          <th><input type="text" class="form-control" placeholder="Nombre" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Articulo" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Marca/Modelo" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Precio" disabled></th>
         </tr>
         </thead>
         <tbody style="text-align: center">
-        <% @serv_repar.each do |d| %>
+        <% @insts.each do |d| %>
             <tr>
               <td class="td-actions">
-                <%= button_to "Editar", edit_servicio_reparacion_path(d), :method => :get %>
+                <%= button_to "Agregar", add_path(d.si_cod), :method => :get %>
               </td>
               <td class="td-actions">
-                <%= button_to "Borrar", elimSR_path(d.serv_cod), :method => :post %>
               </td>
-              <td><%= d.serv_cod %></td>
-              <td><%= d.serv_nom %></td>
+              <td><%= Articulo.where(art_cod: d.art_cod).first.art_nom %> </td>
+              <td><%= Marca.where(marca_cod: d.marca_cod).first.marca_nombre %> <%= Modelo.where(modelo_cod: d.modelo_cod).first.modelo_nombre %> <%= d.modelo_ano %></td>
+              <td><%= d.s_v_a_mo_pr + d.s_v_a_in_pr%> </td>
             </tr>
         <% end %>
         </tbody>

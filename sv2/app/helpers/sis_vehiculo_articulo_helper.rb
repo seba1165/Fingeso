@@ -1,0 +1,2 @@
+module SisVehiculoArticuloHelper
+end

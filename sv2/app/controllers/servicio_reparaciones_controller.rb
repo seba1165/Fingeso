@@ -1,4 +1,4 @@
-class ServicioReparacionsController < ApplicationController
+class ServicioReparacionesController < ApplicationController
   include Devise::Controllers::Helpers
   def index
     if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
@@ -19,11 +19,11 @@ class ServicioReparacionsController < ApplicationController
   def create
     if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
       #Recuperamos las varibles POST que vinieron desde la acción new.
-      @sr_nom = params[:servicio_reparacion][:serv_nom];
+      @serv_nom = params[:servicio_reparacion][:serv_nom];
 
       #Creamos el objeto con los valores a ingresar.
       @serv_repar = ServicioReparacion.new({
-                                               :serv_nom => @sr_nom,
+                                               :serv_nom => @serv_nom,
                                            });
       #Verificamos si la tarea ha podido ser guardado correctamente.
       if @serv_repar.save()
@@ -47,7 +47,7 @@ class ServicioReparacionsController < ApplicationController
 
   def update
     if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
-      @sr_nom = params[:servicio_reparacion]["serv_nom"];
+      @sr_nom = params[:servicio_reparaciones]["serv_nom"];
 
       @serv_repar = ServicioReparacion.find(params[:id]);
       @serv_repar.serv_nom = @sr_nom;
@@ -66,9 +66,9 @@ class ServicioReparacionsController < ApplicationController
     if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
       @serv_repar = ServicioReparacion.find(params[:id]);
       if @serv_repar.destroy()
-        redirect_to servicio_reparacions_path, :notice => "El servicio de reparación ha sido eliminado";
+        redirect_to servicio_reparaciones_path, :notice => "El servicio de reparación ha sido eliminado";
       else
-        redirect_to servicio_reparacions_path, :notice => "El servicio de reparación NO ha podido ser eliminado";
+        redirect_to servicio_reparaciones_path, :notice => "El servicio de reparación NO ha podido ser eliminado";
       end
     else
       redirect_to '/errors/not_found'
