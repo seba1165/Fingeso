@@ -1,6 +1,18 @@
 class CotOdcArt < ActiveRecord::Base
   has_many :det_cot_odc_arts, :foreign_key => :doc_cod
 
+#  validates :doc_cod, :presence => true, :uniqueness => true
+#  validates :cliente_cod, :presence => true
+#  validates :not_ven_cod, :presence => true
+#  validates :emp_rut, :presence => true
+# validates :doc_fecha, :presence => true
+# validates :doc_obs, :presence => true
+# validates :doc_neto, :presence => true
+# validates :doc_total, :presence => true
+# validates :emp_rut, :presence => true
+# validates :doc_total_desc, :presence => true
+
+
   def subtotal
     det_cot_odc_arts.collect { |oi| oi.valid? ? (oi.art_cant * oi.art_precio_unidad) : 0 }.sum
   end
