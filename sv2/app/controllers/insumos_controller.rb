@@ -31,13 +31,16 @@ class InsumosController < ApplicationController
                                          :art_precio => @art_precio,
                                          :art_imagen => @art_imagen,
                                      });
-
-
-      #Verificamos si la tarea ha podido ser guardado correctamente.
-      if @insumo.save()
-        redirect_to articulos_path, :notice => "El insumo ha sido guardado con éxito";
+      @busqueda = Articulo.find_by(art_cod: @insumo.art_cod)
+      if @busqueda.nil?
+        #Verificamos si la tarea ha podido ser guardado correctamente.
+        if @insumo.save()
+          redirect_to articulos_path, :notice => "El insumo ha sido guardado con éxito";
+        else
+          redirect_to articulos_path, :notice => "El insumo no se pudo  guardar";
+        end
       else
-        redirect_to articulos_path, :notice => "El insumo no se pudo  guardar";
+        redirect_to articulos_path, :notice => "El insumo con ese código ya existe en los artículos";
       end
     end
   end

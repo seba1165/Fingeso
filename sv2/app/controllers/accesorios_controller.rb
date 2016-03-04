@@ -1,4 +1,5 @@
 class AccesoriosController < ApplicationController
+  include Devise::Controllers::Helpers
   def index
     if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
       redirect_to '/errors/not_found'
@@ -38,12 +39,17 @@ class AccesoriosController < ApplicationController
                                    :art_imagen => @art_imagen,
                                });
 
+      @busqueda = Articulo.find_by(art_cod: @accesorio.art_cod)
+      if @busqueda.nil?
+        #Verificamos si la tarea ha podido ser guardado correctamente.
+        if @accesorio.save()
+          redirect_to articulos_path, :notice => "El accesorio ha sido guardado con éxito";
+        else
+          redirect_to articulos_path, :notice => "El accesorio no se pudo guardar";
+        end
 
-      #Verificamos si la tarea ha podido ser guardado correctamente.
-      if @accesorio.save()
-        redirect_to articulos_path, :notice => "El accesorio ha sido guardado con éxito";
       else
-        redirect_to articulos_path, :notice => "El accesorio no se pudo guardar";
+        redirect_to articulos_path, :notice => "El accesorio con ese código ya existe en los artículos";
       end
     end
   end

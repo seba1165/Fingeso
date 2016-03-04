@@ -5,6 +5,11 @@ class DetCotOdcArt < ActiveRecord::Base
   validates :art_cant, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validate :articulo_presente
   validate :cot_presente
+  # validate :doc_cod
+  # validate :det_num_linea
+  # validate :art_cod
+  # validate :art_desc
+  # validate :art_precio_unidad
 
   before_save :finalize
 

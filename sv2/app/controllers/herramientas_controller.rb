@@ -37,12 +37,16 @@ class HerramientasController < ApplicationController
                                      :art_imagen => @art_imagen,
                                  });
 
-
-      #Verificamos si la tarea ha podido ser guardado correctamente.
-      if @herramienta.save()
-        redirect_to articulos_path, :notice => "La herramienta ha sido guardado con éxito";
+      @busqueda = Articulo.find_by(art_cod: @herramienta.art_cod)
+      if @busqueda.nil?
+        #Verificamos si la tarea ha podido ser guardado correctamente.
+        if @herramienta.save()
+          redirect_to articulos_path, :notice => "La herramienta ha sido guardado con éxito";
+        else
+          redirect_to articulos_path, :notice => "La herramienta no se pudo  guardar";
+        end
       else
-        redirect_to articulos_path, :notice => "La herramienta no se pudo  guardar";
+        redirect_to articulos_path, :notice => "La herramienta con ese código ya existe en los artísculos";
       end
     end
   end

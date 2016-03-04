@@ -35,13 +35,16 @@ class RepuestosController < ApplicationController
                                          :art_precio => @art_precio,
                                          :art_imagen => @art_imagen,
                                      });
-
-
-      #Verificamos si la tarea ha podido ser guardado correctamente.
-      if @repuesto.save()
-        redirect_to articulos_path, :notice => "El repuesto ha sido guardado con éxito";
+      @busqueda = Articulo.find_by(art_cod: @repuesto.art_cod)
+      if @busqueda.nil?
+        #Verificamos si la tarea ha podido ser guardado correctamente.
+        if @repuesto.save()
+          redirect_to articulos_path, :notice => "El repuesto ha sido guardado con éxito";
+        else
+          redirect_to articulos_path, :notice => "El repuesto no se pudo  guardar";
+        end
       else
-        redirect_to articulos_path, :notice => "El repuesto no se pudo  guardar";
+        redirect_to articulos_path, :notice => "El repuesto con ese código ya existe en los artículos";
       end
     end
   end
