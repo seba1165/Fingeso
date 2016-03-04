@@ -1,13 +1,13 @@
-<% if @herramienta.errors.any? %>
+<% if @accesorio.errors.any? %>
     <ul>
-      <% @herramienta.errors.each do |atributo, mensaje| %>
+      <% @accesorio.errors.each do |atributo, mensaje| %>
           <li> <%= mensaje %> </li>
       <% end %>
     </ul>
 <% end %>
 <div class="container">
-  <h1 style="color:#0B2161"><FONT FACE="times new roman">CREAR HERRAMIENTA</FONT></h1>
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">CREAR ACCESORIO</FONT></h1>
   <hr>
-  <%= render :partial => "herramientas/formulario_guardar_herramienta.html" %>
+  <%= render :partial => "accesorios/formulario_guardar_accesorio.html" %>
   <hr>
 </div>

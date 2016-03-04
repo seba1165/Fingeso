@@ -55,11 +55,64 @@ class AccesoriosController < ApplicationController
   end
 
   def edit
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
+      redirect_to '/errors/not_found'
+    else
+      @accesorio = Accesorio.find(params[:id]);
+      @art_cod = @accesorio.art_cod;
+      @art_tipo_cod = @accesorio.art_tipo_cod;
+      @art_nom = @accesorio.art_nom;
+      @art_stock = @accesorio.art_stock;
+      @art_precio = @accesorio.art_precio;
+      @art_imagen = @accesorio.art_imagen;
+    end
   end
 
   def update
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
+      redirect_to '/errors/not_found'
+    else
+      @art_cod = params[:accesorio]["art_cod"];
+      @art_tipo_cod = params[:accesorio]["art_tipo_cod"];
+      @art_nom = params[:accesorio]["art_nom"];
+      @art_stock = params[:accesorio]["art_stock"];
+      @art_precio = params[:accesorio]["art_precio"];
+      @art_imagen = params[:accesorio]["art_imagen"];
+
+      @accesorio = Accesorio.find(params[:id]);
+      @accesorio.art_cod = @art_cod;
+      @accesorio.art_tipo_cod= @art_tipo_cod;
+      @accesorio.art_nom = @art_nom;
+      @accesorio.art_stock = @art_stock;
+      @accesorio.art_precio = @art_precio;
+      @accesorio.art_imagen = @art_imagen;
+
+
+      if @accesorio.save()
+        redirect_to articulos_path, :notice => "El articulo ha sido modificado";
+      else
+        if @art_cod == ""
+          redirect_to articulos_path, :notice => "El articulo NO ha podido ser modificado";
+        else
+          render "edit";
+        end
+      end
+    end
   end
 
   def destroy
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
+      redirect_to '/errors/not_found'
+    else
+      @accesorio = Articulo.find(params[:id]);
+      if @articulo.destroy()
+        redirect_to articulos_path, :notice => "El artículo ha sido eliminado";
+      else
+        redirect_to articulos_path, :notice => "El artículo NO ha podido ser eliminado";
+      end
+    end
+  end
+  def elimAcc
+    @accesorio = Articulo.find(params[:id]);
   end
 end
