@@ -1,6 +1,6 @@
 <h1 style="color:#0B2161"><FONT FACE="times new roman">COTIZACIONES POR ARTÍCULOS <small>   Editar, eliminar y crear nuevas cotizaciones</small></FONT></h1>
 <hr>
-<div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/cart/clear';"><span class="glyphicon glyphicon-plus"></span> Vaciar Cotizacion</button>
+<div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/cartart/clear';"><span class="glyphicon glyphicon-plus"></span> Vaciar Cotizacion</button>
   <hr>
 </div>
 
@@ -20,34 +20,37 @@
         <tr class="filters">
           <th></th>
           <th></th>
-          <th><input type="text" class="form-control" placeholder="Instalacion" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Articulo" disabled></th>
           <th><input type="text" class="form-control" placeholder="Precio" disabled></th>
-
+          <th><input type="text" class="form-control" placeholder="Cantidad" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Total Articulos" disabled></th>
         </tr>
         </thead>
         <tbody style="text-align: center">
 
         <% @cart.each do | id, quantity| %>
             <% if quantity != -1 %>
-              <% servicio = SiVehiculoArticulo.where(si_cod: id).first %>
+              <% articulo = Articulo.find(id)%>
               <tr>
                 <td class="td-actions">
-                  <%= button_to "Agregar", add_path(id), :method => :get %>
+                  <%= button_to "Agregar", addArt_path(id), :method => :get %>
                 </td>
                 <td class="td-actions">
-                  <%= button_to "Quitar", rest_path(id), :method => :get %>
+                  <%= button_to "Quitar", restArt_path(id), :method => :get %>
                 </td>
-                <td><%= Articulo.find(servicio.art_cod).art_nom %> en <%= Marca.find(servicio.marca_cod).marca_nombre %> <%= Modelo.where(modelo_cod: servicio.modelo_cod).first.modelo_nombre %> <%= Modelo.where(modelo_cod: servicio.modelo_cod).first.modelo_ano %></td>
-                <% total_si = servicio.s_v_a_mo_pr + servicio.s_v_a_in_pr %>
-                <td><%= number_to_currency (total_si)%></td>
+                <td><%= articulo.art_nom %></td>
+                <td><%= articulo.art_precio %></td>
+                <td><%= quantity %></td>
+                <% totalArt = articulo.art_precio * quantity %>
+                <td><%= number_to_currency (totalArt) %></td>
                 <td></td>
                 <td></td>
               </tr>
             <%else%>
-                <% total_si = 0 %>
+                <% totalArt = 0 %>
             <%end%>
 
-        <% total += total_si %>
+        <% total += totalArt %>
         <% end %>
         </tbody>
       </table>
@@ -104,7 +107,7 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-1">
-      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/servs_inst/new';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
+      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/cots_odc_art/new';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
     </div>
   </div>
   <hr>

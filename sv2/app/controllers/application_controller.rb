@@ -22,10 +22,10 @@ class ApplicationController < ActionController::Base
   end
 
   def carrito_actual_arts
-    if session[:cart_art] then
-      @cart = session[:cart_art]
+    if session[:cartart] then
+      @cartart = session[:cartart]
     else
-      @cart_art = {}
+      @cartart = {}
     end
   end
 

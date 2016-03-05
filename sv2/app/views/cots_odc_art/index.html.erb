@@ -5,7 +5,7 @@
 <div class="container">
   <h1 style="color:#0B2161"><FONT FACE="times new roman">COTIZACIONES POR ARTÍCULOS <small>   Editar, eliminar y crear nuevas cotizaciones</small></FONT></h1>
   <hr>
-  <div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/cot_odc_arts/new';"><span class="glyphicon glyphicon-plus"></span> Crear Cotización</button>
+  <div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/cots_odc_art/new';"><span class="glyphicon glyphicon-plus"></span> Crear Cotización</button>
     <hr>
   </div>
 </div>
@@ -43,13 +43,11 @@
               </td>
               <td><%= d.doc_cod %></td>
               <td><%= d.cliente.cliente_correo %></td>
+              <td><%= d.not_ven_cod %></td>
               <td><%= d.emp_rut %></td>
               <td><%= d.doc_fecha %></td>
               <td><%= Cotizacion.find(d.doc_cod).estado_cotizacion.cot_est_descr %></td>
               <td><%= d.doc_total %></td>
-              <td></td>
-              <td></td>
-              <td></td>
               <td></td>
               <td></td>
               <td></td>
@@ -65,7 +63,7 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-1">
-      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
+      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/doc_previos/index';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
     </div>
   </div>
   <hr>
