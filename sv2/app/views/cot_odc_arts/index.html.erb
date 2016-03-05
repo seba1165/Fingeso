@@ -3,9 +3,9 @@
 <% end %>
 <body>
 <div class="container">
-  <h1 style="color:#0B2161"><FONT FACE="times new roman">ADMINISTRAR COTIZACIONES <small>   Editar, eliminar y crear nuevas cotizaciones</small></FONT></h1>
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">COTIZACIONES POR ARTÍCULOS <small>   Editar, eliminar y crear nuevas cotizaciones</small></FONT></h1>
   <hr>
-  <div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/cot_odc_arts/clienteCot';"><span class="glyphicon glyphicon-plus"></span> Crear Nueva Cotizacion</button>
+  <div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/cot_odc_arts/new';"><span class="glyphicon glyphicon-plus"></span> Crear Cotización</button>
     <hr>
   </div>
 </div>
@@ -13,7 +13,7 @@
   <div class="row">
     <div class="panel panel-primary filterable">
       <div class="panel-heading" style="min-height:40px;">
-        <h3 class="panel-title pull-left">Cotizaciones por Articulos</h3>
+        <h3 class="panel-title pull-left">Cotizaciones por artículos</h3>
         <div class="pull-right">
           <button href="javascript:;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
         </div>
@@ -23,26 +23,29 @@
         <tr class="filters">
           <th></th>
           <th></th>
-          <th><input type="text" class="form-control" placeholder="Documento" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Código" disabled></th>
           <th><input type="text" class="form-control" placeholder="Cliente" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Nota de Venta" disabled></th>
           <th><input type="text" class="form-control" placeholder="Empleado" disabled></th>
           <th><input type="text" class="form-control" placeholder="Fecha" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Estado" disabled></th>
           <th><input type="text" class="form-control" placeholder="Total" disabled></th>
         </tr>
         </thead>
-        <tbody>
-        <% @cotodcArts.each do |d| %>
+        <tbody style="text-align: center">
+        <% @cots.each do |d| %>
             <tr>
               <td class="td-actions">
-                <%= button_to "Editar", cot_odc_arts_edit_path(d), :method => :get %>
+                <!--%= button_to "Editar",  %-->
               </td>
               <td class="td-actions">
-                <%= button_to "Borrar", elimCotODCArt_path(d.doc_cod), :method => :post %>
+                <!--%= button_to "Borrar", elimDocPrevio_path(d.doc_cod), :method => :post %-->
               </td>
               <td><%= d.doc_cod %></td>
-              <td><%= d.cliente_cod %></td>
+              <td><%= d.cliente.cliente_correo %></td>
               <td><%= d.emp_rut %></td>
               <td><%= d.doc_fecha %></td>
+              <td><%= Cotizacion.find(d.doc_cod).estado_cotizacion.cot_est_descr %></td>
               <td><%= d.doc_total %></td>
               <td></td>
               <td></td>
@@ -62,14 +65,9 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-1">
-      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/admin/inicio';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
+      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
     </div>
   </div>
   <hr>
 </div>
 </body>
-
-<div>
-  <%= render 'shared/footer' %>
-  <%= yield %>
-</div>b</p>

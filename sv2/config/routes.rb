@@ -1,5 +1,41 @@
 Rails.application.routes.draw do
 
+  get 'cart_art/index'
+
+  get '/cart' => 'cart#index'
+  get '/cart/clear' => 'cart#clearCart'
+  get '/cart/:id' => 'cart#add'
+  get '/cart/rest/:id' => 'cart#rest'
+
+  get '/cart_art' => 'cart_art#index'
+  get '/cart_art/clear' => 'cart_art#clearCartArt'
+  get '/cart_art/:id' => 'cart_art#add'
+  get '/cart_art/rest/:id' => 'cart_art#rest'
+
+  get 'sis_vehiculo_articulo/index'
+
+  get 'sis_vehiculo_articulo/new'
+
+  get 'sis_vehiculo_articulo/create'
+
+  get 'sis_vehiculo_articulo/edit'
+
+  get 'sis_vehiculo_articulo/update'
+
+  get 'sis_vehiculo_articulo/destroy'
+
+  get 'servs_inst/index'
+
+  get 'servs_inst/new'
+
+  get 'servs_inst/create'
+
+  get 'servs_inst/edit'
+
+  get 'servs_inst/update'
+
+  get 'servs_inst/destroy'
+
   get 'modelos/index'
 
   get 'modelos/new'
@@ -87,11 +123,11 @@ Rails.application.routes.draw do
 
   get 'articulos/edit'
 
-  get 'servicio_reparacions/index'
+  get 'servicio_reparaciones/index'
 
-  get 'servicio_reparacions/new'
+  get 'servicio_reparaciones/new'
 
-  get 'servicio_reparacions/edit'
+  get 'servicio_reparaciones/edit'
 
   get 'articulos/index'
 
@@ -109,9 +145,9 @@ Rails.application.routes.draw do
 
   #get 'det_cot_odc_arts/destroy'
 
-  #get 'cot_odc_arts/index'
+  get 'cot_odc_arts/index'
 
-  #get 'cot_odc_arts/new'
+  get 'cot_odc_arts/new'
 
   #get 'cot_odc_arts/edit'
 
@@ -151,27 +187,21 @@ Rails.application.routes.draw do
 
   #devise_for :empleados
   resources :empleados, :except => [:show]
-
   resources :tipos_cliente, :except => [:show]
-
-
   #resources :cot_odc_arts, :except => [:show]
-  resources :servicio_reparacions, :except => [:show]
-
+  resources :servicio_reparaciones, :except => [:show]
   resources :cot_odc_arts, :except => [:show]
-
   resources :doc_previos, :except => [:show]
-
   resources :articulos, :except => [:show]
   resources :accesorios, :except => [:show]
   resources :insumos, :except => [:show]
   resources :repuestos, :except => [:show]
   resources :herramientas, :except => [:show]
-
   resources :tipo_articulos, :except => [:show]
-
   resources :marcas, :except => [:show]
   resources :modelos, :except => [:show]
+  resources :sis_vehiculo_articulo, :except => [:show]
+  resources :servs_inst, :except => [:show]
 
   #devise_for :empleados, :controllers => { :registrations => "registrations" } , :skip => [:registrations]
   #as :empleado do
@@ -184,7 +214,7 @@ Rails.application.routes.draw do
   #post "cot_odc_arts/del/:id" => 'cot_odc_arts#elimCotODCArt' , as: :elimCotODCArt
   post "tipos_cliente/del/:id" => 'tipos_cliente#elimTipoCliente', as: :elimTipoCliente
   post "doc_previos/del/:id" => 'doc_previos#elimDocPrevio', as: :elimDocPrevio
-  post "servicio_reparacions/del/:id" => 'servicio_reparacions#elimSR', as: :elimSR
+  post "servicio_reparaciones/del/:id" => 'servicio_reparaciones#elimSR', as: :elimSR
   post "articulos/del/:id" => 'articulos#elimArt', as: :elimArt
   post "tipo_articulos/del/:id" => 'tipo_articulos#elimTipoArt', as: :elimTipoArt
   post "marcas/del/:id" => 'marcas#elimMarca', as: :elimMarca
@@ -194,6 +224,13 @@ Rails.application.routes.draw do
   post "repuestos/del/:id" => 'repuestos#elimRepu', as: :elimRepu
   post "modelos/del/:id" => 'modelos#elimModelo', as: :elimModelo
 
+  post "cart/:id" => 'cart#add', as: :add
+  post "cart/rest/:id" => 'cart#rest', as: :rest
+
+  post "cart_art/:id" => 'cart_art#add', as: :addArt
+  post "cart_art/rest/:id" => 'cart_art#rest', as: :restArt
+
+  post "sis_vehiculo_articulo/del/:id" => 'sis_vehiculo_articulo#elimSI', as: :elimSI
 
   get 'admin/parametro' => 'errors#construccion'
 

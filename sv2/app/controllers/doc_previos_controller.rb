@@ -11,9 +11,7 @@ class DocPreviosController < ApplicationController
 
   def new
     if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor"
-      @doc = DocPrevio.new
-      # asociar un nuevo cliente
-      @doc.cliente = Cliente.new
+            # asociar un nuevo cliente
     else
       redirect_to '/errors/not_found'
     end

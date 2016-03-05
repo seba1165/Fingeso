@@ -1,7 +1,13 @@
-<% if @doc.errors.any? %>
-    <ul>
-      <% @doc.errors.each do |atributo, mensaje| %>
-          <li> <%= mensaje %> </li>
-      <% end %>
-    </ul>
-<% end %>
+<div class="container">
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">CREAR COTIZACIÓN</FONT></h1>
+  <hr>
+  <div class="col-md-4">
+    <!-- Form Name -->
+    <legend>Seleccione el tipo de cotización</legend>
+    <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#17A649; width: 300px;" onclick="location.href='/cot_odc_arts/new';"><span class="glyphicon glyphicon-pencil"></span> Cotización por Artículos</button>
+    <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#17A649; width: 300px;" onclick="location.href='/servs_inst/new';"><span class="glyphicon glyphicon-pencil"></span> Cotización por Servicios de Instalación</button>
+    <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#17A649;width: 300px;" onclick="location.href='/serv_reps/new';"><span class="glyphicon glyphicon-pencil"></span> Cotizacióm por Servicios de Reparación</button>
+  </div><!-- /.col-lg-12 -->
+  <!--%= render :partial => "formulario_guardar_articulo.html" %-->
+  <hr>
+</div>

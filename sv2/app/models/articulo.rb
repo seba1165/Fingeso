@@ -1,8 +1,8 @@
 class Articulo < ActiveRecord::Base
-  has_many :det_cot_odc_arts
+  has_many :si_vehiculo_articulos, :foreign_key => :art_cod
+  belongs_to :tipo_articulo , foreign_key: "art_tipo_cod"
 
   attr_accessible  :art_cod, :art_tipo_cod, :art_nom, :art_stock, :art_precio
-
   validates :art_cod, :presence => true, :uniqueness => true
   validates :art_tipo_cod, :presence => true, numericality: { only_integer: true, greater_than: 0 }
   validates :art_nom, :presence => true

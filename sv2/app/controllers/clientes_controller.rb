@@ -43,7 +43,7 @@ class ClientesController < ApplicationController
                                  :cliente_nom => @cliente_nom,
                                  :cliente_ape => @cliente_ape,
                                  :cliente_direccion => @cliente_direccion,
-                                 :cliente_comuna => @cliente_direccion,
+                                 :cliente_comuna => @cliente_comuna,
                                  :cliente_tel => @cliente_tel,
                                  :cliente_correo => @cliente_correo,
                                  :cliente_emp => @cliente_emp,
