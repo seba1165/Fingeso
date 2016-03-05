@@ -126,9 +126,9 @@ class DocPreviosController < ApplicationController
 
   def elimDocPrevio
     if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      @doc = DocPrevio.find(params[:id]);
-    else
       redirect_to '/errors/not_found'
+    else
+      @doc = DocPrevio.find(params[:id]);
     end
   end
 

@@ -1,0 +1,2 @@
+module TiposArticuloHelper
+end

@@ -23,7 +23,6 @@
         <tr class="filters">
           <th></th>
           <th></th>
-          <th><input type="text" class="form-control" placeholder="Código" disabled></th>
           <th><input type="text" class="form-control" placeholder="Marca" disabled></th>
           <th><input type="text" class="form-control" placeholder="Modelo" disabled></th>
           <th><input type="text" class="form-control" placeholder="Año" disabled></th>
@@ -38,7 +37,6 @@
               <td class="td-actions">
                 <%= button_to "Borrar", elimModelo_path(d.modelo_cod), :method => :post %>
               </td>
-              <td><%= d.modelo_cod %></td>
               <td><%= d.marca.marca_nombre %></td>
               <td><%= d.modelo_nombre %></td>
               <td><%= d.modelo_ano %></td>
