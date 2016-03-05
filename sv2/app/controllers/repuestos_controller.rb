@@ -82,8 +82,15 @@ class RepuestosController < ApplicationController
       @repuesto.art_precio = @art_precio;
       @repuesto.art_imagen = @art_imagen;
 
+      @art = Articulo.find(params[:id]);
+      @art.art_cod = @art_cod;
+      @art.art_tipo_cod= @art_tipo_cod;
+      @art.art_nom = @art_nom;
+      @art.art_stock = @art_stock;
+      @art.art_precio = @art_precio;
+      @art.art_imagen = @art_imagen;
 
-      if @repuesto.save()
+      if @art.save() && @repuesto.save()
         redirect_to articulos_path, :notice => "El repuesto ha sido modificado";
       else
         if @art_cod == ""
@@ -99,15 +106,19 @@ class RepuestosController < ApplicationController
     if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
       redirect_to '/errors/not_found'
     else
-      @accesorio = Articulo.find(params[:id]);
-      if @articulo.destroy()
-        redirect_to articulos_path, :notice => "El artículo ha sido eliminado";
+      @repuesto = Repuesto.find(params[:id]);
+      @art = Articulo.find(params[:id]);
+
+      if @repuesto.destroy() && @art.destroy()
+        redirect_to articulos_path, :notice => "El repuesto ha sido eliminado";
       else
-        redirect_to articulos_path, :notice => "El artículo NO ha podido ser eliminado";
+        redirect_to articulos_path, :notice => "El repuesto NO ha podido ser eliminado";
       end
     end
   end
-  def elimAcc
-    @accesorio = Articulo.find(params[:id]);
+  def elimRepu
+    @repuesto = Repuesto.find(params[:id]);
+    @art = Articulo.find(params[:id]);
+
   end
 end

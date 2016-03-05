@@ -87,16 +87,24 @@ class AccesoriosController < ApplicationController
       @accesorio.art_precio = @art_precio;
       @accesorio.art_imagen = @art_imagen;
 
+      @art = Articulo.find(params[:id]);
+      @art.art_cod = @art_cod;
+      @art.art_tipo_cod= @art_tipo_cod;
+      @art.art_nom = @art_nom;
+      @art.art_stock = @art_stock;
+      @art.art_precio = @art_precio;
+      @art.art_imagen = @art_imagen;
 
-      if @accesorio.save()
-        redirect_to articulos_path, :notice => "El articulo ha sido modificado";
-      else
-        if @art_cod == ""
-          redirect_to articulos_path, :notice => "El articulo NO ha podido ser modificado";
+        if @art.save() && @accesorio.save()
+          redirect_to articulos_path, :notice => "El accesorio ha sido modificado";
         else
-          render "edit";
+          if @art_cod == ""
+            redirect_to articulos_path, :notice => "El accesorio NO ha podido ser modificado";
+          else
+            render "edit";
+          end
         end
-      end
+
     end
   end
 
@@ -104,15 +112,18 @@ class AccesoriosController < ApplicationController
     if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
       redirect_to '/errors/not_found'
     else
-      @accesorio = Articulo.find(params[:id]);
-      if @articulo.destroy()
-        redirect_to articulos_path, :notice => "El artículo ha sido eliminado";
+      @accesorio = Accesorio.find(params[:id]);
+      @art = Articulo.find(params[:id]);
+
+      if @accesorio.destroy() && @art.destroy()
+        redirect_to articulos_path, :notice => "El accesorio ha sido eliminado";
       else
-        redirect_to articulos_path, :notice => "El artículo NO ha podido ser eliminado";
+        redirect_to articulos_path, :notice => "El accesorio NO ha podido ser eliminado";
       end
     end
   end
   def elimAcc
-    @accesorio = Articulo.find(params[:id]);
+    @accesorio = Accesorio.find(params[:id]);
+    @art = Articulo.find(params[:id]);
   end
 end
