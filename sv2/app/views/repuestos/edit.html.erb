@@ -1,2 +1,14 @@
-<h1>Repuestos#edit</h1>
-<p>Find me in app/views/repuestos/edit.html.erb</p>
+<% if @repuesto.errors.any? %>
+    <ul>
+      <% @repuesto.errors.each do |atributo, mensaje| %>
+          <li> <%= mensaje %> </li>
+      <% end %>
+    </ul>
+<% end %>
+
+<div class="container">
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">EDITAR REPUESTO</FONT></h1>
+  <hr>
+  <%= render :partial => "formulario_guardar_repuesto.html" %>
+  <hr>
+</div>

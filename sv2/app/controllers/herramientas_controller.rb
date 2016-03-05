@@ -84,8 +84,15 @@ class HerramientasController < ApplicationController
       @herramienta.art_precio = @art_precio;
       @herramienta.art_imagen = @art_imagen;
 
+      @art = Articulo.find(params[:id]);
+      @art.art_cod = @art_cod;
+      @art.art_tipo_cod= @art_tipo_cod;
+      @art.art_nom = @art_nom;
+      @art.art_stock = @art_stock;
+      @art.art_precio = @art_precio;
+      @art.art_imagen = @art_imagen;
 
-      if @herramienta.save()
+      if @art.save() && @herramienta.save()
         redirect_to articulos_path, :notice => "La herramienta ha sido modificada";
       else
         if @art_cod == ""
@@ -101,8 +108,9 @@ class HerramientasController < ApplicationController
     if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
       redirect_to '/errors/not_found'
     else
-      @herramienta = Articulo.find(params[:id]);
-      if @articulo.destroy()
+      @herramienta = Herramienta.find(params[:id]);
+      @art = Articulo.find(params[:id]);
+      if @herramienta.destroy() && @art.destroy()
         redirect_to articulos_path, :notice => "La herramienta ha sido eliminada";
       else
         redirect_to articulos_path, :notice => "La herramienta NO ha podido ser eliminada";
@@ -110,6 +118,7 @@ class HerramientasController < ApplicationController
     end
   end
   def elimHerr
-    @herramienta = Articulo.find(params[:id]);
+    @herramienta = Herramienta.find(params[:id]);
+    @art = Articulo.find(params[:id]);
   end
 end

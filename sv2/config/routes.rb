@@ -216,6 +216,10 @@ Rails.application.routes.draw do
   post "articulos/del/:id" => 'articulos#elimArt', as: :elimArt
   post "tipo_articulos/del/:id" => 'tipo_articulos#elimTipoArt', as: :elimTipoArt
   post "marcas/del/:id" => 'marcas#elimMarca', as: :elimMarca
+  post "accesorios/del/:id" => 'accesorios#elimAcc', as: :elimAcc
+  post "herramientas/del/:id" => 'herramientas#elimHerr', as: :elimHerr
+  post "insumos/del/:id" => 'insumos#elimIns', as: :elimIns
+  post "repuestos/del/:id" => 'repuestos#elimRepu', as: :elimRepu
   post "modelos/del/:id" => 'modelos#elimModelo', as: :elimModelo
 
   post "cart/:id" => 'cart#add', as: :add

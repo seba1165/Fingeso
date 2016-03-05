@@ -10,12 +10,12 @@
     		</div>
     		<div class="panel-body" style="color:#0B2161; background-color:#A9D0F5;">
 	    		<div style="text-align:center; margin:0 auto;">
-			    	<p>Desea elminar la herramienta: <%= @articulo.art_nom %> ?</p>
+			    	<p>Desea elminar la herramienta: <%= @herramienta.art_nom %> ?</p>
 			    	<p></p>
 			    	<p></p>
 			    	<p></p>
 			    	<div>
-				        <%= button_to "Si", @articulo, :method => "delete" %>
+				        <%= button_to "Si", @herramienta, :method => "delete" %>
                 		<%= button_to "No", articulos_index_path, :method => :get %>
 				    </div>
 			    </div>
@@ -25,7 +25,7 @@
     <div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-1">
-				<button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/Herramientas/index';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
+				<button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/herramientas/index';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
 			</div>
 		</div>
 		<hr>
