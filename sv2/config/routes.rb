@@ -1,16 +1,14 @@
 Rails.application.routes.draw do
 
-  get 'cart_art/index'
-
   get '/cart' => 'cart#index'
   get '/cart/clear' => 'cart#clearCart'
   get '/cart/:id' => 'cart#add'
   get '/cart/rest/:id' => 'cart#rest'
 
-  get '/cart_art' => 'cart_art#index'
-  get '/cart_art/clear' => 'cart_art#clearCartArt'
-  get '/cart_art/:id' => 'cart_art#add'
-  get '/cart_art/rest/:id' => 'cart_art#rest'
+  get '/cartart' => 'cartart#index'
+  get '/cartart/clear' => 'cartart#clearCartArt'
+  get '/cartart/:id' => 'cartart#add'
+  get '/cartart/rest/:id' => 'cartart#rest'
 
   get 'sis_vehiculo_articulo/index'
 
@@ -145,13 +143,13 @@ Rails.application.routes.draw do
 
   #get 'det_cot_odc_arts/destroy'
 
-  get 'cot_odc_arts/index'
+  get 'cots_odc_art/index'
 
-  get 'cot_odc_arts/new'
+  get 'cots_odc_art/new'
 
-  #get 'cot_odc_arts/edit'
+  #get 'cots_odc_art/edit'
 
-  #get 'cot_odc_arts/clienteCot'
+  #get 'cots_odc_art/clienteCot'
 
   get 'clientes/index'
 
@@ -188,9 +186,9 @@ Rails.application.routes.draw do
   #devise_for :empleados
   resources :empleados, :except => [:show]
   resources :tipos_cliente, :except => [:show]
-  #resources :cot_odc_arts, :except => [:show]
+  #resources :cots_odc_art, :except => [:show]
   resources :servicio_reparaciones, :except => [:show]
-  resources :cot_odc_arts, :except => [:show]
+  resources :cots_odc_art, :except => [:show]
   resources :doc_previos, :except => [:show]
   resources :articulos, :except => [:show]
   resources :accesorios, :except => [:show]
@@ -211,7 +209,7 @@ Rails.application.routes.draw do
 
   post "clientes/del/:id" => 'clientes#elimCliente' , as: :elimCliente
   post "empleado/del/:id" => 'admin#elimUsr' , as: :elimUsr
-  #post "cot_odc_arts/del/:id" => 'cot_odc_arts#elimCotODCArt' , as: :elimCotODCArt
+  #post "cots_odc_art/del/:id" => 'cots_odc_art#elimCotODCArt' , as: :elimCotODCArt
   post "tipos_cliente/del/:id" => 'tipos_cliente#elimTipoCliente', as: :elimTipoCliente
   post "doc_previos/del/:id" => 'doc_previos#elimDocPrevio', as: :elimDocPrevio
   post "servicio_reparaciones/del/:id" => 'servicio_reparaciones#elimSR', as: :elimSR
@@ -223,8 +221,8 @@ Rails.application.routes.draw do
   post "cart/:id" => 'cart#add', as: :add
   post "cart/rest/:id" => 'cart#rest', as: :rest
 
-  post "cart_art/:id" => 'cart_art#add', as: :addArt
-  post "cart_art/rest/:id" => 'cart_art#rest', as: :restArt
+  post "cartart/:id" => 'cartart#add', as: :addArt
+  post "cartart/rest/:id" => 'cartart#rest', as: :restArt
 
   post "sis_vehiculo_articulo/del/:id" => 'sis_vehiculo_articulo#elimSI', as: :elimSI
 
