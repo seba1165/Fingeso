@@ -1,4 +1,4 @@
-class TipoArticulosController < ApplicationController
+class TiposArticuloController < ApplicationController
   include Devise::Controllers::Helpers
   def index
     if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de bodega"
@@ -26,7 +26,7 @@ class TipoArticulosController < ApplicationController
                                            :tipo_nom => @tipoArticulo_nom,
                                        });
       if @tipoArticulo.save()
-        redirect_to tipo_articulos_path, :notice => "El tipo de articulo ha sido guardado con éxito";
+        redirect_to tipos_articulo_path, :notice => "El tipo de articulo ha sido guardado con éxito";
       else
         render "new";
       end
@@ -51,7 +51,7 @@ class TipoArticulosController < ApplicationController
       @tipoArticulo.tipo_nom = @tipo_nom;
 
       if @tipoArticulo.save()
-        redirect_to tipo_articulos_path, :notice => "El tipo de articulo ha sido modificado";
+        redirect_to tipos_articulo_path, :notice => "El tipo de articulo ha sido modificado";
       else
         render "edit";
       end
@@ -66,12 +66,12 @@ class TipoArticulosController < ApplicationController
       @articulo = Articulo.find_by(art_tipo_cod: @tipoArticulo.art_tipo_cod)
       if @articulo.nil?
         if @tipoArticulo.destroy()
-          redirect_to tipo_articulos_path, :notice => "El tipo de articulo ha sido eliminado";
+          redirect_to tipos_articulo_path, :notice => "El tipo de articulo ha sido eliminado";
         else
-          redirect_to tipo_articulos_path, :notice => "El tipo de articulo NO ha podido ser eliminado";
+          redirect_to tipos_articulo_path, :notice => "El tipo de articulo NO ha podido ser eliminado";
         end
       else
-        redirect_to tipo_articulos_path, :notice => "El tipo articulo no ha podido ser eliminado ya que tiene articulos asociados";
+        redirect_to tipos_articulo_path, :notice => "El tipo articulo no ha podido ser eliminado ya que tiene articulos asociados";
       end
     else
       redirect_to '/errors/not_found'

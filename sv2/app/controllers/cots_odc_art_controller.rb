@@ -69,8 +69,8 @@ class CotsOdcArtController < ApplicationController
                             :doc_total => total
                           });
 
-      if @cliente_correo == ""
-        redirect_to new_cot_odc_art_path, :notice => "Ingrese correo del cliente";
+      if @cliente_correo == "" || @tipo_cliente_cod == ""
+        redirect_to new_cot_odc_art_path, :notice => "El correo del cliente y el tipo son obligatorios";
       else
         if @cliente_cod == ""
           @cot.cliente = cliente
@@ -117,9 +117,33 @@ class CotsOdcArtController < ApplicationController
   end
 
   def destroy
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
+      redirect_to '/errors/not_found'
+    else
+      @doc = DocPrevio.find(params[:id]);
+      if @doc.destroy()
+        redirect_to cots_odc_art_index_path, :notice => "La cotizacion ha sido eliminada";
+      else
+        redirect_to cots_odc_art_index_path, :notice => "La cotizacion no ha podido ser eliminada";
+      end
+    end
   end
 
   def elimCotODCArt
+    if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
+      redirect_to '/errors/not_found'
+    else
+      @doc = CotOdcArt.find(params[:id]);
+    end
+  end
 
+  def aprobar
+    @cot = Cotizacion.find(params[:id]);
+    @cot.cot_est_cod = 1
+    if @cot.save
+      redirect_to cots_odc_art_index_path, :notice => "Cotizacion Aprobada";
+    else
+      redirect_to cots_odc_art_index_path, :notice => "La cotizacion no pudo ser aprobada";
+    end
   end
 end

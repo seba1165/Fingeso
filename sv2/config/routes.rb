@@ -106,14 +106,11 @@ Rails.application.routes.draw do
 
   get 'accesorios/destroy'
 
-  get 'tipo_articulos/index'
+  get 'tipos_articulo/index'
 
-  get 'tipo_articulos/new'
+  get 'tipos_articulo/new'
 
-  get 'tipo_articulos/edit'
-
-  #resource :carro, only: [:show]
-  #resources :det_cot_odc_arts, only: [:create, :update, :destroy]
+  get 'tipos_articulo/edit'
 
   get 'articulos/index'
 
@@ -135,21 +132,11 @@ Rails.application.routes.draw do
 
   get 'vendedor/inicio'
 
-  #get 'det_cot_odc_arts/index'
-
-  #get 'det_cot_odc_arts/create'
-
-  #get 'det_cot_odc_arts/update'
-
-  #get 'det_cot_odc_arts/destroy'
-
   get 'cots_odc_art/index'
 
   get 'cots_odc_art/new'
 
-  #get 'cots_odc_art/edit'
-
-  #get 'cots_odc_art/clienteCot'
+  get 'cots_odc_art/aprobar/:id' => 'cots_odc_art#aprobar'
 
   get 'clientes/index'
 
@@ -195,7 +182,7 @@ Rails.application.routes.draw do
   resources :insumos, :except => [:show]
   resources :repuestos, :except => [:show]
   resources :herramientas, :except => [:show]
-  resources :tipo_articulos, :except => [:show]
+  resources :tipos_articulo, :except => [:show]
   resources :marcas, :except => [:show]
   resources :modelos, :except => [:show]
   resources :sis_vehiculo_articulo, :except => [:show]
@@ -214,7 +201,7 @@ Rails.application.routes.draw do
   post "doc_previos/del/:id" => 'doc_previos#elimDocPrevio', as: :elimDocPrevio
   post "servicio_reparaciones/del/:id" => 'servicio_reparaciones#elimSR', as: :elimSR
   post "articulos/del/:id" => 'articulos#elimArt', as: :elimArt
-  post "tipo_articulos/del/:id" => 'tipo_articulos#elimTipoArt', as: :elimTipoArt
+  post "tipos_articulo/del/:id" => 'tipos_articulo#elimTipoArt', as: :elimTipoArt
   post "marcas/del/:id" => 'marcas#elimMarca', as: :elimMarca
   post "accesorios/del/:id" => 'accesorios#elimAcc', as: :elimAcc
   post "herramientas/del/:id" => 'herramientas#elimHerr', as: :elimHerr
@@ -222,11 +209,15 @@ Rails.application.routes.draw do
   post "repuestos/del/:id" => 'repuestos#elimRepu', as: :elimRepu
   post "modelos/del/:id" => 'modelos#elimModelo', as: :elimModelo
 
+  post "cots_odc_art/del/:id" => 'cots_odc_art#elimCotODCArt', as: :elimCotODCArt
+
   post "cart/:id" => 'cart#add', as: :add
   post "cart/rest/:id" => 'cart#rest', as: :rest
 
   post "cartart/:id" => 'cartart#add', as: :addArt
   post "cartart/rest/:id" => 'cartart#rest', as: :restArt
+
+  post "cots_odc_art/aprobar/:id" => 'cots_odc_art#aprobar', as: :aprobar
 
   post "sis_vehiculo_articulo/del/:id" => 'sis_vehiculo_articulo#elimSI', as: :elimSI
 

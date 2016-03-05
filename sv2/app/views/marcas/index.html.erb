@@ -23,7 +23,6 @@
         <tr class="filters">
           <th></th>
           <th></th>
-          <th><input type="text" class="form-control" placeholder="Código" disabled></th>
           <th><input type="text" class="form-control" placeholder="Marca" disabled></th>
         </tr>
         </thead>
@@ -36,7 +35,6 @@
               <td class="td-actions">
                 <%= button_to "Borrar", elimMarca_path(d.marca_cod), :method => :post %>
               </td>
-              <td><%= d.marca_cod %></td>
               <td><%= d.marca_nombre %></td>
             </tr>
         <% end %>

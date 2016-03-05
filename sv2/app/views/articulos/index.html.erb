@@ -53,7 +53,7 @@
               <td><%= d.art_tipo_cod %></td>
               <td><%= d.art_nom %></td>
               <td><%= d.art_stock %></td>
-              <td><%= d.art_precio %></td>
+              <td><%= number_to_currency(d.art_precio) %></td>
             </tr>
         <% end %>
         </tbody>

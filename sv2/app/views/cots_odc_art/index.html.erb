@@ -36,10 +36,12 @@
         <% @cots.each do |d| %>
             <tr>
               <td class="td-actions">
-                <!--%= button_to "Editar",  %-->
+                <%if Cotizacion.find(d.doc_cod).cot_est_cod == 0 %>
+                <%= button_to "Aprobar", aprobar_path(d), :method => :get %>
+                <%end%>
               </td>
               <td class="td-actions">
-                <!--%= button_to "Borrar", elimDocPrevio_path(d.doc_cod), :method => :post %-->
+                <%= button_to "Borrar", elimCotODCArt_path(d.doc_cod), :method => :post %>
               </td>
               <td><%= d.doc_cod %></td>
               <td><%= d.cliente.cliente_correo %></td>
@@ -47,7 +49,7 @@
               <td><%= d.emp_rut %></td>
               <td><%= d.doc_fecha %></td>
               <td><%= Cotizacion.find(d.doc_cod).estado_cotizacion.cot_est_descr %></td>
-              <td><%= d.doc_total %></td>
+              <td><%= number_to_currency(d.doc_total) %></td>
               <td></td>
               <td></td>
               <td></td>
