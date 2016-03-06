@@ -1,4 +1,9 @@
 <!--Vista de la tabla log-->
+<style> 
+td.cortar {
+    word-break: break-all;
+}
+</style>
 <body>
 <div class="container" style="width: 100%; height: 100%">
     <h1 style="color:#0B2161"><FONT FACE="times new roman">REGISTRO <small>   Seleccione el registro que desea modificar y elija una opción</small></FONT></h1>
@@ -12,7 +17,7 @@
                     <button href="javascript:;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
                 </div>
             </div>
-            <table class="table" style="table-layout: auto;overflow: scroll;width: 100%; height: 100%;"> <!-- Arreglar tabla y conectarlo con la bd-->
+            <table class="table"> <!-- Arreglar tabla y conectarlo con la bd-->
                 <thead>
                     <tr class="filters">
                         <th><input type="text" class="form-control" placeholder="Fecha de Modificación" disabled></th>
@@ -27,14 +32,13 @@
                 <tbody style="text-align: center">
                     <% @logs.each do |d| %>
                         <tr>
-                            <td><%= d.UpdateDate %></td>
-                            <td><%= d.UserName %></td>
-                            <td><%= d.TableName %></td>
-                            <td><%= d.Operation %></td>
-                            <td><%= d.OldValue %></td>
-                            <td><%= d.NewValue %></td>
-                            <td></td>
-                            <td class="td-actions">
+                            <td class="cortar" style="width: 100px;"><%= d.UpdateDate %></td>
+                            <td class="cortar" style="width: 100px;"><%= d.UserName %></td>
+                            <td class="cortar" style="width: 100px;"><%= d.TableName %></td>
+                            <td class="cortar" style="width: 50px;"><%= d.Operation %></td>
+                            <td class="cortar" style="width: 200px;"><%= d.OldValue %></td>
+                            <td class="cortar" style="width: 200px;"><%= d.NewValue %></td>
+                            <td style="width: 50px;">
                                 <button type: "submit" class="btn btn-default btn-xs" style="color:#FFFFFF; background-color:#FE2E2E;" onclick="location.href='#';"><span class="glyphicon glyphicon-remove"></span></button>
                             </td>
                         </tr>
