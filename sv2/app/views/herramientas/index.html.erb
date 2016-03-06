@@ -41,7 +41,7 @@
                 <%= button_to "Borrar", elimHerr_path(d.art_cod), :method => :post %>
               </td>
               <td><%= d.art_cod %></td>
-              <td><%= d.art_tipo_cod %></td>
+              <td><%= TipoArticulo.where(art_tipo_cod: d.art_tipo_cod).first.tipo_nom %></td>
               <td><%= d.art_nom %></td>
               <td><%= d.art_stock %></td>
               <td><%= number_to_currency(d.art_precio) %></td>

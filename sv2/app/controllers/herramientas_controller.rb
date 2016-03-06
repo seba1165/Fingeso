@@ -43,7 +43,7 @@ class HerramientasController < ApplicationController
         if @herramienta.save()
           redirect_to articulos_path, :notice => "La herramienta ha sido guardado con éxito";
         else
-          redirect_to articulos_path, :notice => "La herramienta no se pudo guardar";
+          render "new"
         end
       else
         redirect_to articulos_path, :notice => "La herramienta con ese código ya existe en los artículos";

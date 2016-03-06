@@ -7,8 +7,8 @@
     </div>
 
     <div class="field">
-      <%= f.label :art_tipo_cod, "Tipo Herramienta *" %><br />
-      <%= f.text_field :art_tipo_cod, autofocus: true %>
+      <%= f.label :art_tipo_cod, "Tipo de Repuesto" %><br />
+      <%= collection_select(:herramienta, :art_tipo_cod, TipoArticulo.all, :id, :tipo_nom, prompt: true) %>
     </div>
 
     <div class="field">

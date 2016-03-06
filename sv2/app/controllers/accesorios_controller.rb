@@ -45,7 +45,7 @@ class AccesoriosController < ApplicationController
         if @accesorio.save()
           redirect_to articulos_path, :notice => "El accesorio ha sido guardado con éxito";
         else
-          redirect_to articulos_path, :notice => "El accesorio no se pudo guardar";
+          render "new"
         end
 
       else

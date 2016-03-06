@@ -50,7 +50,7 @@
                 <%= button_to "Borrar", elimArt_path(d.art_cod), :method => :post %>
               </td>
               <td><%= d.art_cod %></td>
-              <td><%= d.art_tipo_cod %></td>
+              <td><%= d.tipo_articulo.tipo_nom %></td>
               <td><%= d.art_nom %></td>
               <td><%= d.art_stock %></td>
               <td><%= number_to_currency(d.art_precio) %></td>

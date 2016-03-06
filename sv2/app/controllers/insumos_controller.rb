@@ -42,7 +42,7 @@ class InsumosController < ApplicationController
         if @insumo.save()
           redirect_to articulos_path, :notice => "El insumo ha sido guardado con éxito";
         else
-          redirect_to articulos_path, :notice => "El insumo no se pudo  guardar";
+          render "new"
         end
       else
         redirect_to articulos_path, :notice => "El insumo con ese código ya existe en los artículos";

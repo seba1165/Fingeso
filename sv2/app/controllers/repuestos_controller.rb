@@ -42,7 +42,7 @@ class RepuestosController < ApplicationController
         if @repuesto.save()
           redirect_to articulos_path, :notice => "El repuesto ha sido guardado con éxito";
         else
-          redirect_to articulos_path, :notice => "El repuesto no se pudo  guardar";
+          render "new"
         end
       else
         redirect_to articulos_path, :notice => "El repuesto con ese código ya existe en los artículos";

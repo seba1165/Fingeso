@@ -59,3 +59,6 @@ en:
           other: "%{count} errores impidieron que este %{resource} fuese guardado:"
         blank: "%{attribute} no puede estar vacio"
         invalid: "%{attribute} no es válido"
+        not_a_number: "%{attribute} no es un numero"
+        invalid_rut: "%{attribute} no es un rut valido"
+        rut_valid: "%{attribute} no un rut valido"
