@@ -146,6 +146,8 @@ Rails.application.routes.draw do
 
   get 'cots_odc_art/new'
 
+  get 'cots_odc_art/show'
+
   get 'cots_odc_art/aprobar/:id' => 'cots_odc_art#aprobar'
   get 'notas_de_venta/pagar/:id' => 'notas_de_venta#pagar'
 
@@ -186,7 +188,7 @@ Rails.application.routes.draw do
   resources :tipos_cliente, :except => [:show]
   #resources :cots_odc_art, :except => [:show]
   resources :servicio_reparaciones, :except => [:show]
-  resources :cots_odc_art, :except => [:show]
+  #resources :cots_odc_art, :except => [:show]
   resources :doc_previos, :except => [:show]
   resources :articulos, :except => [:show]
   resources :accesorios, :except => [:show]
