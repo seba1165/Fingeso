@@ -32,10 +32,10 @@
         <% @modelos.each do |d| %>
             <tr>
               <td class="td-actions">
-                <%= button_to "Editar", modelos_edit_path(d), :method => :get %>
+                <%= button_to "Editar", edit_modelo_path(d), :method => :get %>
               </td>
               <td class="td-actions">
-                <%= button_to "Borrar", elimModelo_path(d.modelo_cod), :method => :post %>
+                <%= button_to "Borrar", elimModelo_path(d), :method => :post %>
               </td>
               <td><%= d.marca.marca_nombre %></td>
               <td><%= d.modelo_nombre %></td>

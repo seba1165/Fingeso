@@ -1,12 +1,17 @@
 <% flash.each do |key, value| %>
     <p> <%= value %> </p>
 <% end %>
-<body>
-<div class="container">
-  <h1 style="color:#0B2161"><FONT FACE="times new roman">AGREGAR INSTALACIONES A LA COTIZACION <small> </small></FONT></h1>
-  <hr>
+<head>
+  <div class="container">
+    <h1 style="color:#0B2161"><FONT FACE="times new roman">AGREGAR INSTALACIONES A LA COTIZACIÓN </FONT>
+      <button type: "submit" class="btn btn-default pull-right" style="color:#FFFFFF; background-color:#31B404;" onclick="location.href='/cart';"><span class="glyphicon glyphicon-eye-open"></span> Vista previa</button>
+      <br><hr>
 
-</div>
+    </h1>
+
+  </div>
+</head>
+<body>
 <div class="container">
   <div class="row">
     <div class="panel panel-primary filterable">
@@ -36,7 +41,7 @@
               </td>
               <td><%= Articulo.where(art_cod: d.art_cod).first.art_nom %> </td>
               <td><%= Marca.where(marca_cod: d.marca_cod).first.marca_nombre %> <%= Modelo.where(modelo_cod: d.modelo_cod).first.modelo_nombre %> <%= d.modelo_ano %></td>
-              <td><%= d.s_v_a_mo_pr + d.s_v_a_in_pr%> </td>
+              <td><%= number_to_currency(d.s_v_a_mo_pr + d.s_v_a_in_pr)%> </td>
             </tr>
         <% end %>
         </tbody>
@@ -49,7 +54,7 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-1">
-      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
+      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/servs_inst/index';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
     </div>
   </div>
   <hr>

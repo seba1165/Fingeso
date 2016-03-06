@@ -26,31 +26,30 @@ td.cortar {
                     <tbody>
                       <tr>
                         <td><strong>Nombre Empleado:</strong></td>
-                        <td class="cortar">aqui va el codigo</td>
+                        <td class="cortar"><%= @emp.emp_nom %> <%= @emp.emp_ape  %></td>
                       </tr>
                       <tr>
                         <td><strong>Cargo:</strong></td>
-                        <td class="cortar">aqui va el codigo</td>
+                        <td class="cortar"><%= @emp.cargo_empleado.cargo_nom %></td>
                       </tr>
                       <tr>
                         <td><strong>RUT:</strong></td>
-                        <td class="cortar">aqui va el codigo</td>
+                        <td class="cortar"><%= @emp.emp_rut %></td>
                       </tr>
                       <tr>
                         <td><strong>Teléfono:</strong></td>
-                        <td class="cortar">aqui va el codigo</td>
+                        <td class="cortar"><%= @emp.emp_tel %></td>
                       </tr>
                       <tr>
                         <td><strong>e-mail:</strong></td>
-                        <td class="cortar">aqui va el codigo</td>
-                      </tr>                  
+                        <td class="cortar"><%= @emp.email %></td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
             <div class="panel-footer">
-                <a href="#" class="btn btn-default" style="color:#FFFFFF; background-color:#DF0101;"><span class="glyphicon glyphicon-save-file"></span> Generar PDF</a>
             </div>
             
           </div>
@@ -60,6 +59,6 @@ td.cortar {
 
 	<br>
 	<div class="col-md-1">
-		<button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='#';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
+    <%= link_to 'VOLVER', :back %>
 	</div><br><hr>
 </div></body>

@@ -1433,7 +1433,7 @@ ALTER TABLE public.doc_pago_sec OWNER TO seba;
 -- Name: doc_pago_sec; Type: SEQUENCE SET; Schema: public; Owner: seba
 --
 
-SELECT pg_catalog.setval('doc_pago_sec', 10, true);
+SELECT pg_catalog.setval('doc_pago_sec', 14, true);
 
 
 --
@@ -2710,7 +2710,7 @@ ALTER TABLE public.nv_sec OWNER TO seba;
 -- Name: nv_sec; Type: SEQUENCE SET; Schema: public; Owner: seba
 --
 
-SELECT pg_catalog.setval('nv_sec', 12, true);
+SELECT pg_catalog.setval('nv_sec', 14, true);
 
 
 --
@@ -3891,7 +3891,7 @@ ALTER TABLE public.si_sec OWNER TO seba;
 -- Name: si_sec; Type: SEQUENCE SET; Schema: public; Owner: seba
 --
 
-SELECT pg_catalog.setval('si_sec', 3, true);
+SELECT pg_catalog.setval('si_sec', 7, true);
 
 
 --
@@ -3971,7 +3971,7 @@ ALTER SEQUENCE tbl_audit_pk_audit_seq OWNED BY log.pk_audit;
 -- Name: tbl_audit_pk_audit_seq; Type: SEQUENCE SET; Schema: public; Owner: seba
 --
 
-SELECT pg_catalog.setval('tbl_audit_pk_audit_seq', 814, true);
+SELECT pg_catalog.setval('tbl_audit_pk_audit_seq', 858, true);
 
 
 --
@@ -4438,8 +4438,8 @@ ALTER TABLE ONLY log ALTER COLUMN pk_audit SET DEFAULT nextval('tbl_audit_pk_aud
 --
 
 COPY accesorio (art_cod, art_tipo_cod, art_nom, art_stock, art_precio, art_imagen) FROM stdin;
-acc-01	2	Radio Hawk	48	25000	\N
 acc-02	23	Sens HAWK	15	10000	\N
+acc-01	2	Radio Hawk	47	25000	\N
 \.
 
 
@@ -4465,9 +4465,9 @@ COPY art_prop_valor (prop_cod, dom_cod, art_cod, valor) FROM stdin;
 
 COPY articulo (art_cod, art_tipo_cod, art_nom, art_stock, art_precio, art_imagen) FROM stdin;
 acc-02	23	Sens HAWK	15	10000	\N
-CK-RK-500	21	Mango Solido	37	14000	\N
-acc-01	2	Radio Hawk	45	25000	\N
-Qc-200	21	Tirador Metalico	42	15000	\N
+CK-RK-500	21	Mango Solido	33	14000	\N
+acc-01	2	Radio Hawk	44	25000	\N
+Qc-200	21	Tirador Metalico	41	15000	\N
 Rep-01	14	Par 01	20	40000	\N
 Herr-01	7	Equalizer GripTape	10	9900	\N
 Ins-01	5	Magnibond 005	21	9900	\N
@@ -4480,6 +4480,10 @@ Ins-01	5	Magnibond 005	21	9900	\N
 
 COPY boleta (doc_pago_cod, doc_pago_fecha, doc_pago_obs) FROM stdin;
 8	2016-03-06 03:45:56.760457	\N
+11	2016-03-06 15:32:50.178042	\N
+12	2016-03-06 15:33:43.51582	\N
+13	2016-03-06 15:41:49.393331	\N
+14	2016-03-06 15:46:08.997997	\N
 \.
 
 
@@ -4530,7 +4534,8 @@ COPY compatibilidad (art_cod, marca_cod, modelo_cod, modelo_ano) FROM stdin;
 
 COPY cot_odc_art (doc_cod, cliente_cod, not_ven_cod, emp_rut, doc_fecha, doc_obs, doc_neto, doc_iva, doc_total, doc_total_desc) FROM stdin;
 1	26	11	18293486-0	2016-03-06	\N	\N	\N	14000	\N
-2	27	12	18293486-0	2016-03-06	\N	\N	\N	54000	\N
+3	22	13	18293486-0	2016-03-06	\N	\N	\N	90000	\N
+2	27	14	18293486-0	2016-03-06	\N	\N	\N	54000	\N
 \.
 
 
@@ -4539,6 +4544,8 @@ COPY cot_odc_art (doc_cod, cliente_cod, not_ven_cod, emp_rut, doc_fecha, doc_obs
 --
 
 COPY cot_odc_serv (doc_cod, cliente_cod, not_ven_cod, emp_rut, doc_fecha, doc_obs, doc_neto, doc_iva, doc_total, doc_total_desc) FROM stdin;
+4	22	\N	18293486-0	2016-03-06	\N	\N	\N	40000	\N
+5	22	\N	18293486-0	2016-03-06	\N	\N	\N	70000	\N
 \.
 
 
@@ -4547,8 +4554,11 @@ COPY cot_odc_serv (doc_cod, cliente_cod, not_ven_cod, emp_rut, doc_fecha, doc_ob
 --
 
 COPY cotizacion (doc_cod, cot_est_cod, cliente_cod, not_ven_cod, emp_rut, doc_fecha, doc_obs, doc_neto, doc_iva, doc_total, doc_total_desc) FROM stdin;
-1	1	26	11	18293486-0	2016-03-06	\N	\N	\N	14000	\N
-2	1	27	12	18293486-0	2016-03-06	\N	\N	\N	54000	\N
+3	0	22	-1	18293486-0	2016-03-06	\N	\N	\N	90000	\N
+1	0	26	-1	18293486-0	2016-03-06	\N	\N	\N	14000	\N
+2	1	27	14	18293486-0	2016-03-06	\N	\N	\N	54000	\N
+4	0	22	\N	18293486-0	2016-03-06	\N	\N	\N	40000	\N
+5	0	22	\N	18293486-0	2016-03-06	\N	\N	\N	70000	\N
 \.
 
 
@@ -4561,6 +4571,8 @@ COPY det_cot_odc_art (doc_cod, det_num_linea, art_cod, art_cant, art_desc, art_p
 2	1	CK-RK-500	1	\N	14000
 2	2	acc-01	1	\N	25000
 2	3	Qc-200	1	\N	15000
+3	1	acc-02	1	\N	10000
+3	2	Rep-01	2	\N	40000
 \.
 
 
@@ -4579,6 +4591,9 @@ COPY det_ot (ot_cod, ot_num_linea, serv_cod, marca_cod, modelo_cod, modelo_ano, 
 COPY doc_previo (doc_cod, cliente_cod, not_ven_cod, emp_rut, doc_fecha, doc_obs, doc_neto, doc_iva, doc_total, doc_total_desc) FROM stdin;
 1	26	\N	18293486-0	2016-03-06 00:00:00	\N	\N	\N	14000	\N
 2	27	\N	18293486-0	2016-03-06 00:00:00	\N	\N	\N	54000	\N
+3	22	\N	18293486-0	2016-03-06 00:00:00	\N	\N	\N	90000	\N
+4	22	\N	18293486-0	2016-03-06 00:00:00	\N	\N	\N	40000	\N
+5	22	\N	18293486-0	2016-03-06 00:00:00	\N	\N	\N	70000	\N
 \.
 
 
@@ -4596,6 +4611,10 @@ COPY documento_de_pago (doc_pago_cod, doc_pago_fecha, doc_pago_obs) FROM stdin;
 8	2016-03-06 03:45:56.760457	\N
 9	2016-03-06 05:32:11.164766	\N
 10	2016-03-06 05:34:00.322679	\N
+11	2016-03-06 15:32:50.178042	\N
+12	2016-03-06 15:33:43.51582	\N
+13	2016-03-06 15:41:49.393331	\N
+14	2016-03-06 15:46:08.997997	\N
 \.
 
 
@@ -4693,9 +4712,9 @@ COPY factura (doc_pago_cod, fact_est_cod, doc_pago_fecha, doc_pago_obs) FROM std
 --
 
 COPY herramienta (art_cod, art_tipo_cod, art_nom, art_stock, art_precio, art_imagen) FROM stdin;
-CK-RK-500	21	Mango Solido	37	14000	\N
-Qc-200	21	Tirador Metalico	42	15000	\N
 Herr-01	7	Equalizer GripTape	20	9900	\N
+CK-RK-500	21	Mango Solido	33	14000	\N
+Qc-200	21	Tirador Metalico	41	15000	\N
 \.
 
 
@@ -5203,6 +5222,50 @@ COPY log (pk_audit, "TableName", "Operation", "OldValue", "NewValue", "UpdateDat
 812	hist_est_fact                                	I	\N	(0,10,2016-03-06,)	2016-03-06 05:34:00.339106	seba                                         
 813	nota_de_venta                                	U	(12,,1,,2,2016-03-06,,2)	(12,,1,10,2,2016-03-06,,2)	2016-03-06 05:34:00.34388	seba                                         
 814	tipo_articulo                                	I	\N	(23,"Sensor de Retroceso")	2016-03-06 06:11:22.105292	seba                                         
+815	doc_previo                                   	I	\N	(3,22,,18293486-0,"2016-03-06 00:00:00",,,,90000,)	2016-03-06 15:29:37.627483	seba                                         
+816	cotizacion                                   	I	\N	(3,0,22,,18293486-0,2016-03-06,,,,90000,)	2016-03-06 15:29:37.627483	seba                                         
+817	det_cot_odc_art                              	I	\N	(3,1,acc-02,1,,10000)	2016-03-06 15:29:38.334445	seba                                         
+818	det_cot_odc_art                              	I	\N	(3,2,Rep-01,2,,40000)	2016-03-06 15:29:38.399798	seba                                         
+819	cotizacion                                   	U	(3,0,22,,18293486-0,2016-03-06,,,,90000,)	(3,1,22,,18293486-0,2016-03-06,,,,90000,)	2016-03-06 15:29:59.412923	seba                                         
+820	nota_de_venta                                	I	\N	(13,,0,,,2016-03-06,,3)	2016-03-06 15:29:59.412923	seba                                         
+821	cotizacion                                   	U	(3,1,22,,18293486-0,2016-03-06,,,,90000,)	(3,1,22,13,18293486-0,2016-03-06,,,,90000,)	2016-03-06 15:29:59.521752	seba                                         
+822	nota_de_venta                                	U	(11,,0,,,2016-03-06,,1)	(11,,1,,,2016-03-06,,1)	2016-03-06 15:32:50.05131	seba                                         
+823	documento_de_pago                            	I	\N	(11,"2016-03-06 15:32:50.178042",)	2016-03-06 15:32:50.182517	seba                                         
+824	nota_de_venta                                	U	(11,,1,,,2016-03-06,,1)	(11,,1,11,,2016-03-06,,1)	2016-03-06 15:32:50.280707	seba                                         
+825	documento_de_pago                            	I	\N	(12,"2016-03-06 15:33:43.51582",)	2016-03-06 15:33:43.518441	seba                                         
+826	nota_de_venta                                	U	(11,,1,11,,2016-03-06,,1)	(11,,1,12,,2016-03-06,,1)	2016-03-06 15:33:43.537197	seba                                         
+827	documento_de_pago                            	I	\N	(13,"2016-03-06 15:41:49.393331",)	2016-03-06 15:41:49.399115	seba                                         
+828	nota_de_venta                                	U	(11,,1,12,,2016-03-06,,1)	(11,,1,13,,2016-03-06,,1)	2016-03-06 15:41:49.424998	seba                                         
+829	cotizacion                                   	U	(3,1,22,13,18293486-0,2016-03-06,,,,90000,)	(3,0,22,-1,18293486-0,2016-03-06,,,,90000,)	2016-03-06 12:45:18.267664	seba                                         
+830	nota_de_venta                                	D	(13,,0,,,2016-03-06,,3)	\N	2016-03-06 12:45:18.267664	seba                                         
+831	cotizacion                                   	U	(2,1,27,12,18293486-0,2016-03-06,,,,54000,)	(2,0,27,-1,18293486-0,2016-03-06,,,,54000,)	2016-03-06 12:45:21.379121	seba                                         
+832	nota_de_venta                                	D	(12,,1,10,2,2016-03-06,,2)	\N	2016-03-06 12:45:21.379121	seba                                         
+833	cotizacion                                   	U	(1,1,26,11,18293486-0,2016-03-06,,,,14000,)	(1,0,26,-1,18293486-0,2016-03-06,,,,14000,)	2016-03-06 12:45:24.80204	seba                                         
+834	nota_de_venta                                	D	(11,,1,13,,2016-03-06,,1)	\N	2016-03-06 12:45:24.80204	seba                                         
+835	cotizacion                                   	U	(2,0,27,-1,18293486-0,2016-03-06,,,,54000,)	(2,1,27,-1,18293486-0,2016-03-06,,,,54000,)	2016-03-06 15:45:43.466815	seba                                         
+836	nota_de_venta                                	I	\N	(14,,0,,,2016-03-06,,2)	2016-03-06 15:45:43.466815	seba                                         
+837	cotizacion                                   	U	(2,1,27,-1,18293486-0,2016-03-06,,,,54000,)	(2,1,27,14,18293486-0,2016-03-06,,,,54000,)	2016-03-06 15:45:43.530305	seba                                         
+838	nota_de_venta                                	U	(14,,0,,,2016-03-06,,2)	(14,,1,,2,2016-03-06,,2)	2016-03-06 15:46:08.408526	seba                                         
+839	documento_de_pago                            	I	\N	(14,"2016-03-06 15:46:08.997997",)	2016-03-06 15:46:09.001204	seba                                         
+840	nota_de_venta                                	U	(14,,1,,2,2016-03-06,,2)	(14,,1,14,2,2016-03-06,,2)	2016-03-06 15:46:09.019537	seba                                         
+841	modelo                                       	U	(2,3,Murano,2017)	(2,3,Murano,2014)	2016-03-06 16:18:54.936088	seba                                         
+842	modelo                                       	D	(3,6,Supra,1999)	\N	2016-03-06 16:19:46.584701	seba                                         
+843	si_vehiculo_articulo                         	I	\N	(acc-02,2,3,2014,5000,5000,4)	2016-03-06 16:22:12.415417	seba                                         
+844	si_vehiculo_articulo                         	I	\N	(Rep-01,4,7,2015,10000,30000,5)	2016-03-06 16:22:45.968164	seba                                         
+845	si_vehiculo_articulo                         	I	\N	(Rep-01,1,5,2005,5000,15000,6)	2016-03-06 16:23:10.823016	seba                                         
+846	si_vehiculo_articulo                         	I	\N	(acc-01,4,10,2011,5000,15000,7)	2016-03-06 16:23:21.206268	seba                                         
+847	si_vehiculo_articulo                         	U	(Rep-01,1,5,2005,5000,15000,6)	(acc-01,1,5,2005,,,6)	2016-03-06 16:30:06.19559	seba                                         
+848	si_vehiculo_articulo                         	U	(acc-01,1,5,2005,,,6)	(acc-01,1,5,2005,5000,15000,6)	2016-03-06 16:34:50.020298	seba                                         
+849	si_vehiculo_articulo                         	D	(acc-01,1,5,2005,5000,15000,6)	\N	2016-03-06 16:52:38.834616	seba                                         
+850	doc_previo                                   	I	\N	(4,22,,18293486-0,"2016-03-06 00:00:00",,,,40000,)	2016-03-06 17:09:16.361487	seba                                         
+851	cotizacion                                   	I	\N	(4,0,22,,18293486-0,2016-03-06,,,,40000,)	2016-03-06 17:09:16.361487	seba                                         
+852	serv_inst_det                                	I	\N	(4,1,4,acc-01,10,2011,,)	2016-03-06 17:09:16.64115	seba                                         
+853	serv_inst_det                                	I	\N	(4,2,4,Rep-01,7,2015,,)	2016-03-06 17:09:16.73867	seba                                         
+854	doc_previo                                   	I	\N	(5,22,,18293486-0,"2016-03-06 00:00:00",,,,70000,)	2016-03-06 17:20:50.997155	seba                                         
+855	cotizacion                                   	I	\N	(5,0,22,,18293486-0,2016-03-06,,,,70000,)	2016-03-06 17:20:50.997155	seba                                         
+856	serv_inst_det                                	I	\N	(5,1,4,Rep-01,7,2015,,)	2016-03-06 17:20:51.43606	seba                                         
+857	serv_inst_det                                	I	\N	(5,2,2,acc-02,3,2014,,)	2016-03-06 17:20:51.471037	seba                                         
+858	serv_inst_det                                	I	\N	(5,3,4,acc-01,10,2011,,)	2016-03-06 17:20:51.510008	seba                                         
 \.
 
 
@@ -5244,15 +5307,14 @@ COPY metodo_de_pago (pago_cod, pago_tipo) FROM stdin;
 --
 
 COPY modelo (marca_cod, modelo_cod, modelo_nombre, modelo_ano) FROM stdin;
-2	3	Murano	2017
 2	4	Murano	2016
 1	5	Corsa	2005
-3	6	Supra	1999
 4	7	TT	2015
 1	8	Corsa	2010
 4	9	A3	2010
 4	10	A3	2011
 4	11	A3	2012
+2	3	Murano	2014
 \.
 
 
@@ -5261,8 +5323,7 @@ COPY modelo (marca_cod, modelo_cod, modelo_nombre, modelo_ano) FROM stdin;
 --
 
 COPY nota_de_venta (not_ven_cod, od_cod, not_ven_est_cod, doc_pago_cod, pago_cod, not_ven_fecha, not_ven_obs, doc_cod) FROM stdin;
-11	\N	0	\N	\N	2016-03-06	\N	1
-12	\N	1	10	2	2016-03-06	\N	2
+14	\N	1	14	2	2016-03-06	\N	2
 \.
 
 
@@ -5386,6 +5447,8 @@ COPY schema_migrations (version) FROM stdin;
 --
 
 COPY serv_inst (doc_cod, not_ven_cod, emp_rut, doc_fecha, doc_obs, doc_neto, doc_iva, doc_total, doc_total_desc, cliente_cod) FROM stdin;
+4	\N	18293486-0	2016-03-06	\N	\N	\N	40000	\N	22
+5	\N	18293486-0	2016-03-06	\N	\N	\N	70000	\N	22
 \.
 
 
@@ -5394,6 +5457,11 @@ COPY serv_inst (doc_cod, not_ven_cod, emp_rut, doc_fecha, doc_obs, doc_neto, doc
 --
 
 COPY serv_inst_det (doc_cod, si_num_linea, marca_cod, art_cod, modelo_cod, modelo_ano, si_desc, serv_precio) FROM stdin;
+4	1	4	acc-01	10	2011	\N	\N
+4	2	4	Rep-01	7	2015	\N	\N
+5	1	4	Rep-01	7	2015	\N	\N
+5	2	2	acc-02	3	2014	\N	\N
+5	3	4	acc-01	10	2011	\N	\N
 \.
 
 
@@ -5428,6 +5496,9 @@ COPY servicio_reparacion (serv_cod, serv_nom) FROM stdin;
 --
 
 COPY si_vehiculo_articulo (art_cod, marca_cod, modelo_cod, modelo_ano, s_v_a_mo_pr, s_v_a_in_pr, si_cod) FROM stdin;
+acc-02	2	3	2014	5000	5000	4
+Rep-01	4	7	2015	10000	30000	5
+acc-01	4	10	2011	5000	15000	7
 \.
 
 

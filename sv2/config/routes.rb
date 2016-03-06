@@ -4,12 +4,6 @@ Rails.application.routes.draw do
 
   get 'notas_de_venta/new'
 
-  get 'notas_de_venta/create'
-
-  get 'notas_de_venta/destroy'
-
-  get 'notas_de_venta/edit'
-
   get '/cart' => 'cart#index'
   get '/cart/clear' => 'cart#clearCart'
   get '/cart/:id' => 'cart#add'
@@ -24,97 +18,49 @@ Rails.application.routes.draw do
 
   get 'sis_vehiculo_articulo/new'
 
-  get 'sis_vehiculo_articulo/create'
-
   get 'sis_vehiculo_articulo/edit'
-
-  get 'sis_vehiculo_articulo/update'
-
-  get 'sis_vehiculo_articulo/destroy'
 
   get 'servs_inst/index'
 
   get 'servs_inst/new'
 
-  get 'servs_inst/create'
-
   get 'servs_inst/edit'
-
-  get 'servs_inst/update'
-
-  get 'servs_inst/destroy'
 
   get 'modelos/index'
 
   get 'modelos/new'
 
-  get 'modelos/create'
-
   get 'modelos/edit'
-
-  get 'modelos/update'
-
-  get 'modelos/destroy'
 
   get 'marcas/index'
 
   get 'marcas/new'
 
-  get 'marcas/create'
-
   get 'marcas/edit'
-
-  get 'marcas/update'
-
-  get 'marcas/destroy'
 
   get 'herramientas/index'
 
   get 'herramientas/new'
 
-  get 'herramientas/create'
-
   get 'herramientas/edit'
-
-  get 'herramientas/update'
-
-  get 'herramientas/destroy'
 
   get 'repuestos/index'
 
   get 'repuestos/new'
 
-  get 'repuestos/create'
-
   get 'repuestos/edit'
-
-  get 'repuestos/update'
-
-  get 'repuestos/destroy'
 
   get 'insumos/index'
 
   get 'insumos/new'
 
-  get 'insumos/create'
-
   get 'insumos/edit'
-
-  get 'insumos/update'
-
-  get 'insumos/destroy'
 
   get 'accesorios/index'
 
   get 'accesorios/new'
 
-  get 'accesorios/create'
-
   get 'accesorios/edit'
-
-  get 'accesorios/update'
-
-  get 'accesorios/destroy'
 
   get 'tipos_articulo/index'
 
@@ -151,6 +97,8 @@ Rails.application.routes.draw do
   get 'cots_odc_art/aprobar/:id' => 'cots_odc_art#aprobar'
   get 'notas_de_venta/pagar/:id' => 'notas_de_venta#pagar'
   get 'cots_odc_art/show/:id' => 'cots_odc_art#show'
+  get 'empleados/show/:id' => 'empleados#show'
+  get 'clientes/show/:id' => 'clientes#show'
   get 'clientes/index'
 
   get 'clientes/new'
@@ -168,6 +116,7 @@ Rails.application.routes.draw do
   get 'empleados/new'
 
   get 'empleados/edit'
+  get 'empleados/show'
 
   get 'admin/inicio'
 
@@ -177,14 +126,14 @@ Rails.application.routes.draw do
     put 'empleados' => 'devise/registrations#update', :as => 'empleado_registration'
   end
 
-  resources :clientes, :except => [:show] do
+  resources :clientes do
     collection do
       get :autocomplete_cliente_cliente_correo
     end
   end
 
   #devise_for :empleados
-  resources :empleados, :except => [:show]
+  resources :empleados
   resources :tipos_cliente, :except => [:show]
   #resources :cots_odc_art, :except => [:show]
   resources :servicio_reparaciones, :except => [:show]
@@ -222,7 +171,6 @@ Rails.application.routes.draw do
   post "insumos/del/:id" => 'insumos#elimIns', as: :elimIns
   post "repuestos/del/:id" => 'repuestos#elimRepu', as: :elimRepu
   post "modelos/del/:id" => 'modelos#elimModelo', as: :elimModelo
-
   post "cots_odc_art/del/:id" => 'cots_odc_art#elimCotODCArt', as: :elimCotODCArt
 
   post "cart/:id" => 'cart#add', as: :add
@@ -233,6 +181,8 @@ Rails.application.routes.draw do
 
   post "cots_odc_art/aprobar/:id" => 'cots_odc_art#aprobar', as: :aprobar
   post "cots_odc_art/show/:id" => 'cots_odc_art#show', as: :show
+  post "empleados/show/:id" => 'empleados#show', as: :showEmp
+  post "clientes/show/:id" => 'clientes#show', as: :showCliente
   post "notas_de_venta/pagar/:id" => 'notas_de_venta#pagar', as: :pagar
 
   post "sis_vehiculo_articulo/del/:id" => 'sis_vehiculo_articulo#elimSI', as: :elimSI
@@ -248,41 +198,11 @@ Rails.application.routes.draw do
   get 'precioArt' => 'errors#construccion'
   get 'precioServ' => 'errors#construccion'
 
-  get 'admin/ordComp' => 'errors#construccion'
-
-  get 'admin/nuevaOC' => 'errors#construccion'
-
-  get 'admin/anularOC' => 'errors#construccion'
-
-  get 'admin/aprobOC' => 'errors#construccion'
-
-  get 'admin/abrirOC' => 'errors#construccion'
-
-  get 'admin/OT' => 'errors#construccion'
-
-  get 'admin/anularOT' => 'errors#construccion'
-
-  get 'admin/editarOT' => 'errors#construccion'
-
-  get 'admin/finOT' => 'errors#construccion'
-
-  get 'admin/notVent' => 'errors#construccion'
-
-  get 'admin/genNV' => 'errors#construccion'
-
-  get 'admin/pagoNV' => 'errors#construccion'
-
-  get 'admin/articulo'
-
-  get 'admin/servicio' => 'errors#construccion'
-
-  get 'admin/servEdRep' => 'errors#construccion'
-  
-  get 'admin/servEdInstal' => 'errors#construccion'
-  
   get 'vendedor/nuevaOC' => 'errors#construccion'
 
   get 'vendedor/anularOC' => 'errors#construccion'
+
+  get 'admin/ordComp' => 'errors#construccion'
 
   get 'vendedor/aprobarOC' => 'errors#construccion'
 

@@ -23,6 +23,10 @@ class ClientesController < ApplicationController
     end
   end
 
+  def show
+    @cliente = Cliente.find(params[:id])
+  end
+
   def create
     if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor"
       #Recuperamos las varibles POST que vinieron desde la acción new.

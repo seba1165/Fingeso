@@ -148,18 +148,22 @@ class CotsOdcArtController < ApplicationController
   end
 
   def aprobar
-    @cot = Cotizacion.find(params[:id]);
-    @cotArt = CotOdcArt.find(params[:id]);
-    @cot.cot_est_cod = 1
-    if @cot.save
-      @not_vent = NotaDeVenta.where(doc_cod: @cot.doc_cod).first
-      @cot.not_ven_cod = @not_vent.not_ven_cod
-      @cotArt.not_ven_cod = @not_vent.not_ven_cod
-      @cotArt.save
-      @cot.save
-      redirect_to cots_odc_art_index_path, :notice => "Cotizacion Aprobada";
+    if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor"
+      @cot = Cotizacion.find(params[:id]);
+      @cotArt = CotOdcArt.find(params[:id]);
+      @cot.cot_est_cod = 1
+      if @cot.save
+        @not_vent = NotaDeVenta.where(doc_cod: @cot.doc_cod).first
+        @cot.not_ven_cod = @not_vent.not_ven_cod
+        @cotArt.not_ven_cod = @not_vent.not_ven_cod
+        @cotArt.save
+        @cot.save
+        redirect_to cots_odc_art_index_path, :notice => "Cotizacion Aprobada";
+      else
+        redirect_to cots_odc_art_index_path, :notice => "La cotizacion no pudo ser aprobada";
+      end
     else
-      redirect_to cots_odc_art_index_path, :notice => "La cotizacion no pudo ser aprobada";
+      redirect_to '/errors/not_found'
     end
   end
 end

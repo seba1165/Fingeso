@@ -3,7 +3,7 @@
 <% end %>
 <body>
 <div class="container">
-  <h1 style="color:#0B2161"><FONT FACE="times new roman">ADMINISTRAR SERVICIOS DE INSTALACION<small>   Editar, eliminar y crear servicios de Instalacion</small></FONT></h1>
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">ADMINISTRAR SERVICIOS DE INSTALACION<small>   Editar, eliminar y crear Servicios de Instalacion</small></FONT></h1>
   <hr>
   <div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/sis_vehiculo_articulo/new';"><span class="glyphicon glyphicon-plus"></span> Crear Nuevo SI</button>
     <hr>
@@ -33,8 +33,10 @@
         <% @SIs.each do |d| %>
             <tr>
               <td class="td-actions">
+                <%= button_to "Editar", edit_si_vehiculo_articulo_path(d), :method => :get %>
               </td>
               <td class="td-actions">
+                <%= button_to "Borrar", elimSI_path(d), :method => :post %>
               </td>
               <td><%= ParaInstalacion.where(art_cod: d.art_cod).first.art_nom %> </td>
               <td><%= Marca.where(marca_cod: d.marca_cod).first.marca_nombre %> <%= Modelo.where(modelo_cod: d.modelo_cod).first.modelo_nombre %> <%= d.modelo_ano %></td>

@@ -19,6 +19,10 @@ class EmpleadosController < ApplicationController
 
   end
 
+  def show
+    @emp = Empleado.find(params[:id])
+  end
+
   def create
     if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
       redirect_to '/errors/not_found'

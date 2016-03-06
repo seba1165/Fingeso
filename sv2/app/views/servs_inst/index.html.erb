@@ -45,7 +45,7 @@
               <td><%= d.emp_rut %></td>
               <td><%= d.doc_fecha %></td>
               <td><%= Cotizacion.find(d.doc_cod).estado_cotizacion.cot_est_descr %></td>
-              <td><%= d.doc_total %></td>
+              <td><%= number_to_currency(d.doc_total) %></td>
               <td></td>
               <td></td>
               <td></td>

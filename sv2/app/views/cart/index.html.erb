@@ -1,38 +1,28 @@
 <h1 style="color:#0B2161"><FONT FACE="times new roman">COTIZACIONES POR SERVICIOS DE INSTALACIÓN <small>   Editar, eliminar y crear nuevas cotizaciones</small></FONT></h1>
 <hr>
-<div><button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#2DB171;" onclick="location.href='/cart/clear';"><span class="glyphicon glyphicon-plus"></span> Vaciar Cotizacion</button>
-  <hr>
-</div>
-
-<% total = 0 %>
-
-<div class="container">
-  <div class="row">
-    <div class="panel panel-primary filterable">
-      <div class="panel-heading" style="min-height:40px;">
-        <h3 class="panel-title pull-left">Cotizacion en Curso</h3>
-        <div class="pull-right">
-          <button href="javascript:;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
-        </div>
-      </div>
-      <table class="table table-filterable">
-        <thead>
-        <tr class="filters">
-          <th></th>
-          <th></th>
-          <th><input type="text" class="form-control" placeholder="Instalacion" disabled></th>
-          <th><input type="text" class="form-control" placeholder="Precio" disabled></th>
-
-        </tr>
-        </thead>
-        <tbody style="text-align: center">
-
-        <% @cart.each do | id, quantity| %>
-            <% if quantity != -1 %>
+<div class="col-md-8">
+  <% total = 0 %>
+  <button type: "submit" class="btn btn-default pull-right" style="color:#FFFFFF; background-color:#FF0000;" onclick="location.href='/cart/clear';"><span class="glyphicon glyphicon-remove"></span> Vaciar Cotizacion</button><br><br><br><br>
+  <div class="panel panel-primary filterable">
+    <div class="panel-heading" style="min-height:40px;">
+      <h3 class="panel-title pull-left">Cotizacion en Curso</h3>
+      <button href="javascript:;" class="btn btn-default btn-xs btn-filter pull-right"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
+    </div>
+    <table class="table table-filterable">
+      <thead>
+      <tr class="filters">
+        <th></th>
+        <th></th>
+        <th><input type="text" class="form-control" placeholder="Instalación" disabled></th>
+        <th><input type="text" class="form-control" placeholder="Precio" disabled></th>
+      </tr>
+      </thead>
+      <tbody style="text-align: center">
+      <% @cart.each do | id, quantity| %>
+          <% if quantity != -1 %>
               <% servicio = SiVehiculoArticulo.where(si_cod: id).first %>
               <tr>
                 <td class="td-actions">
-                  <%= button_to "Agregar", add_path(id), :method => :get %>
                 </td>
                 <td class="td-actions">
                   <%= button_to "Quitar", rest_path(id), :method => :get %>
@@ -43,70 +33,64 @@
                 <td></td>
                 <td></td>
               </tr>
-            <%else%>
-                <% total_si = 0 %>
-            <%end%>
-
-        <% total += total_si %>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <hr>
-</div>
-<div>
-
-  <p>Total: <%= number_to_currency(total) %><p>
-
-  <div class="container">
-    <h1 style="color:#0B2161"><FONT FACE="times new roman">INGRESE CLIENTE</FONT></h1>
-    <hr>
-    <%= form_for @cot, :html => { :class => 'form-horizontal' } do |f| %>
-        <%= fields_for @cot.cliente do |c| %>
-            <%#= c.text_field :nombre, :placeholder => "Nombre del cliente" %>
-
-            <%= c.autocomplete_field :cliente_correo, autocomplete_cliente_cliente_correo_clientes_path, :placeholder => "Correo del Cliente", :multiple => false, :update_elements => {:cliente_direccion => '#cliente_cliente_direccion', :cliente_tel => '#cliente_cliente_tel', :cliente_nom => '#cliente_cliente_nom', :cliente_ape => '#cliente_cliente_ape', :cliente_comuna => '#cliente_cliente_comuna', :tipo_cliente_cod => '#cliente_tipo_cliente_cod', :cliente_emp => '#cliente_cliente_emp', :cliente_frecuente => '#cliente_cliente_frecuente', :cliente_rut => '#cliente_cliente_rut', :cliente_cod => '#cliente_cliente_cod'} %>
-            <p></p>
-            <%= c.hidden_field :cliente_cod%>
-            <p></p>
-            <%= c.text_field :cliente_nom, :placeholder => "Nombre" %>
-            <p></p>
-            <%= c.text_field :cliente_ape, :placeholder => "Apellido" %>
-            <p></p>
-            <%= c.text_field :cliente_direccion, :placeholder => "Dirección" %>
-            <p></p>
-            <%= c.text_field :cliente_comuna, :placeholder => "Comuna" %>
-            <p></p>
-            <%= c.text_field :cliente_ape, :placeholder => "Teléfono" %>
-            <p></p>
-            <%= c.text_field :cliente_emp, :placeholder => "Empresa" %>
-            <p></p>
-            <%= c.text_field :cliente_rut, :placeholder => "Rut" %>
-            <p></p>
-            <%= c.label :cliente_frecuente, "Frecuente?" %>
-            <%= c.check_box :cliente_frecuente %>
-            <p></p>
-
-            <%= c.label :cargo_cod, "Tipo de Cliente" %>
-            <%= collection_select(:cliente, :tipo_cliente_cod, TipoCliente.all, :id, :tipo_cliente_descr, prompt: true) %>
-
+          <%else%>
+              <% total_si = 0 %>
+          <%end%>
+          <% total += total_si %>
       <% end %>
-      </br>
-      </br>
-
-      <%= f.submit "Crear Cotizacion", :class => 'btn btn-primary' %>
-
-  <% end %>
-  <hr>
-</div>
-
+      </tbody>
+    </table>
+  </div><br>
+  <p class="row col-md-2 pull-right"><strong>Total: <%= number_to_currency(total) %></strong></p>
+  <br><hr>
   <div class="row">
-    <div class="col-md-1"></div>
     <div class="col-md-1">
       <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/servs_inst/new';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
     </div>
   </div>
-  <hr>
 </div>
-</body>
+
+<div class="col-md-1"></div>
+<div class="col-xs-4" style="background-color: #F7F8E0;">
+  <div>
+    <div class="container">
+      <h2 style="color:#0B2161"><FONT FACE="times new roman">INGRESE CLIENTE</FONT></h2><br><br>
+      <%= form_for @cot, :html => { :class => 'form-horizontal' } do |f| %>
+          <%= fields_for @cot.cliente do |c| %>
+              <%#= c.text_field :nombre, :placeholder => "Nombre del cliente" %>
+
+              <%= c.autocomplete_field :cliente_correo, autocomplete_cliente_cliente_correo_clientes_path, :placeholder => "Correo del Cliente", :multiple => false, :update_elements => {:cliente_direccion => '#cliente_cliente_direccion', :cliente_tel => '#cliente_cliente_tel', :cliente_nom => '#cliente_cliente_nom', :cliente_ape => '#cliente_cliente_ape', :cliente_comuna => '#cliente_cliente_comuna', :tipo_cliente_cod => '#cliente_tipo_cliente_cod', :cliente_emp => '#cliente_cliente_emp', :cliente_frecuente => '#cliente_cliente_frecuente', :cliente_rut => '#cliente_cliente_rut', :cliente_cod => '#cliente_cliente_cod'} %>
+              <p></p>
+              <%= c.hidden_field :cliente_cod%>
+              <p></p>
+              <%= c.text_field :cliente_nom, :placeholder => "Nombre" %>
+              <p></p>
+              <%= c.text_field :cliente_ape, :placeholder => "Apellido" %>
+              <p></p>
+              <%= c.text_field :cliente_direccion, :placeholder => "Dirección" %>
+              <p></p>
+              <%= c.text_field :cliente_comuna, :placeholder => "Comuna" %>
+              <p></p>
+              <%= c.text_field :cliente_ape, :placeholder => "Teléfono" %>
+              <p></p>
+              <%= c.text_field :cliente_emp, :placeholder => "Empresa" %>
+              <p></p>
+              <%= c.text_field :cliente_rut, :placeholder => "Rut" %>
+              <p></p>
+              <%= c.label :cliente_frecuente, "Frecuente?" %>
+              <%= c.check_box :cliente_frecuente %>
+              <p></p>
+
+              <%= c.label :cargo_cod, "Tipo de Cliente" %>
+              <%= collection_select(:cliente, :tipo_cliente_cod, TipoCliente.all, :id, :tipo_cliente_descr, prompt: true) %>
+
+          <% end %>
+          <br>
+          <br>
+          <%= f.submit "Crear Cotizacion", :class => 'btn btn-primary' %>
+      <% end %>
+    </div>
+    <hr>
+  </div>
+</div>
+<hr>

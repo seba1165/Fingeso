@@ -29,12 +29,20 @@ td.cortar {
                         <td class="cortar"><%= @cot.doc_cod %></td>
                       </tr>
                       <tr>
+                        <td><strong>Empleado:</strong></td>
+                        <td class="cortar"><%= Empleado.find(@cot.emp_rut).emp_nom %> <%= Empleado.find(@cot.emp_rut).emp_ape %></td>
+                      </tr>
+                      <tr>
                         <td><strong>Cliente:</strong></td>
                         <td class="cortar"><%= @cot.cliente.cliente_correo %></td>
                       </tr>
                       <tr>
                         <td><strong>Código Nota de Venta:</strong></td>
-                        <td class="cortar"><%= @cot.not_ven_cod %></td>
+                        <%if Cotizacion.find(@cot.doc_cod).cot_est_cod == 0 %>
+                            <td></td>
+                        <%else%>
+                            <td><%= @cot.not_ven_cod %></td>
+                        <%end%>
                       </tr>
                       <tr>
                         <td><strong>Fecha:</strong></td>

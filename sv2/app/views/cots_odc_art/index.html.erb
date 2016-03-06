@@ -44,13 +44,13 @@
                 <%= button_to "Borrar", elimCotODCArt_path(d.doc_cod), :method => :post %>
               </td>
               <td><a href="/cots_odc_art/show/<%= d.doc_cod %>"><%= d.doc_cod %></a></td>
-              <td><%= d.cliente.cliente_correo %></td>
+              <td><a href="/clientes/show/<%= d.cliente.cliente_cod %>"><%= d.cliente.cliente_correo %></a></td>
               <%if Cotizacion.find(d.doc_cod).cot_est_cod == 0 %>
                   <td></td>
               <%else%>
                   <td><%= d.not_ven_cod %></td>
             <%end%>
-              <td><%= d.emp_rut %></td>
+              <td><a href="/empleados/show/<%= d.emp_rut %>"><%= d.emp_rut %></a></td>
               <td><%= d.doc_fecha %></td>
               <td><%= Cotizacion.find(d.doc_cod).estado_cotizacion.cot_est_descr %></td>
               <td><%= number_to_currency(d.doc_total) %></td>
