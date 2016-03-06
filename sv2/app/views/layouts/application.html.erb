@@ -4,7 +4,7 @@
 
 <head>
 
-  <title>- Serviventas -</title>
+  <title>- USACH -</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -13,7 +13,7 @@
 		<% if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" %>
 			<%= render 'shared/navbarAdmin' %>
 		<% end %>
-		<% if current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor" %>
+		<% if current_empleado.cargo_empleado.cargo_nom.downcase == "profesor" %>
 			<%= render 'shared/navbar' %>
 		<% end %>
     <% if current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de bodega" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicio" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de ventas"%>

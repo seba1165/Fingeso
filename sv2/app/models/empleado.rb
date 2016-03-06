@@ -16,12 +16,12 @@ class Empleado < ActiveRecord::Base
     self.cargo_empleado.cargo_nom.downcase == "vendedor"
   end
 
-  def jefeDeVentas?
-    self.cargo_empleado.cargo_nom.downcase == "jefe de ventas"
+  def profesor?
+    self.cargo_empleado.cargo_nom.downcase == "profesor"
   end
 
-  def jefeDeServicios?
-    self.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
+  def alumno?
+    self.cargo_empleado.cargo_nom.downcase == "alumno"
   end
 
   def jefeDeBodega?
@@ -31,5 +31,7 @@ class Empleado < ActiveRecord::Base
   validates :cargo_cod, :presence => true
   validates :emp_rut, :presence => true, rut: true
   validates :email, :uniqueness => true
+  validates :emp_nom, :uniqueness => true
+  validates :emp_ape, :uniqueness => true
 
 end

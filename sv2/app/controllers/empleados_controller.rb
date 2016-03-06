@@ -60,7 +60,20 @@ class EmpleadosController < ApplicationController
 
   def edit
     if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
+      @empleado = Empleado.find(params[:id]);
+      if current_empleado.emp_rut == @empleado.emp_rut
+        @empleado = Empleado.find(params[:id]);
+        @emp_nom = @empleado.emp_nom;
+        @emp_ape = @empleado.emp_ape;
+        @emp_tel = @empleado.emp_tel;
+        @emp_rut = @empleado.emp_rut;
+        @email = @empleado.email;
+        @cargo_cod = @empleado.cargo_cod;
+        @password = @empleado.password;
+        @password_confirmation = @empleado.password_confirmation;
+      else
+        redirect_to '/errors/not_found'
+      end
     else
       @empleado = Empleado.find(params[:id]);
       @emp_nom = @empleado.emp_nom;
@@ -110,16 +123,13 @@ class EmpleadosController < ApplicationController
       redirect_to '/errors/not_found'
     else
       @empleado = Empleado.find(params[:id]);
-      @doc = DocPrevio.find_by(emp_rut: @empleado.emp_rut)
-      if @doc.nil?
         if @empleado.destroy()
           redirect_to empleados_path, :notice => "El empleado ha sido eliminado";
         else
           redirect_to empleados_path, :notice => "El empleado NO ha podido ser eliminado";
         end
-      else
-        redirect_to empleados_path, :notice => "El empleado NO ha podido ser eliminado ya que tiene documentos asociados";
-      end
+
+
     end
   end
 end

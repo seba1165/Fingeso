@@ -6,10 +6,15 @@
     </ul>
 <% end %>
 <div class="container">
-  <h1 style="color:#0B2161"><FONT FACE="times new roman">MODIFICAR EMPLEADO</FONT></h1>
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">MODIFICAR USUARIO</FONT></h1>
   <hr>
 
-  <%= render :partial => "formulario_modificar_empleado.html" %>
+  <%if current_empleado.profesor? || current_empleado.alumno? %>
+      <%= render :partial => "form_edit" %>
+  <%else%>
+      <%= render :partial => "formulario_modificar_empleado.html" %>
+  <%end%>
+
 
   <hr>
 </div>

@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-users = Empleado.create ([{email: 'calde@algo.com', emp_rut: '18293486-0', cargo_cod: 0, password: '12345678', password_confirmation: '12345678'},
-                          {email: 'daniel@algo.com', emp_rut: '18519095-1', cargo_cod: 0, password: '12345678', password_confirmation: '12345678'},
-                          {email: 'vero@algo.com', emp_rut: '5893349-k', cargo_cod: 0, password: '12345678', password_confirmation: '12345678'}])
+users = Empleado.create ([{email: 'calde@algo.com', emp_rut: '18293486-0', cargo_cod: 2, password: '12345678', password_confirmation: '12345678'},
+                          {email: 'daniel@algo.com', emp_rut: '18519095-1', cargo_cod: 2, password: '12345678', password_confirmation: '12345678'},
+                          {email: 'vero@algo.com', emp_rut: '5893349-k', cargo_cod: 2, password: '12345678', password_confirmation: '12345678'}])
 
