@@ -1,0 +1,24 @@
+<div class="container">
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">DEFINIR PAGO</FONT></h1>
+  <hr>
+  <%= form_for @not_ven do |f| %>
+
+      <div class="field">
+        <%= f.label :pago_cod, "Metodo de Pago" %><br />
+        <%= collection_select(:not_ven, :pago_cod, MetodoDePago.all, :id, :pago_tipo, prompt: true) %>
+      </div>
+
+      <div class="field">
+        <select name="[not_ven]doc_pago">
+          <option value= 1 selected="selected">Boleta</option>
+          <option value= 2 >Factura</option>
+        </select>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Realizar Pago" %>
+      </div>
+
+<% end %>
+  <hr>
+</div>

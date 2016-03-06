@@ -150,7 +150,7 @@ Rails.application.routes.draw do
 
   get 'cots_odc_art/aprobar/:id' => 'cots_odc_art#aprobar'
   get 'notas_de_venta/pagar/:id' => 'notas_de_venta#pagar'
-
+  get 'cots_odc_art/show/:id' => 'cots_odc_art#show'
   get 'clientes/index'
 
   get 'clientes/new'
@@ -188,7 +188,7 @@ Rails.application.routes.draw do
   resources :tipos_cliente, :except => [:show]
   #resources :cots_odc_art, :except => [:show]
   resources :servicio_reparaciones, :except => [:show]
-  #resources :cots_odc_art, :except => [:show]
+  resources :cots_odc_art
   resources :doc_previos, :except => [:show]
   resources :articulos, :except => [:show]
   resources :accesorios, :except => [:show]
@@ -232,6 +232,7 @@ Rails.application.routes.draw do
   post "cartart/rest/:id" => 'cartart#rest', as: :restArt
 
   post "cots_odc_art/aprobar/:id" => 'cots_odc_art#aprobar', as: :aprobar
+  post "cots_odc_art/show/:id" => 'cots_odc_art#show', as: :show
   post "notas_de_venta/pagar/:id" => 'notas_de_venta#pagar', as: :pagar
 
   post "sis_vehiculo_articulo/del/:id" => 'sis_vehiculo_articulo#elimSI', as: :elimSI

@@ -26,37 +26,36 @@ td.cortar {
                     <tbody>
                       <tr>
                         <td><strong>Código Documento:</strong></td>
-                        <td class="cortar">Calde aqui va el codigo</td>
+                        <td class="cortar"><%= @cot.doc_cod %></td>
                       </tr>
                       <tr>
                         <td><strong>Cliente:</strong></td>
-                        <td class="cortar">Calde aqui va el codigo</td>
+                        <td class="cortar"><%= @cot.cliente.cliente_correo %></td>
                       </tr>
                       <tr>
                         <td><strong>Código Nota de Venta:</strong></td>
-                        <td class="cortar">Calde aqui va el codigo</td>
+                        <td class="cortar"><%= @cot.not_ven_cod %></td>
                       </tr>
                       <tr>
                         <td><strong>Fecha:</strong></td>
-                        <td class="cortar">Calde aqui va el codigo</td>
+                        <td class="cortar"><%= @cot.doc_fecha %></td>
                       </tr>
                       <tr>
                         <td><strong>Detalle:</strong></td>
                         <td class="cortar">
-                        	<p>Calde aqui va el codigo</p><br>
-                        	<p>linea detalle</p><br>
-                        	<p>linea detalle</p><br>
-                        	<p>linea detalle</p><br>
-                        	<p>linea detalle</p><br>
+                          <% @dets = DetCotOdcArt.where(doc_cod: @cot.doc_cod) %>
+                          <% @dets.each do |d| %>
+                              <p><%= d.det_num_linea %>. <%= d.articulo.art_nom %> <%= d.articulo.art_cod %> X <%= d.art_cant %> = <%= number_to_currency(d.art_cant * d.art_precio) %> </p><br>
+                          <%end%>
                         </td>
                       </tr>
                       <tr>
                         <td><strong>Observación:</strong></td>
-                        <td class="cortar">Calde aqui va el codigo</td>
+                        <td class="cortar"></td>
                       </tr>
                       <tr>
                         <td><strong>Total:</strong></td>
-                        <td class="cortar">Calde aqui va el codigo</td>
+                        <td class="cortar"><%=number_to_currency(@cot.doc_total)%></td>
                       </tr>                     
                     </tbody>
                   </table>
@@ -74,6 +73,6 @@ td.cortar {
 
 	<br>
 	<div class="col-md-1">
-		<button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/cots_odc_art/new';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
+		<button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/cots_odc_art/';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
 	</div><br><hr>
 </div></body>

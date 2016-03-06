@@ -1,0 +1,82 @@
+<% flash.each do |key, value| %>
+    <p> <%= value %> </p>
+<% end %>
+<body>
+<div class="container">
+  <h1 style="color:#0B2161"><FONT FACE="times new roman">NOTAS DE VENTA <small>   Editar y eliminar Notas de Venta</small></FONT></h1>
+  <hr>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="panel panel-primary filterable">
+      <div class="panel-heading" style="min-height:40px;">
+        <h3 class="panel-title pull-left">Notas de Venta</h3>
+        <div class="pull-right">
+          <button href="javascript:;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+        <tr class="filters">
+          <th></th>
+          <th></th>
+          <th><input type="text" class="form-control" placeholder="Código" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Cliente" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Fecha" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Estado" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Forma de Pago" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Boleta/Factura" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Cotizacion" disabled></th>
+        </tr>
+        </thead>
+        <tbody style="text-align: center">
+        <% @notas.each do |d| %>
+            <tr>
+              <td class="td-actions">
+                <%if d.not_ven_est_cod == 0 %>
+                    <%= button_to "Pagar", edit_nota_de_venta_path(d), :method => :get %>
+                <%end%>
+              </td>
+              <td class="td-actions">
+                <!--%= button_to "Borrar", elimCotODCArt_path(d.doc_cod), :method => :post %-->
+              </td>
+              <td><%= d.not_ven_cod %></td>
+              <td><%= DocPrevio.find(d.doc_cod).cliente.cliente_correo %></td>
+              <td><%= d.not_ven_fecha %></td>
+              <td><%= d.estado_nota_de_venta.not_ven_est_descr %></td>
+              <%if d.not_ven_est_cod == 0 %>
+                  <td></td>
+              <%else%>
+                  <td><%= d.metodo_de_pago.pago_tipo %></td>
+              <%end%>
+              <%@fact = Factura.where(doc_pago_cod: d.doc_pago_cod).first%>
+              <%if d.doc_pago_cod == nil %>
+                  <td>  </td>
+              <%elsif @fact !=nil %>
+                  <td> Factura </td>
+              <%else%>
+                  <td>Boleta</td>
+              <%end%>
+
+              <td><a href="/cots_odc_art/show/<%= d.doc_cod %>"><%= d.doc_cod %></a></td>
+              <td></td>
+              <td></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+</div>
+<div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-1">
+      <button type: "submit" class="btn btn-default" style="color:#FFFFFF; background-color:#5858FA;" onclick="location.href='/';"><span class="glyphicon glyphicon-arrow-left"></span> Volver </button>
+    </div>
+  </div>
+  <hr>
+</div>
+</body>

@@ -43,7 +43,7 @@
               <td class="td-actions">
                 <%= button_to "Borrar", elimCotODCArt_path(d.doc_cod), :method => :post %>
               </td>
-              <td><%= d.doc_cod %></td>
+              <td><a href="/cots_odc_art/show/<%= d.doc_cod %>"><%= d.doc_cod %></a></td>
               <td><%= d.cliente.cliente_correo %></td>
               <%if Cotizacion.find(d.doc_cod).cot_est_cod == 0 %>
                   <td></td>

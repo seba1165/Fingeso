@@ -31,7 +31,7 @@
                   <%= button_to "Quitar", restArt_path(id), :method => :get %>
                 </td>
                 <td><%= articulo.art_nom %></td>
-                <td><%= articulo.art_precio %></td>
+                <td><%= number_to_currency(articulo.art_precio) %></td>
                 <td><%= quantity %></td>
                 <% totalArt = articulo.art_precio * quantity %>
                 <td><%= number_to_currency (totalArt) %></td>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304180413) do
+ActiveRecord::Schema.define(version: 20160306011702) do
 
   create_table "accesorio", primary_key: "art_cod", force: :cascade do |t|
     t.integer "art_tipo_cod"
@@ -141,12 +141,11 @@ ActiveRecord::Schema.define(version: 20160304180413) do
   add_index "cotizacion", ["doc_cod"], name: "cotizacion_pk", unique: true, using: :btree
 
   create_table "det_cot_odc_art", id: false, force: :cascade do |t|
-    t.integer "doc_cod",                                                                     null: false
-    t.integer "det_num_linea",                default: "nextval('det_linea_sec'::regclass)", null: false
-    t.string  "art_cod",           limit: 20,                                                null: false
+    t.integer "doc_cod",                                                                 null: false
+    t.integer "det_num_linea",            default: "nextval('det_linea_sec'::regclass)", null: false
+    t.string  "art_cod",       limit: 20,                                                null: false
     t.integer "art_cant"
     t.integer "art_desc"
-    t.integer "art_precio_unidad"
   end
 
   add_index "det_cot_odc_art", ["art_cod"], name: "relationship_2_fk", using: :btree
@@ -169,15 +168,15 @@ ActiveRecord::Schema.define(version: 20160304180413) do
   add_index "det_ot", ["serv_cod", "marca_cod", "modelo_cod", "modelo_ano"], name: "relationship_41_fk", using: :btree
 
   create_table "doc_previo", primary_key: "doc_cod", force: :cascade do |t|
-    t.integer "cliente_cod",                null: false
-    t.integer "not_ven_cod"
-    t.string  "emp_rut",        limit: 10,  null: false
-    t.date    "doc_fecha"
-    t.string  "doc_obs",        limit: 100
-    t.integer "doc_neto"
-    t.integer "doc_iva"
-    t.integer "doc_total"
-    t.integer "doc_total_desc"
+    t.integer  "cliente_cod",                null: false
+    t.integer  "not_ven_cod"
+    t.string   "emp_rut",        limit: 10,  null: false
+    t.datetime "doc_fecha"
+    t.string   "doc_obs",        limit: 100
+    t.integer  "doc_neto"
+    t.integer  "doc_iva"
+    t.integer  "doc_total"
+    t.integer  "doc_total_desc"
   end
 
   add_index "doc_previo", ["cliente_cod"], name: "relationship_8_fk", using: :btree
@@ -278,10 +277,10 @@ ActiveRecord::Schema.define(version: 20160304180413) do
   add_index "herramienta", ["art_cod"], name: "herramienta_pk", unique: true, using: :btree
 
   create_table "hist_est_cot", id: false, force: :cascade do |t|
-    t.integer "doc_cod",          null: false
-    t.integer "cot_est_cod",      null: false
-    t.date    "cot_estado_desde"
-    t.date    "cot_estado_hasta"
+    t.integer  "doc_cod",          null: false
+    t.integer  "cot_est_cod",      null: false
+    t.datetime "cot_estado_desde"
+    t.datetime "cot_estado_hasta"
   end
 
   add_index "hist_est_cot", ["cot_est_cod"], name: "relationship_104_fk", using: :btree
@@ -300,10 +299,10 @@ ActiveRecord::Schema.define(version: 20160304180413) do
   add_index "hist_est_fact", ["fact_est_cod"], name: "relationship_98_fk", using: :btree
 
   create_table "hist_est_nv", id: false, force: :cascade do |t|
-    t.integer "not_ven_cod",          null: false
-    t.integer "not_ven_est_cod",      null: false
-    t.date    "not_ven_estado_desde"
-    t.date    "not_ven_estado_hasta"
+    t.integer  "not_ven_cod",          null: false
+    t.integer  "not_ven_est_cod",      null: false
+    t.datetime "not_ven_estado_desde"
+    t.datetime "not_ven_estado_hasta"
   end
 
   add_index "hist_est_nv", ["not_ven_cod", "not_ven_est_cod"], name: "hist_est_nv_pk", unique: true, using: :btree
@@ -385,12 +384,13 @@ ActiveRecord::Schema.define(version: 20160304180413) do
   add_index "modelo", ["marca_cod"], name: "relationship_11_fk", using: :btree
 
   create_table "nota_de_venta", primary_key: "not_ven_cod", force: :cascade do |t|
-    t.integer "od_cod"
-    t.integer "not_ven_est_cod",             null: false
-    t.integer "doc_pago_cod",                null: false
-    t.integer "pago_cod"
-    t.date    "not_ven_fecha"
-    t.string  "not_ven_obs",     limit: 100
+    t.integer  "od_cod"
+    t.integer  "not_ven_est_cod",             null: false
+    t.integer  "doc_pago_cod"
+    t.integer  "pago_cod"
+    t.datetime "not_ven_fecha"
+    t.string   "not_ven_obs",     limit: 100
+    t.integer  "doc_cod",                     null: false
   end
 
   add_index "nota_de_venta", ["doc_pago_cod"], name: "relationship_69_fk", using: :btree
@@ -522,6 +522,7 @@ ActiveRecord::Schema.define(version: 20160304180413) do
     t.integer "modelo_cod",              null: false
     t.integer "modelo_ano",              null: false
     t.integer "si_desc"
+    t.integer "serv_precio"
   end
 
   add_index "serv_inst_det", ["doc_cod", "si_num_linea"], name: "serv_inst_det_pk", unique: true, using: :btree
@@ -678,6 +679,7 @@ ActiveRecord::Schema.define(version: 20160304180413) do
   add_foreign_key "cliente", "tipo_cliente", column: "tipo_cliente_cod", primary_key: "tipo_cliente_cod", name: "fk_cliente_relations_tipo_cli", on_update: :cascade, on_delete: :nullify
   add_foreign_key "compatibilidad", "modelo", column: "marca_cod", primary_key: "marca_cod", name: "fk_compatib_relations_modelo", on_update: :cascade, on_delete: :cascade
   add_foreign_key "compatibilidad", "para_instalacion", column: "art_cod", primary_key: "art_cod", name: "fk_compatib_relations_para_ins", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "cot_odc_art", "cliente", column: "cliente_cod", primary_key: "cliente_cod", name: "fk_cliente_cot_odc_art"
   add_foreign_key "cot_odc_art", "doc_previo", column: "doc_cod", primary_key: "doc_cod", name: "fk_cot_odc__inheritan_doc_prev", on_update: :cascade, on_delete: :cascade
   add_foreign_key "cot_odc_serv", "doc_previo", column: "doc_cod", primary_key: "doc_cod", name: "fk_cot_odc__inheritan_doc_prev", on_update: :cascade, on_delete: :cascade
   add_foreign_key "cotizacion", "doc_previo", column: "doc_cod", primary_key: "doc_cod", name: "fk_cotizaci_inheritan_doc_prev", on_update: :cascade, on_delete: :cascade
@@ -707,6 +709,7 @@ ActiveRecord::Schema.define(version: 20160304180413) do
   add_foreign_key "hist_est_ot", "orden_de_trabajo", column: "ot_cod", primary_key: "ot_cod", name: "fk_hist_est_relations_orden_de", on_update: :cascade, on_delete: :cascade
   add_foreign_key "insumo", "articulo", column: "art_cod", primary_key: "art_cod", name: "fk_insumo_inheritan_articulo", on_update: :cascade, on_delete: :cascade
   add_foreign_key "modelo", "marca", column: "marca_cod", primary_key: "marca_cod", name: "fk_modelo_relations_marca", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "nota_de_venta", "doc_previo", column: "doc_cod", primary_key: "doc_cod", name: "fk_docp_notvent"
   add_foreign_key "nota_de_venta", "documento_de_pago", column: "doc_pago_cod", primary_key: "doc_pago_cod", name: "fk_nota_de__relations_document", on_update: :cascade, on_delete: :restrict
   add_foreign_key "nota_de_venta", "estado_nota_de_venta", column: "not_ven_est_cod", primary_key: "not_ven_est_cod", name: "fk_nota_de__relations_estado_n", on_update: :cascade, on_delete: :restrict
   add_foreign_key "nota_de_venta", "metodo_de_pago", column: "pago_cod", primary_key: "pago_cod", name: "fk_nota_de__relations_metodo_d", on_update: :cascade, on_delete: :restrict

@@ -27,7 +27,7 @@ class ServicioReparacionesController < ApplicationController
                                            });
       #Verificamos si la tarea ha podido ser guardado correctamente.
       if @serv_repar.save()
-        redirect_to servicio_reparacions_path, :notice => "El servicio de reparación ha sido guardado con éxito";
+        redirect_to servicio_reparaciones_path, :notice => "El servicio de reparación ha sido guardado con éxito";
       else
         render "new";
       end
@@ -47,13 +47,13 @@ class ServicioReparacionesController < ApplicationController
 
   def update
     if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "jefe de servicios"
-      @sr_nom = params[:servicio_reparaciones]["serv_nom"];
+      @sr_nom = params[:servicio_reparacion]["serv_nom"];
 
       @serv_repar = ServicioReparacion.find(params[:id]);
       @serv_repar.serv_nom = @sr_nom;
 
       if @serv_repar.save()
-        redirect_to servicio_reparacions_path, :notice => "El servicio de reparación ha sido modificado";
+        redirect_to servicio_reparaciones_path, :notice => "El servicio de reparación ha sido modificado";
       else
         render "edit";
       end

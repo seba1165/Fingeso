@@ -15,6 +15,10 @@ class CotsOdcArtController < ApplicationController
     end
   end
 
+  def show
+    @cot = CotOdcArt.find(params[:id]);
+  end
+
   def create
     if current_empleado.cargo_empleado.cargo_nom.downcase == "administrador" || current_empleado.cargo_empleado.cargo_nom.downcase == "vendedor"
       @cart = carrito_actual_arts
@@ -94,13 +98,14 @@ class CotsOdcArtController < ApplicationController
             @det =DetCotOdcArt.new({ :doc_cod => @doc,
                                      :det_num_linea => num_linea,
                                      :art_cod => articulo.art_cod,
-                                     :art_cant => quantity
+                                     :art_cant => quantity,
+                                     :art_precio => articulo.art_precio
                                    });
             @det.save
             num_linea += 1
           end
           session[:cartart] = nil
-          redirect_to cots_odc_art_index_path, :notice => "Cotizacion Creada";
+          redirect_to show_path(@cot)
         else
           redirect_to cots_odc_art_index_path, :notice => "Error al guardar cotizacion ";
         end
@@ -121,10 +126,15 @@ class CotsOdcArtController < ApplicationController
       redirect_to '/errors/not_found'
     else
       @doc = DocPrevio.find(params[:id]);
-      if @doc.destroy()
-        redirect_to cots_odc_art_index_path, :notice => "La cotizacion ha sido eliminada";
+      @not_vent = NotaDeVenta.where(doc_cod: @doc.doc_cod).first
+      if @not_vent.nil?
+        if @doc.destroy()
+          redirect_to cots_odc_art_index_path, :notice => "La cotizacion ha sido eliminada";
+        else
+          redirect_to cots_odc_art_index_path, :notice => "La cotizacion no ha podido ser eliminada";
+        end
       else
-        redirect_to cots_odc_art_index_path, :notice => "La cotizacion no ha podido ser eliminada";
+        redirect_to cots_odc_art_index_path, :notice => "La cotizacion no se puede borrar, tiene una nota de venta asociada";
       end
     end
   end
@@ -139,8 +149,14 @@ class CotsOdcArtController < ApplicationController
 
   def aprobar
     @cot = Cotizacion.find(params[:id]);
+    @cotArt = CotOdcArt.find(params[:id]);
     @cot.cot_est_cod = 1
     if @cot.save
+      @not_vent = NotaDeVenta.where(doc_cod: @cot.doc_cod).first
+      @cot.not_ven_cod = @not_vent.not_ven_cod
+      @cotArt.not_ven_cod = @not_vent.not_ven_cod
+      @cotArt.save
+      @cot.save
       redirect_to cots_odc_art_index_path, :notice => "Cotizacion Aprobada";
     else
       redirect_to cots_odc_art_index_path, :notice => "La cotizacion no pudo ser aprobada";
