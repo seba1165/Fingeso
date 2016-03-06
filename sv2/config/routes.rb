@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'notas_de_venta/index'
+
+  get 'notas_de_venta/new'
+
+  get 'notas_de_venta/create'
+
+  get 'notas_de_venta/destroy'
+
+  get 'notas_de_venta/edit'
+
   get '/cart' => 'cart#index'
   get '/cart/clear' => 'cart#clearCart'
   get '/cart/:id' => 'cart#add'
@@ -137,6 +147,7 @@ Rails.application.routes.draw do
   get 'cots_odc_art/new'
 
   get 'cots_odc_art/aprobar/:id' => 'cots_odc_art#aprobar'
+  get 'notas_de_venta/pagar/:id' => 'notas_de_venta#pagar'
 
   get 'clientes/index'
 
@@ -187,6 +198,7 @@ Rails.application.routes.draw do
   resources :modelos, :except => [:show]
   resources :sis_vehiculo_articulo, :except => [:show]
   resources :servs_inst, :except => [:show]
+  resources :notas_de_venta, :except => [:show]
 
   #devise_for :empleados, :controllers => { :registrations => "registrations" } , :skip => [:registrations]
   #as :empleado do
@@ -218,6 +230,7 @@ Rails.application.routes.draw do
   post "cartart/rest/:id" => 'cartart#rest', as: :restArt
 
   post "cots_odc_art/aprobar/:id" => 'cots_odc_art#aprobar', as: :aprobar
+  post "notas_de_venta/pagar/:id" => 'notas_de_venta#pagar', as: :pagar
 
   post "sis_vehiculo_articulo/del/:id" => 'sis_vehiculo_articulo#elimSI', as: :elimSI
 

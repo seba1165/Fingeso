@@ -45,7 +45,11 @@
               </td>
               <td><%= d.doc_cod %></td>
               <td><%= d.cliente.cliente_correo %></td>
-              <td><%= d.not_ven_cod %></td>
+              <%if Cotizacion.find(d.doc_cod).cot_est_cod == 0 %>
+                  <td></td>
+              <%else%>
+                  <td><%= d.not_ven_cod %></td>
+            <%end%>
               <td><%= d.emp_rut %></td>
               <td><%= d.doc_fecha %></td>
               <td><%= Cotizacion.find(d.doc_cod).estado_cotizacion.cot_est_descr %></td>
