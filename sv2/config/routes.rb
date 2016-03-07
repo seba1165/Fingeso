@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
 
 
+  get 'alumno/inicio'
+
   get 'empleados/show/:id' => 'empleados#show'
 
   get 'empleados/index'
@@ -50,12 +52,8 @@ Rails.application.routes.draw do
   root to: 'vendedor#inicio', as: 'vendedor_root',
        constraints: lambda { |request| request.env['warden'].user.profesor? }
 
-  root to: 'otros#inicio', as: 'jedeDeVentas_root',
-       constraints: lambda { |request| request.env['warden'].user.jefeDeVentas? }
-  root to: 'otros#inicio', as: 'jefeDeServicios_root',
-       constraints: lambda { |request| request.env['warden'].user.jefeDeServicios? }
-  root to: 'otros#inicio', as: 'jefeDeBodega_root',
-       constraints: lambda { |request| request.env['warden'].user.jefeDeBodega? }
+  root to: 'alumno#inicio', as: 'alumno_root',
+       constraints: lambda { |request| request.env['warden'].user.alumno? }
 
   #get 'welcome/home'
   # The priority is based upon order of creation: first created -> highest priority.

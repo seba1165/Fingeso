@@ -89,7 +89,30 @@ class EmpleadosController < ApplicationController
 
   def update
     if current_empleado.cargo_empleado.cargo_nom.downcase != "administrador"
-      redirect_to '/errors/not_found'
+      @empleado = Empleado.find(params[:id]);
+      if current_empleado.emp_rut == @empleado.emp_rut
+        @emp_tel = params[:empleado]["emp_tel"];
+        @password = params[:empleado]["password"];
+        @password_confirmation = params[:empleado]["password_confirmation"]
+
+        @empleado = Empleado.find(params[:id]);
+        @empleado.emp_tel = @emp_tel;
+        @empleado.password = @password
+        @empleado.password_confirmation = @password_confirmation
+
+        if @empleado.save()
+          redirect_to empleados_path, :notice => "El empleado ha sido modificado";
+        else
+          if @emp_rut == ""
+            redirect_to empleados_path, :notice => "El empleado NO ha sido modificado";
+          else
+            render "edit"
+          end
+        end
+      else
+        redirect_to '/errors/not_found'
+      end
+
     else
       @emp_nom = params[:empleado]["emp_nom"];
       @emp_ape = params[:empleado]["emp_ape"];
